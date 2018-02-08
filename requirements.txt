@@ -1,0 +1,17 @@
+django
+gunicorn
+psycopg2
+
+git+https://github.com/shakedown-street/django-boards.git
+
+# django_boards
+# djangorestframework>=3.0.0
+# pillow
+# django-precise-bbcode
+# django-cors-headers
+# easy-thumbnails
+# django-simple-captcha
+# python-memcached
+# libsass
+# django-compressor
+# django-sass-processor

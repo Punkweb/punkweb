@@ -1,0 +1,9 @@
+The [url=https://punkweb.us/board/api/]Punkweb API[/url] allows for anyone to authenticate and access data that their user would be able to see if they were viewing the actual site.  It's main purpose is for writing JavaScript plugins/extensions to the django-boards core, but can be used for other purposes aswell, such as completely custom frontends.
+
+Below is custom frontend that uses the API to access data from punkweb written with [url=https://github.com/shakedown-street/porks-ngx-template]this project template[/url].  Using Angular and Electron, this frontend could be packaged as an installable desktop program.  If at some point this were to become an official project, that would give any django-boards forum the option to have a desktop version that it's users could install.
+
+Aside from the ability to have a desktop app, [url=http://angular.io/]Angular[/url] is a wicked cool web [b]application[/b] framework.  Django (what the site is currently written in) is used for creating web [b]sites[/b], where as Angular specializes in creating web [b]applications[/b].  The difference is subtle, but opens up horizons that would otherwise not be possible with Django/JQuery.
+
+[spoiler=Custom Frontend]
+[img]https://i.imgur.com/y0giAj9.png[/img]
+[/spoiler]

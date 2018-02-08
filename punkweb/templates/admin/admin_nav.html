@@ -1,0 +1,6 @@
+{% extends 'django_boards/themes/punkweb/includes/nav.html' %}
+{% load i18n static %}
+
+{% block main_right_links %}
+<a class="nav__link" href="{% url 'admin:password_change' %}"> {% trans 'Change password' %}</a>
+{% endblock %}
