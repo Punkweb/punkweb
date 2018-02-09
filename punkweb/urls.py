@@ -19,7 +19,7 @@ from django.contrib.staticfiles.urls import static, staticfiles_urlpatterns
 
 from punkweb import settings
 
-app_name = "punkweb"
+app_name = 'punkweb'
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),

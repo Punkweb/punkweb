@@ -242,7 +242,7 @@ LOGGING = {
 
 admin.site.site_header = 'Punk Web'
 
-AUTH_USER_MODEL = 'django_boards.EmailUser'
+# AUTH_USER_MODEL = 'django_boards.EmailUser'
 LOGIN_REDIRECT_URL = '/board/'
 
 CORS_ORIGIN_ALLOW_ALL = True
@@ -266,5 +266,5 @@ THUMBNAIL_ALIASES = {
 }
 
 DJANGO_BOARDS = {
-    'SHOUTBOX_ENABLED': False
+    'CAPTCHAS_ENABLED': True,
 }
