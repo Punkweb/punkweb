@@ -266,5 +266,6 @@ THUMBNAIL_ALIASES = {
 }
 
 DJANGO_BOARDS = {
+    'BOARD_NAME': 'Punk Web',
     'CAPTCHAS_ENABLED': True,
 }

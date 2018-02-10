@@ -1,0 +1,69 @@
+[font=Storybook][shadow=#0074d9][color=#0074d9][size=3]Django[/size][/color][/shadow]:gd:[shadow=#C10300][size=3][color=#C10300]Boards[/color][/size][/shadow][/font]
+
+Django boards can be added into any existing project with very little setup.  Here I'll cover how to add a basic forum to your existing or brand new website.
+
+[size=4]Install[/size]
+
+Add in [b]requirements.txt[/b]:
+[code]git+https://github.com/shakedown-street/django-boards.git[/code]
+
+and [b]pip install -r requirements.txt[/b]
+
+Then in settings.py "[b]INSTALLED_APPS[/b]" add:
+[code]INSTALLED_APPS = [
+    ...
+    # Django boards
+    'sass_processor',  # required
+    'easy_thumbnails', # required
+    'precise_bbcode',  # required
+    'django_boards',
+]
+[/code]
+
+There are other apps you can add that will provide additional functionality, such as a rest_framework API and captcha, although these won't be covered in the quick start.
+
+[size=4]Context processors[/size]
+
+Add the following in [b]TEMPLATES.OPTIONS.context_processors[/b] in settings.py
+
+[code]...
+'django_boards.context_processors.settings',
+'django_boards.context_processors.base_context',
+...
+[/code]
+
+[size=4]Required configurations[/size]
+
+Add this anywhere in [b]settings.py[/b]:
+[code]THUMBNAIL_ALIASES = {
+    '': {
+        'avatar': {'size': (200, 200), 'crop': True},
+        'avatar_small': {'size': (100, 100), 'crop': True},
+        'avatar_smaller': {'size': (50, 50), 'crop': True},
+        'avatar_smallest': {'size': (25, 25), 'crop': True}
+    },
+}
+[/code]
+
+And also add this to change your forums title:
+[code]DJANGO_BOARDS = {
+    'BOARD_NAME': 'Example Name'
+}
+[/code]
+
+There are dozens of configurations you can set to enable, disable, or alter functionality.  I'll add documentation on the configurations and what they do soon.
+
+[size=4]Add board urls[/size]
+
+In your root [b]urls.py[/b]:
+[code]...
+url(r'^board/', include('django_boards.urls')),
+url(r'^board/page/', include('django_boards.page_urls')),
+...
+[/code]
+
+That's it, you're finished!
+
+Run your application and navigate to [b]/board/[/b].  Remember to migrate your database to add the tables for django boards.
+
+This will provide you with a basic forum setup.  This configuration barely scratches the surface of all the functionality that django-boards provides.  Soon to come will be documentation on how to further customize and add exactly what functionality you want.
