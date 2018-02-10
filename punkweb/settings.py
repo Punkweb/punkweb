@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'corsheaders',
     'precise_bbcode',
-    'captcha',
+    # 'captcha',
     'django_boards',
 ]
 
@@ -267,5 +267,5 @@ THUMBNAIL_ALIASES = {
 
 DJANGO_BOARDS = {
     'BOARD_NAME': 'Punk Web',
-    'CAPTCHAS_ENABLED': True,
+    # 'CAPTCHAS_ENABLED': True,
 }

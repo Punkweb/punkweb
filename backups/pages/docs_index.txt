@@ -1,19 +1,39 @@
 [font=Storybook][shadow=#0074d9][color=#0074d9][size=3]Django[/size][/color][/shadow]:gd:[shadow=#C10300][size=3][color=#C10300]Boards[/color][/size][/shadow][/font]
 
-This documentation is temporary, until I can write out a serious docs page.
-
-This page contains notes on the state of most of the features in the project, you won't find any code examples or where to find bits of functionality here but there is notes on what works well and what could be improved or added.
-
-
-Django Boards may be removed from GitHub by me at any time, so I'd advise you to not make commits directly to the GitHub repo but to instead clone or download it and work from there.  I try my best to keep the code clean and consistent in ways of doing things.  Personally I think that all the features provided work decently well and with the proper fine tuning could be hosted live for a small online community.
-
-[size=5]Features List[/size]
-
-[size=3]STABLE (works well)[/size]
+[size=2]Navigation[/size]
 [ul]
-[li]django-precise-bbcode support for threads, posts, usernames, shoutbox, signatures, category descriptions, and private messaging.  Able to restrict tags in the shoutbox.  Through django-precise-bbcode, you can also add your own custom bbcode tags and emojis in the admin.
+[li][url=https://punkweb.us/board/page/docs-quick-start/]Quick Start Tutorial[/url][/li]
+[li][url=https://punkweb.us/board/page/docs-rest-api/]Adding a REST API[/url][/li]
+[/ul]
+
+[size=2]In the Works[/size]
+
+Pages that have yet to be written out:
+[ul]
+[li]Adding sceditor into your project for a fully configurable bbcode editor[/li]
+[li]Adding captcha to your registration form[/li]
+[li]The DJANGO_BOARDS project level settings dict[/li]
+[li]Adding custom bbcode tags[/li]
+[li]Creating your own theme, or editing the default one[/li]
+[li]Enabling trigram keyword searching (Postgres only)[/li]
+[li]And more...[/li]
+[/ul]
+
+[size=3]Features List[/size]
+
+[size=2]STABLE[/size]
+[ul]
+[li][url=https://github.com/ellmetha/django-precise-bbcode]django-precise-bbcode[/url] support for threads, posts, usernames, shoutbox, signatures, category descriptions, and private messaging.  Able to restrict tags in the shoutbox.  Through django-precise-bbcode, you can also add your own custom bbcode tags and emojis in the admin.
 [/li]
-[li]django-rest-framework API data access is equivalent to what you'll see and be able to do on the website, minus a few things being restricted; e.g you can't make posts, threads, or send messages through the private messaging system. The shoutbox and statistics graphs utilize the API and are written in a plugin format.  The shoutbox can be configured or disabled entirely through the board settings module.  No token or session authentication, as this is more for plugins than writing a custom frontend.
+[li][url=http://www.django-rest-framework.org/]django-rest-framework[/url] API data access is equivalent to what you'll see and be able to do on the website, minus a few things being restricted; e.g you can't make posts, threads, or send messages through the private messaging system. The shoutbox and statistics graphs utilize the API and are written in a plugin format.  The shoutbox can be configured or disabled entirely through the board settings module.
+[/li]
+[li][url=https://github.com/jrief/django-sass-processor]django-sass-processor[/url] for scss compilation.
+[/li]
+[li][url=https://github.com/SmileyChris/easy-thumbnails]easy-thumbnails[/url] support for user image thumbnailing.
+[/li]
+[li][url=https://github.com/mbi/django-simple-captcha]django-simple-captcha[/url] on registration page.
+[/li]
+[li][url=https://github.com/google/code-prettify]code-prettify[/url] for code tag highlighting.
 [/li]
 [li]Custom bbcode tags registered at apps/api/bbcode_tags.py
 [/li]
@@ -31,36 +51,26 @@ Django Boards may be removed from GitHub by me at any time, so I'd advise you to
 [/li]
 [li]Utils for rendering user names and getting user tags in any bbcode content.
 [/li]
-[li]easy-thumbnails support for user image thumbnailing.
-[/li]
 [li]Uses a postgres database backend.
-[/li]
-[li]django-sass-processor for scss compilation.
 [/li]
 [li]Javascript bundling and scss minification scripts included for production.
 [/li]
-[li]google code-prettify for code tag highlighting.
-[/li]
 [li]Fully responsive punkweb layout and theme.
 [/li]
-[li]Integrates with django-simple-captcha.
-[/li]
-[/ul]
-
-[size=3]EXPERIMENTAL[/size]
-
-[ul]
-[li]Private messaging system in place.  Feature wise the only thing missing is a form for starting conversations with any number of users.  From a design stand point it is nowhere near ready for production use.
-[/li]
-[li]Shout box integrated with the API to get last 25 shouts, and be able to post them with the BBCode editor.  Can be configured or disabled in the board settings module.
+[li]Keyword content searching.  Uses a combination of trigram searching and full text searching and orders results by relevancy.
 [/li]
 [li]A notification is created when a user is tagged in a post or a thread. Clicking the notification links to the thread or exact post that the user was tagged in and is marked as read.  Notifications just have a required text and link field, so they could really be used for anything.  A mark all read button will be added.  I also plan to do global notifications that will be sent to all users.
 [/li]
+[/ul]
+
+[size=2]EXPERIMENTAL[/size]
+[ul]
+[li][url=http://www.chartjs.org/]Chart.js[/url] statistics graphs integrates with the API.  The graphs hit endpoints that use SQL queries, and load wicked fast regardless of how much data is on the forum.
+[/li]
+[li]Private messaging system in place.  Feature wise the only thing missing is a form for starting conversations with any number of users.  From a design stand point it is nowhere near ready for production use.
+[/li]
+[li]Shout box integrates with the API to get last 25 shouts, and be able to post them with the BBCode editor.  Can be configured or disabled in the board settings module.[/li]
 [li]upvoted_by/downvoted_by fields are on the thread and post models but can't be changed with the exception of through the admin.
-[/li]
-[li]Chart.js statistics graphs integrated with the API.  The graphs hit endpoints that use SQL queries, and load wicked fast regardless of how much data is on the forum.
-[/li]
-[li]Keyword content searching.  I used trigram text searching thinking that it would work well but I'm going to have to switch it up a bit.  I think it would be better to use full-text searching for searching long contents, and trigram searching for searching short fields such as names.
 [/li]
 [li]Reporting posts/threads is fully usable but it could be done better and look nicer.
 [/li]
@@ -68,24 +78,16 @@ Django Boards may be removed from GitHub by me at any time, so I'd advise you to
 [/li]
 [li]The board settings module has loads of configurations that work, but I want to go through every feature in the forum and make sure that they can be configured to fit any specific needs as well as lack of need.
 [/li]
-[li]A "pages" app, where users with admin access and proper permissions can add pages to the site, such as documentation, rules, and supported bbcode tags.[/li]
+[li]A "pages" app, where users with admin access and proper permissions can add pages to the site, such as documentation, rules, and supported bbcode tags.
+[/li]
 [/ul]
 
-
-
-[size=3]TODO[/size]
-
+[size=2]TODO[/size]
 [ul]
-[li]Per-user theme selection
-[/li]
-[li]Sceditor hacking to show exactly what you'll see when the bbcode is rendered. Show custom tags on the editor.
-[/li]
-[li]Polls
-[/li]
-[li]Moderators
-[/li]
-[li]"What's New" section
-[/li]
-[li]Timezone support
-[/li]
+[li]Per-user theme selection[/li]
+[li]Sceditor hacking to show exactly what you'll see when the bbcode is rendered. Show custom tags on the editor.[/li]
+[li]Polls[/li]
+[li]Moderators[/li]
+[li]"What's New" section[/li]
+[li]Timezone support[/li]
 [/ul]

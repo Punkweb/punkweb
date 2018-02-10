@@ -2,7 +2,7 @@
 
 Django boards can be added into any existing project with very little setup.  Here I'll cover how to add a basic forum to your existing or brand new website.
 
-[size=4]Install[/size]
+[size=2]Install[/size]
 
 Add in [b]requirements.txt[/b]:
 [code]git+https://github.com/shakedown-street/django-boards.git[/code]
@@ -22,7 +22,7 @@ Then in settings.py "[b]INSTALLED_APPS[/b]" add:
 
 There are other apps you can add that will provide additional functionality, such as a rest_framework API and captcha, although these won't be covered in the quick start.
 
-[size=4]Context processors[/size]
+[size=2]Context processors[/size]
 
 Add the following in [b]TEMPLATES.OPTIONS.context_processors[/b] in settings.py
 
@@ -32,7 +32,7 @@ Add the following in [b]TEMPLATES.OPTIONS.context_processors[/b] in settings.py
 ...
 [/code]
 
-[size=4]Required configurations[/size]
+[size=2]Required configurations[/size]
 
 Add this anywhere in [b]settings.py[/b]:
 [code]THUMBNAIL_ALIASES = {
@@ -53,7 +53,7 @@ And also add this to change your forums title:
 
 There are dozens of configurations you can set to enable, disable, or alter functionality.  I'll add documentation on the configurations and what they do soon.
 
-[size=4]Add board urls[/size]
+[size=2]Add board urls[/size]
 
 In your root [b]urls.py[/b]:
 [code]...
