@@ -1,5 +1,12 @@
 [font=Storybook][shadow=#0074d9][color=#0074d9][size=3]Django[/size][/color][/shadow]:gd:[shadow=#C10300][size=3][color=#C10300]Boards[/color][/size][/shadow][/font]
 
+[size=2]Navigation[/size]
+[ul]
+[li][url=https://punkweb.us/board/page/docs-index/]Documentation Index[/url][/li]
+[li][url=https://punkweb.us/board/page/docs-quick-start/]Quick Start Tutorial[/url][/li]
+[li][url=https://punkweb.us/board/page/docs-rest-api/]Adding a REST API[/url][/li]
+[/ul]
+
 Django boards can be added into any existing project with very little setup.  Here I'll cover how to add a basic forum to your existing or brand new website.
 
 [size=2]Install[/size]

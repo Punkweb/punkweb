@@ -1,5 +1,12 @@
 [font=Storybook][shadow=#0074d9][color=#0074d9][size=3]Django[/size][/color][/shadow]:gd:[shadow=#C10300][size=3][color=#C10300]Boards[/color][/size][/shadow][/font]
 
+[size=2]Navigation[/size]
+[ul]
+[li][url=https://punkweb.us/board/page/docs-index/]Documentation Index[/url][/li]
+[li][url=https://punkweb.us/board/page/docs-quick-start/]Quick Start Tutorial[/url][/li]
+[li][url=https://punkweb.us/board/page/docs-rest-api/]Adding a REST API[/url][/li]
+[/ul]
+
 Want to add a [url=http://www.django-rest-framework.org/]django-rest-framework[/url] API that developers can use to integrate your forum into their software with?  So did I.  Django Boards [url=https://github.com/shakedown-street/django-boards/tree/dev/django_boards/rest]comes shipped[/url] with a django-rest-framework implementation for accessing exactly what data you'd be able to access if you were browsing the forum itself.
 
 You need only to configure project level settings to be able to implement a full rest API.

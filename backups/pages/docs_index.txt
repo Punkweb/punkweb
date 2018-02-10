@@ -2,6 +2,7 @@
 
 [size=2]Navigation[/size]
 [ul]
+[li][url=https://punkweb.us/board/page/docs-index/]Documentation Index[/url][/li]
 [li][url=https://punkweb.us/board/page/docs-quick-start/]Quick Start Tutorial[/url][/li]
 [li][url=https://punkweb.us/board/page/docs-rest-api/]Adding a REST API[/url][/li]
 [/ul]
