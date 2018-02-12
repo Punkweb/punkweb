@@ -5,6 +5,7 @@
 [li][url=https://punkweb.us/board/page/docs-index/]Documentation Index[/url][/li]
 [li][url=https://punkweb.us/board/page/docs-quick-start/]Quick Start Tutorial[/url][/li]
 [li][url=https://punkweb.us/board/page/docs-rest-api/]Adding a REST API[/url][/li]
+[li][url=https://punkweb.us/board/page/docs-sceditor/]BBCode editor[/url][/li]
 [/ul]
 
 Want to add a [url=http://www.django-rest-framework.org/]django-rest-framework[/url] API that developers can use to integrate your forum into their software with?  So did I.  Django Boards [url=https://github.com/shakedown-street/django-boards/tree/dev/django_boards/rest]comes shipped[/url] with a django-rest-framework implementation for accessing exactly what data you'd be able to access if you were browsing the forum itself.

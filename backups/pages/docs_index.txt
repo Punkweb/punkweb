@@ -5,13 +5,13 @@
 [li][url=https://punkweb.us/board/page/docs-index/]Documentation Index[/url][/li]
 [li][url=https://punkweb.us/board/page/docs-quick-start/]Quick Start Tutorial[/url][/li]
 [li][url=https://punkweb.us/board/page/docs-rest-api/]Adding a REST API[/url][/li]
+[li][url=https://punkweb.us/board/page/docs-sceditor/]BBCode editor[/url][/li]
 [/ul]
 
 [size=2]In the Works[/size]
 
 Pages that have yet to be written out:
 [ul]
-[li]Adding sceditor into your project for a fully configurable bbcode editor[/li]
 [li]Adding captcha to your registration form[/li]
 [li]The DJANGO_BOARDS project level settings dict[/li]
 [li]Adding custom bbcode tags[/li]

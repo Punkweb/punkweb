@@ -1,0 +1,42 @@
+[font=Storybook][shadow=#0074d9][color=#0074d9][size=3]Django[/size][/color][/shadow]:gd:[shadow=#C10300][size=3][color=#C10300]Boards[/color][/size][/shadow][/font]
+
+[size=2]Navigation[/size]
+[ul]
+[li][url=https://punkweb.us/board/page/docs-index/]Documentation Index[/url][/li]
+[li][url=https://punkweb.us/board/page/docs-quick-start/]Quick Start Tutorial[/url][/li]
+[li][url=https://punkweb.us/board/page/docs-rest-api/]Adding a REST API[/url][/li]
+[li][url=https://punkweb.us/board/page/docs-sceditor/]BBCode editor[/url][/li]
+[/ul]
+
+The bbcode editor is provided by [url=https://www.sceditor.com/]sceditor[/url].  Sceditor is a lightweight, open source, WYSIWYG BBCode and (X)HTML editor.
+
+Sceditor is actually incredibly easy to install and you can do it while your project is running, just click [url=https://www.sceditor.com/]here[/url], download the zip, and unzip it at [b]project_root/static/django_boards/sceditor/[/b].  Django Boards will automatically detect it and start using it.
+
+You can configure the editor as needed by overriding the editor config provided with Django Boards.  To do so, in your static directory root, in the django_boards folder, add [b]/js/[/b] with a file called [b]editor-config.js[/b].
+
+Here is a basic configuration you can use to start.
+
+[spoiler=Show default]
+[code]
+$(function() {
+  $(document).ready(function() {
+    $('.post-editor').sceditor({
+      format: 'bbcode',
+      toolbar: 'bold,italic,underline,strike|bulletlist,orderedlist,center,horizontalrule|font,size,color,quote,code,link,image,emoticon|date,time|source,maximize,removeformat',
+      style: '/static/django_boards/scss/editor.css',
+      fonts: 'Arial,Arial Black,Comic Sans MS,Courier New,Georgia,Impact,Open-Sans,Sans-serif,Serif,Storybook,Times New Roman,Trebuchet MS,Verdana,Winterland',
+      autoExpand: true,
+      emoticonsEnabled: false, // True if you want to enable emoticons
+      emoticonsCompat: true,   // Recommended
+      emoticonsRoot: '/media/precise_bbcode/smilies/', // Required
+      // Add your own emoticons here
+      // emoticons: {
+      //   ':gd:': 'gd.jpg', 
+      // }
+    });
+  });
+});
+[/code]
+[/spoiler]
+
+You can now overwrite the configuration as necessary.  Visit their [url=https://www.sceditor.com/documentation/getting-started/]documentation and licensing[/url] to see all of the possible configurations.
