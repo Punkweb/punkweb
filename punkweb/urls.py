@@ -26,7 +26,7 @@ urlpatterns = [
     url(r'^board/', include('django_boards.urls')),
     url(r'^board/page/', include('django_boards.page_urls')),
     url(r'^board/api/', include('django_boards.rest.urls')),
-    # url(r'^captcha/', include('captcha.urls')),
+    url(r'^captcha/', include('captcha.urls')),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

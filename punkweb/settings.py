@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'corsheaders',
     'precise_bbcode',
-    # 'captcha',
+    'captcha',
     'django_boards',
 ]
 
@@ -242,7 +242,6 @@ LOGGING = {
 
 admin.site.site_header = 'Punk Web'
 
-# AUTH_USER_MODEL = 'django_boards.EmailUser'
 LOGIN_REDIRECT_URL = '/board/'
 
 CORS_ORIGIN_ALLOW_ALL = True
@@ -267,5 +266,5 @@ THUMBNAIL_ALIASES = {
 
 DJANGO_BOARDS = {
     'BOARD_NAME': 'Punk Web',
-    # 'CAPTCHAS_ENABLED': True,
+    'CAPTCHAS_ENABLED': True,
 }

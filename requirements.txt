@@ -2,4 +2,6 @@ django
 gunicorn
 psycopg2
 
+django-simple-captcha
+
 git+https://github.com/shakedown-street/django-boards.git
