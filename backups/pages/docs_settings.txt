@@ -1,0 +1,43 @@
+[size=3]Project Level Settings[/size]
+
+Django Boards has it's own settings module with defaults already set, but you can override the settings by configuring the DJANGO_BOARDS dict in your own settings module.  It will be detected and override any of the defaults with the value you pass.  Let's take a look at what configurations are available so that you can make Django Boards behave exactly how you want it to.
+
+
+Here is what the defaults would look like as a python dict:
+[code]DJANGO_BOARDS = {
+    'BOARD_NAME': 'Django Boards',
+    'BOARD_THEME': 'punkweb',
+    'SIGNATURES_ENABLED': True,
+    'USERNAME_MODIFIERS_ENABLED': True,
+    'USER_BIRTHDAY_MESSAGE': True,
+    'SHOUTBOX_ENABLED': True,
+    'SHOUTBOX_MINIMUM_POSTS', False,
+    'SHOUTBOX_MINIMUM_POSTS_REQ', 5,
+    'SHOUTBOX_DISABLED_TAGS': [
+        'img', 'hr', 'ol', 'ul', 'li', 'youtube', 'code', 'user', 'quote', 'size',
+        'spoiler', 'anchor', 'n', 'y', 'list', '*', 'center',
+    ])
+    'USER_ONLINE_TIMEOUT': 300,
+    'USER_LASTSEEN_TIMEOUT': 60 * 60 * 24 * 7,
+    'CAPTCHAS_ENABLED': False,
+}[/code]
+
+Lets break down what each of these settings does:
+
+[ul]
+[li][b]BOARD_NAME[/b]: Sets the title in the navbar to your community name.[/li]
+[li][b]BOARD_THEME[/b]: The name of the templates directory to use to render the views.  There will be more information on how to create your own theme later on.  Punkweb has a scss file you can override to change the color for everything on the site, more information will come on that soon aswell.[/li]
+[li][b]SIGNATURES_ENABLED[/b]: Display user signatures and allow users to set them in their profile settings page.[/li]
+[li][b]USERNAME_MODIFIERS_ENABLED[/b]: Display username name modifiers based on user rank.  Users cannot set their own username modifiers regardless.[/li]
+[li][b]USER_BIRTHDAY_MESSAGE[/b]: A happy birthday message on the index page only the user can see.[/li]
+[li][b]SHOUTBOX_ENABLED[/b]: Entirely disable or enable the shoutbox.[/li]
+[li][b]SHOUTBOX_MINIMUM_POSTS[/b]: Only allow users with a certain post count requirement to use the shoutbox.[/li]
+[li][b]SHOUTBOX_MINIMUM_POSTS_REQ[/b]: Required post count to use the shoutbox.  Only applicable if SHOUTBOX_MINIMUM_POSTS is True.[/li]
+[li][b]SHOUTBOX_DISABLED_TAGS[/b]: Configure what tags cannot be posted in the shoutbox.  The default will basically disable all but the text markup and emojis.[/li]
+[li][b]USER_ONLINE_TIMEOUT[/b]: Number of seconds of inactivity before a user is marked offline.  Default is 5 minutes.[/li]
+[li][b]USER_LASTSEEN_TIMEOUT[/b]: Number of seconds that we will keep track of inactive users for before their last seen is removed from the cache.  Default is 7 days.[/li]
+[li][b]CAPTCHAS_ENABLED[/b]: Require captcha on registration.[/li]
+[/ul]
+
+
+If you need a configuration added to disable certain features, create a thread in the [url=https://www.punkweb.us/board/subcategory/ba2af6d9-0145-43c2-929f-5f94af03732a/]Suggestions Category[/url].

@@ -1,0 +1,15 @@
+[size=2]Django Boards Services[/size]
+
+The Django Boards core repository is currently and will remain an open source project.
+
+With that being said, not everyone is a programmer or has the time to manage their own servers, staying up to date on the latest Django Boards updates, and writing custom features/plugins for their forum.
+
+We want to make sure that everyone who wants to use Django Boards to launch their own community can do just that.
+
+Want to run a community but you're not a programmer or don't have a development team?  Go right to the source, let our team handle hosting your forum board for a fair price.
+
+Do you just need a minimalist forum with standard features?  If you don't need any custom work done other than what is provided in the Django Boards core our standard price is $60/month, or roughly $2.00/day, full support included.  We are open to working out a solution that works for you, as long as it works for us aswell.
+
+Every forum is different and aimed towards a different community.  If you can dream it, we'll see what we can do to build it.  Want to integrate your forums with discord, slack, last.fm, riot games, blizzard, github, stripe, paypal, twitch, mailchimp, or any other site/service you can think of?  Let's discuss it, we'll look into if it can be done.  However, we won't do integrations with social media platforms such as facebook, twitter, instagram or google plus.  We'll discuss with you and be flexible on pricing for such customizations.  We won't charge you anything until the job is done and you're happy with the results!
+
+Email djangoboards@gmail.com and lets discuss your ideas and work together to create your ideal forum board.

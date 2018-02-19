@@ -51,6 +51,8 @@ INSTALLED_APPS = [
     'precise_bbcode',
     'captcha',
     'django_boards',
+    # Punkweb
+    'punkweb',
 ]
 
 MIDDLEWARE = [

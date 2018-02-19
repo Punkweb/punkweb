@@ -3,5 +3,10 @@ gunicorn
 psycopg2
 
 django-simple-captcha
+djangorestframework
+django-cors-headers
+libsass
+django-compressor
+django-sass-processor
 
 git+https://github.com/shakedown-street/django-boards.git
