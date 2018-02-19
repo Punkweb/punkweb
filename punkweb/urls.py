@@ -18,10 +18,14 @@ from django.contrib import admin
 from django.contrib.staticfiles.urls import static, staticfiles_urlpatterns
 
 from punkweb import settings
+from punkweb import views
 
 app_name = 'punkweb'
 
 urlpatterns = [
+    url(r'^$', views.index_view, name='index'),
+    url(r'^links/$', views.links_view, name='links'),
+    url(r'^pgp/$', views.pgp_view, name='pgp'),
     url(r'^admin/', admin.site.urls),
     url(r'^board/', include('django_boards.urls')),
     url(r'^board/page/', include('django_boards.page_urls')),
