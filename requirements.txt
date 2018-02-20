@@ -1,12 +1,13 @@
 django
 gunicorn
-psycopg2
 
 django-simple-captcha
 djangorestframework
 django-cors-headers
-libsass
 django-compressor
 django-sass-processor
+libsass
+python-memcached
+psycopg2
 
 git+https://github.com/shakedown-street/punkweb-boards.git
