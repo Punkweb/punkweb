@@ -6,7 +6,7 @@ The repository for the Punkweb community.
 Check out our community at `PunkWeb <https://punkweb.us/board/>`__
 
 Or checkout the repository for the custom forum software Punkweb created and uses at
-`Django Boards <https://github.com/shakedown-street/django-boards>`__
+`Punkweb Boards <https://github.com/shakedown-street/punkweb-boards>`__
 
 Supported BBCode tags
 ~~~~~~~~~~~~~~~~~~~~~

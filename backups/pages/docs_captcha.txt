@@ -1,0 +1,38 @@
+[size=2]Navigation[/size]
+[ul]
+[li][url=https://punkweb.us/board/page/docs-index/]Documentation Index[/url][/li]
+[li][url=https://punkweb.us/board/page/docs-quick-start/]Quick Start Tutorial[/url][/li]
+[li][url=https://punkweb.us/board/page/docs-settings/]Punkweb Boards Settings[/url][/li]
+[li][url=https://punkweb.us/board/page/docs-sceditor/]Adding a BBCode editor[/url][/li]
+[li][url=https://punkweb.us/board/page/docs-rest-api/]Adding a REST API[/url][/li]
+[li][url=https://punkweb.us/board/page/docs-captcha/]Adding captcha to your registration form[/url][/li]
+[/ul]
+
+Punkweb Boards leverages [url=https://github.com/mbi/django-simple-captcha]Django Simple Captcha[/url] to add a minimalist friendly captcha field to the registration form.  The captcha is a simple "Enter the 4 letters you see" with a random image captcha field.  We will [b]never[/b] implement a more obtrusive captcha field than that.
+
+As the name of the plugin implies, django simple captcha is simple to set up.
+
+[ol]
+[li][b]pip install django-simple-captcha[/b] or add [b]django-simple-captcha[/b] to requirements.txt and run [b]pip install -r requirements.txt[/b].[/li]
+[li]Add [b]captcha[/b] to your installed apps.
+
+[code]
+INSTALLED_APPS = [
+    ...
+    'captcha',
+    'punkweb_boards',
+    ...
+]
+[/code]
+[/li]
+[li]Set the [b]CAPTCHAS_ENABLED[/b] option to True in your [b]PUNKWEB_BOARDS[/b] dict in [b]settings.py[/b].
+[/li]
+[li]Add the following line in your [b]urls.py[/b]:
+
+[code]...
+url(r'^captcha/', include('captcha.urls')),
+...[/code]
+[/li]
+[/ol]
+
+You now have a simple captcha field on your registration page.

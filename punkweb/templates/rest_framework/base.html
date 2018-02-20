@@ -21,7 +21,7 @@
         {% block bootstrap_theme %}
           <!-- <link rel="stylesheet" type="text/css" href="{% static "rest_framework/css/bootstrap.min.css" %}"/>
           <link rel="stylesheet" type="text/css" href="{% static "rest_framework/css/bootstrap-tweaks.css" %}"/> -->
-          <link href="{% sass_src 'django_boards/scss/punkweb.scss' %}" rel="stylesheet" type="text/css" />
+          <link href="{% sass_src 'punkweb_boards/scss/punkweb.scss' %}" rel="stylesheet" type="text/css" />
         {% endblock %}
 
         <link rel="stylesheet" type="text/css" href="{% static "rest_framework/css/prettify.css" %}"/>
@@ -35,7 +35,7 @@
   <body class="{% block bodyclass %}{% endblock %}">
     <div class="page-wrap">
       {% block navbar %}
-        {% include 'django_boards/themes/punkweb/includes/nav.html' %}
+        {% include 'punkweb_boards/themes/punkweb/includes/nav.html' %}
       {% endblock %}
       <div class="pageHeader">
         <div class="djcontainer">
@@ -254,7 +254,7 @@
         </div><!-- /.content -->
       </div>
     </div><!-- ./wrapper -->
-    {% include 'django_boards/themes/punkweb/includes/footer.html' %}
+    {% include 'punkweb_boards/themes/punkweb/includes/footer.html' %}
 
     {% if filter_form %}
       {{ filter_form }}
@@ -274,7 +274,7 @@
       <script src="{% static "rest_framework/js/bootstrap.min.js" %}"></script>
       <script src="{% static "rest_framework/js/prettify-min.js" %}"></script>
       <script src="{% static "rest_framework/js/default.js" %}"></script>
-      <script src="{% static 'django_boards/ui/js/spoiler.js' %}"></script>
+      <script src="{% static 'punkweb_boards/ui/js/spoiler.js' %}"></script>
       <script>
         $(document).ready(function() {
           $('form').ajaxForm();

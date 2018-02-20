@@ -4,7 +4,7 @@ Often times you'll need to keep track of the last time that a model instance was
 
 [ul]
 [li]auto_now_add - when an instance of this model is created, set the time to "now"[/li]
-[li]auto_now - whenever this model instance change, update this field to be "now"[/li]
+[li]auto_now - whenever this model instance changes, update this field to be "now"[/li]
 [/ul]
 On your model add:
 [code]created = models.DateTimeField(auto_now_add=True)

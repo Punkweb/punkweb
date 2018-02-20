@@ -1,30 +1,29 @@
-[font=Storybook][shadow=#0074d9][color=#0074d9][size=3]Django[/size][/color][/shadow]:gd:[shadow=#C10300][size=3][color=#C10300]Boards[/color][/size][/shadow][/font]
-
 [size=2]Navigation[/size]
 [ul]
 [li][url=https://punkweb.us/board/page/docs-index/]Documentation Index[/url][/li]
 [li][url=https://punkweb.us/board/page/docs-quick-start/]Quick Start Tutorial[/url][/li]
+[li][url=https://punkweb.us/board/page/docs-settings/]Punkweb Boards Settings[/url][/li]
+[li][url=https://punkweb.us/board/page/docs-sceditor/]Adding a BBCode editor[/url][/li]
 [li][url=https://punkweb.us/board/page/docs-rest-api/]Adding a REST API[/url][/li]
-[li][url=https://punkweb.us/board/page/docs-sceditor/]BBCode editor[/url][/li]
+[li][url=https://punkweb.us/board/page/docs-captcha/]Adding captcha to your registration form[/url][/li]
 [/ul]
 
-Django boards can be added into any existing project with very little setup.  Here I'll cover how to add a basic forum to your existing or brand new website.
+Punkweb boards can be added into any existing project with very little setup.  Here I'll cover how to add a basic forum to your existing or brand new website.
 
 [size=2]Install[/size]
 
 Add in [b]requirements.txt[/b]:
-[code]git+https://github.com/shakedown-street/django-boards.git[/code]
+[code]git+https://github.com/shakedown-street/punkweb-boards.git[/code]
 
 and [b]pip install -r requirements.txt[/b]
 
 Then in settings.py "[b]INSTALLED_APPS[/b]" add:
 [code]INSTALLED_APPS = [
     ...
-    # Django boards
-    'sass_processor',  # required
+    # Punkweb boards
     'easy_thumbnails', # required
     'precise_bbcode',  # required
-    'django_boards',
+    'punkweb_boards',
 ]
 [/code]
 
@@ -35,8 +34,8 @@ There are other apps you can add that will provide additional functionality, suc
 Add the following in [b]TEMPLATES.OPTIONS.context_processors[/b] in settings.py
 
 [code]...
-'django_boards.context_processors.settings',
-'django_boards.context_processors.base_context',
+'punkweb_boards.context_processors.settings',
+'punkweb_boards.context_processors.base_context',
 ...
 [/code]
 
@@ -54,12 +53,12 @@ Add this anywhere in [b]settings.py[/b]:
 [/code]
 
 And also add this to change your forums title:
-[code]DJANGO_BOARDS = {
+[code]PUNKWEB_BOARDS = {
     'BOARD_NAME': 'Example Name'
 }
 [/code]
 
-There are dozens of configurations you can set to enable, disable, or alter functionality.  I'll add documentation on the configurations and what they do soon.
+There are dozens of configurations you can set to enable, disable, or alter functionality.  The documentation page for the Punkweb Boards settings module can be found [url=https://punkweb.us/board/page/docs-settings/]here[/url].
 
 Also, if you haven't already, set up your media and static files.  [url=https://docs.djangoproject.com/en/2.0/howto/static-files/]Managing static files | Django Documentation[/url]
 
@@ -67,13 +66,13 @@ Also, if you haven't already, set up your media and static files.  [url=https:/
 
 In your root [b]urls.py[/b]:
 [code]...
-url(r'^board/', include('django_boards.urls')),
-url(r'^board/page/', include('django_boards.page_urls')),
+url(r'^board/', include('punkweb_boards.urls')),
+url(r'^board/page/', include('punkweb_boards.page_urls')),
 ...
 [/code]
 
 That's it, you're finished!
 
-Run your application and navigate to [b]/board/[/b].  Remember to migrate your database to add the tables for django boards.
+Run your application and navigate to [b]/board/[/b].  Remember to migrate your database to add the tables for Punkweb Boards.
 
-This will provide you with a basic forum setup.  This configuration barely scratches the surface of all the functionality that django-boards provides.  Soon to come will be documentation on how to further customize and add exactly what functionality you want.
+This will provide you with a basic forum setup.  This configuration barely scratches the surface of all the functionality that Punkweb Boards provides.  Check out the rest of the documentation to find out how to further customize and add exactly what functionality you want.

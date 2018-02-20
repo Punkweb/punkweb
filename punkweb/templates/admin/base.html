@@ -4,11 +4,11 @@
 <head>
 <title>{% block title %}{% endblock %}</title>
 <link rel="stylesheet" type="text/css" href="{% block stylesheet %}{% static "admin/css/base.css" %}{% endblock %}" />
-<link href="{% sass_src 'django_boards/scss/punkweb-admin.scss' %}" rel="stylesheet" type="text/css" />
+<link href="{% sass_src 'punkweb_boards/scss/punkweb-admin.scss' %}" rel="stylesheet" type="text/css" />
 {% block extrastyle %}{% endblock %}
 {% if LANGUAGE_BIDI %}<link rel="stylesheet" type="text/css" href="{% block stylesheet_rtl %}{% static "admin/css/rtl.css" %}{% endblock %}" />{% endif %}
-<link rel="stylesheet" href="{% static 'django_boards/sceditor/minified/themes/square.min.css' %}" />
-<link href="{% sass_src 'django_boards/scss/punkweb.scss' %}" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="{% static 'punkweb_boards/sceditor/minified/themes/square.min.css' %}" />
+<link href="{% sass_src 'punkweb_boards/scss/punkweb.scss' %}" rel="stylesheet" type="text/css" />
 {% block extrahead %}{% endblock %}
 {% block responsive %}
     <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0">
@@ -67,14 +67,14 @@
 </div>
 {% block footer %}{% endblock %}
 <!-- END Container -->
-<script src="{% static 'django_boards/js/deps/jquery-3.1.1.min.js' %}"></script>
+<script src="{% static 'punkweb_boards/js/deps/jquery-3.1.1.min.js' %}"></script>
 <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
 <!-- Use in production -->
-<!-- <script src="{% static 'django_boards/js/bundle.min.js' %}"></script> -->
+<!-- <script src="{% static 'punkweb_boards/js/bundle.min.js' %}"></script> -->
 <!-- Use in development -->
-<script src="{% static 'django_boards/js/run-prettify.js' %}"></script>
-<script src="{% static 'django_boards/sceditor/minified/jquery.sceditor.bbcode.min.js' %}"></script>
-<script src="{% static 'django_boards/js/ui/spoiler.js' %}"></script>
-<script src="{% static 'django_boards/js/editor-config.js' %}"></script>
+<script src="{% static 'punkweb_boards/js/run-prettify.js' %}"></script>
+<script src="{% static 'punkweb_boards/sceditor/minified/jquery.sceditor.bbcode.min.js' %}"></script>
+<script src="{% static 'punkweb_boards/js/ui/spoiler.js' %}"></script>
+<script src="{% static 'punkweb_boards/js/editor-config.js' %}"></script>
 </body>
 </html>

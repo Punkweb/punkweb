@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.postgres',
-    # Django boards
+    # Punkweb boards
     'sass_processor',
     'easy_thumbnails',
     'rest_framework',
@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'precise_bbcode',
     'captcha',
-    'django_boards',
+    'punkweb_boards',
     # Punkweb
     'punkweb',
 ]
@@ -64,7 +64,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django_boards.middleware.ActiveUserMiddleware',
+    'punkweb_boards.middleware.ActiveUserMiddleware',
 ]
 
 ROOT_URLCONF = 'punkweb.urls'
@@ -80,8 +80,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                'django_boards.context_processors.settings',
-                'django_boards.context_processors.base_context',
+                'punkweb_boards.context_processors.settings',
+                'punkweb_boards.context_processors.base_context',
             ],
         },
     },
@@ -215,7 +215,7 @@ LOGGING = {
             'level': 'ERROR',
             'class': 'logging.handlers.RotatingFileHandler',
             'formatter': 'default',
-            'filename': '/var/log/django-boards/django.log',
+            'filename': '/var/log/punkweb/django.log',
             'maxBytes': 1000000,  # 1MB
             'delay': True,
         },
@@ -251,7 +251,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
-        'django_boards.rest.authentication.NoCSRFSessionAuthentication',
+        'punkweb_boards.rest.authentication.NoCSRFSessionAuthentication',
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 25
@@ -266,7 +266,7 @@ THUMBNAIL_ALIASES = {
     },
 }
 
-DJANGO_BOARDS = {
+PUNKWEB_BOARDS = {
     'BOARD_NAME': 'Punk Web',
     'CAPTCHAS_ENABLED': True,
 }

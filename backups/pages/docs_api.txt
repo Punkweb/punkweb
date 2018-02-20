@@ -1,18 +1,19 @@
-[font=Storybook][shadow=#0074d9][color=#0074d9][size=3]Django[/size][/color][/shadow]:gd:[shadow=#C10300][size=3][color=#C10300]Boards[/color][/size][/shadow][/font]
-
 [size=2]Navigation[/size]
 [ul]
 [li][url=https://punkweb.us/board/page/docs-index/]Documentation Index[/url][/li]
 [li][url=https://punkweb.us/board/page/docs-quick-start/]Quick Start Tutorial[/url][/li]
+[li][url=https://punkweb.us/board/page/docs-settings/]Punkweb Boards Settings[/url][/li]
+[li][url=https://punkweb.us/board/page/docs-sceditor/]Adding a BBCode editor[/url][/li]
 [li][url=https://punkweb.us/board/page/docs-rest-api/]Adding a REST API[/url][/li]
-[li][url=https://punkweb.us/board/page/docs-sceditor/]BBCode editor[/url][/li]
+[li][url=https://punkweb.us/board/page/docs-captcha/]Adding captcha to your registration form[/url][/li]
 [/ul]
 
-Want to add a [url=http://www.django-rest-framework.org/]django-rest-framework[/url] API that developers can use to integrate your forum into their software with?  So did I.  Django Boards [url=https://github.com/shakedown-street/django-boards/tree/dev/django_boards/rest]comes shipped[/url] with a django-rest-framework implementation for accessing exactly what data you'd be able to access if you were browsing the forum itself.
+Want to add a [url=http://www.django-rest-framework.org/]django-rest-framework[/url] API that developers can use to integrate your forum into their software with?  So did I.  Punkweb Boards [url=https://github.com/shakedown-street/punkweb-boards/tree/dev/punkweb_boards/rest]comes shipped[/url] with a django-rest-framework implementation for accessing exactly what data you'd be able to access if you were browsing the forum itself.
 
 You need only to configure project level settings to be able to implement a full rest API.
 
 [ol]
+[li]Pip install [b]djangorestframework[/b] and [b]django-cors-headers[/b] either by running [b]pip install djangorestframework django-cors-headers[/b] or adding djangorestframework and django-cors-headers to your requirements.txt file and running [b]pip install -r requirements.txt[/b][/li]
 [li]Add these apps into [b]INSTALLED_APPS[/b] in [b]settings.py[/b]:
 [code]INSTALLED_APPS = [
     ...
@@ -20,21 +21,20 @@ You need only to configure project level settings to be able to implement a full
     'rest_framework.authtoken',
     'corsheaders',
     ...
-    'django_boards', # To be safe, I'd make sure to add this below the rest_framework apps
 ][/code]
 [/li]
-[li]Django Boards provides the serializers, permissions, and viewsets for you, but you still have control over the project level settings.
+[li]Punkweb Boards provides the serializers, permissions, and viewsets for you, but you still have control over the project level settings.
 
 Add this anywhere, also in [b]settings.py[/b]:
 [code]CORS_ORIGIN_ALLOW_ALL = True
 
-REST_FRAMEWORK = {                        
+REST_FRAMEWORK = {                       
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
-        'django_boards.rest.authentication.NoCSRFSessionAuthentication',
+        'punkweb_boards.rest.authentication.NoCSRFSessionAuthentication',
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 25,       
+    'PAGE_SIZE': 25,      
 }
 [/code]
 [/li]
@@ -42,7 +42,7 @@ REST_FRAMEWORK = {                       
 
 Add the following url:
 [code]...
-url(r'^board/api/', include('django_boards.rest.urls')),
+url(r'^board/api/', include('punkweb_boards.rest.urls')),
 ...[/code]
 [/li]
 [/ol]
@@ -50,4 +50,4 @@ And that's it.
 
 Run your project and navigate to [b]/board/api/[/b], you should now see the django-rest-framework browsable API.
 
-You may need change configurations to bend to you use case, but this should get you started.  You can visit visit documentation for django-rest-framework, which can be found on [url=http://www.django-rest-framework.org/#api-guide]their website[/url].
+You may need to change configurations to bend to you use case, but this should get you started.  You can visit visit documentation for django-rest-framework, which can be found on [url=http://www.django-rest-framework.org/#api-guide]their website[/url].

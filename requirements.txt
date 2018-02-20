@@ -9,4 +9,4 @@ libsass
 django-compressor
 django-sass-processor
 
-git+https://github.com/shakedown-street/django-boards.git
+git+https://github.com/shakedown-street/punkweb-boards.git

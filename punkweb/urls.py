@@ -27,9 +27,9 @@ urlpatterns = [
     url(r'^links/$', views.links_view, name='links'),
     url(r'^pgp/$', views.pgp_view, name='pgp'),
     url(r'^admin/', admin.site.urls),
-    url(r'^board/', include('django_boards.urls')),
-    url(r'^board/page/', include('django_boards.page_urls')),
-    url(r'^board/api/', include('django_boards.rest.urls')),
+    url(r'^board/', include('punkweb_boards.urls')),
+    url(r'^board/page/', include('punkweb_boards.page_urls')),
+    url(r'^board/api/', include('punkweb_boards.rest.urls')),
     url(r'^captcha/', include('captcha.urls')),
 ]
 
