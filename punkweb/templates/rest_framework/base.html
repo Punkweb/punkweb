@@ -1,10 +1,4 @@
-{% load staticfiles %}
-{% load i18n %}
-{% load humanize %}
-{% load rest_framework %}
-{% load static %}
-{% load sass_tags %}
-
+{% load compress i18n humanize rest_framework static staticfiles %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -21,7 +15,9 @@
         {% block bootstrap_theme %}
           <!-- <link rel="stylesheet" type="text/css" href="{% static "rest_framework/css/bootstrap.min.css" %}"/>
           <link rel="stylesheet" type="text/css" href="{% static "rest_framework/css/bootstrap-tweaks.css" %}"/> -->
-          <link href="{% sass_src 'punkweb_boards/scss/punkweb.scss' %}" rel="stylesheet" type="text/css" />
+          {% compress css %}
+          <link href="{% static 'punkweb_boards/scss/punkweb.scss' %}" rel="stylesheet" type="text/x-scss" />
+          {% endcompress %}
         {% endblock %}
 
         <link rel="stylesheet" type="text/css" href="{% static "rest_framework/css/prettify.css" %}"/>
