@@ -4,6 +4,11 @@
 <div class="nav nav--upper">
   <div class="nav__flex">
     <div class="nav__left">
+      {% if user.is_authenticated %}
+      {% if user.is_staff %}
+      <a class="nav--upper__link" href="/admin/">Admin</a>
+      {% endif %}
+      {% endif %}
       <a class="nav--upper__link" href="{% url 'pages:page' 'docs-index' %}"><i class="fa fa-book fa-fw" aria-hidden="true"></i> Documentation</a>
       <a class="nav--upper__link" href="{% url 'pages:page' 'services' %}"><i class="fa fa-wrench fa-fw" aria-hidden="true"></i> Services</a>
     </div>
@@ -67,11 +72,6 @@
       <div class="nav__title"><a href="/">{{BOARD_SETTINGS.BOARD_NAME}}</a></div>
       <a class="nav__link" href="{% url 'board:index' %}">Forum</a>
       <a class="nav__link" href="{% url 'board:members-list' %}">Members</a>
-      {% if user.is_authenticated %}
-      {% if user.is_staff %}
-      <a class="nav__link" href="/admin/">Admin</a>
-      {% endif %}
-      {% endif %}
     </div>
     <div class="nav__right">
       {% block main_right_links %}
