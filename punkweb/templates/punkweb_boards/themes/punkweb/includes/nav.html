@@ -6,7 +6,7 @@
     <div class="nav__left">
       {% if user.is_authenticated %}
       {% if user.is_staff %}
-      <a class="nav--upper__link" href="/admin/">Admin</a>
+      <a class="nav--upper__link" href="/admin/"><i class="fa fa-user-plus fa-fw" aria-hidden="true"></i> Admin</a>
       {% endif %}
       {% endif %}
       <a class="nav--upper__link" href="{% url 'pages:page' 'docs-index' %}"><i class="fa fa-book fa-fw" aria-hidden="true"></i> Documentation</a>
