@@ -46,6 +46,17 @@
 {% else %}
     <p>{% trans "You don't have permission to edit anything." %}</p>
 {% endif %}
+  <div class="app-templates module">
+    <table>
+      <caption>
+        <a href="{% url 'admin-template-list' %}" class="section" title="Edit templates from within the admin interface">Templates</a>
+      </caption>
+      <tr class="model-templates">
+        <th scope="row"><a href="{% url 'admin-template-list' %}">Templates</a></th>
+        <td><a href="{% url 'admin-template-list' %}" class="changelink">Change</a></td>
+      </tr>
+    </table>
+  </div>
 </div>
 {% endblock %}
 

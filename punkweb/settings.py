@@ -51,6 +51,9 @@ INSTALLED_APPS = [
     'precise_bbcode',
     'captcha',
     'punkweb_boards',
+    # Punkweb admin templates
+    'codemirror',
+    'admin_templates',
     # Punkweb
     'punkweb',
 ]
@@ -174,6 +177,8 @@ STATICFILES_FINDERS = (
 COMPRESS_PRECOMPILERS = (
     ('text/x-scss', 'django_libsass.SassCompiler'),
 )
+
+CODEMIRROR_PATH = os.path.join(STATIC_URL, 'punkweb', 'codemirror')
 
 # Logging
 # The numeric values of logging levels are in the following table:
