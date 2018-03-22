@@ -1,4 +1,4 @@
-The [url=https://punkweb.us/board/api/]Punkweb API[/url] allows for anyone to authenticate and access data that their user would be able to see if they were viewing the actual site.  It's main purpose is for writing JavaScript plugins/extensions to the Punkweb Boards core, but can be used for other purposes aswell, such as completely custom frontends.
+The [url=https://punkweb.net/board/api/]Punkweb API[/url] allows for anyone to authenticate and access data that their user would be able to see if they were viewing the actual site.  It's main purpose is for writing JavaScript plugins/extensions to the Punkweb Boards core, but can be used for other purposes aswell, such as completely custom frontends.
 
 Below is custom frontend that uses the API to access data from punkweb written with [url=https://github.com/shakedown-street/porks-ngx-template]this project template[/url].  Using Angular and Electron, this frontend could be packaged as an installable desktop program.  If at some point this were to become an official project, that would give any Punkweb forum the option to have a desktop version that it's users could install.
 
