@@ -27,8 +27,16 @@ urlpatterns = [
     url(r'^$', views.index_view, name='index'),
     url(r'^links/$', views.links_view, name='links'),
     url(r'^pgp/$', views.pgp_view, name='pgp'),
-    url(r'^admin/templates/$', admin_views.templates_list, name='admin-template-list'),
-    url(r'^admin/templates/(?P<key>.+)/$', admin_views.template_view, name='admin-template-detail'),
+    url(
+        r'^admin/templates/$',
+        admin_views.templates_list,
+        name='admin-template-list',
+    ),
+    url(
+        r'^admin/templates/(?P<key>.+)/$',
+        admin_views.template_view,
+        name='admin-template-detail',
+    ),
     url(r'^admin/', admin.site.urls),
     url(r'^board/', include('punkweb_boards.urls')),
     url(r'^board/page/', include('punkweb_boards.page_urls')),

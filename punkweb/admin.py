@@ -10,7 +10,7 @@ class LogEntryAdmin(admin.ModelAdmin):
         'object_id',
         'object_repr',
         'action_flag',
-        'change_message'
+        'change_message',
     )
 
     def has_delete_permission(self, request, obj=None):

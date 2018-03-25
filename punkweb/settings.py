@@ -23,7 +23,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get(
-    'SECRET_KEY', '360wd#k-r^(p)o*86&yw00&^z#x!eoozkq=bn@r!4da7bfnodf')
+    'SECRET_KEY', '360wd#k-r^(p)o*86&yw00&^z#x!eoozkq=bn@r!4da7bfnodf'
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -85,9 +86,9 @@ TEMPLATES = [
                 'django.contrib.messages.context_processors.messages',
                 'punkweb_boards.context_processors.settings',
                 'punkweb_boards.context_processors.base_context',
-            ],
+            ]
         },
-    },
+    }
 ]
 
 WSGI_APPLICATION = 'punkweb.wsgi.application'
@@ -121,16 +122,14 @@ CACHES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator'
+    },
+    {'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator'},
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator'
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
-    },
-    {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator'
     },
 ]
 
@@ -164,9 +163,7 @@ else:
 
 STATIC_DIR = os.path.join(BASE_DIR, 'punkweb/static')
 
-STATICFILES_DIRS = (
-    STATIC_DIR,
-)
+STATICFILES_DIRS = (STATIC_DIR,)
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
@@ -174,9 +171,7 @@ STATICFILES_FINDERS = (
     'compressor.finders.CompressorFinder',
 )
 
-COMPRESS_PRECOMPILERS = (
-    ('text/x-scss', 'django_libsass.SassCompiler'),
-)
+COMPRESS_PRECOMPILERS = (('text/x-scss', 'django_libsass.SassCompiler'),)
 
 CODEMIRROR_PATH = os.path.join(STATIC_URL, 'punkweb', 'codemirror')
 
@@ -263,7 +258,7 @@ REST_FRAMEWORK = {
         'punkweb_boards.rest.authentication.NoCSRFSessionAuthentication',
     ),
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 25
+    'PAGE_SIZE': 25,
 }
 
 THUMBNAIL_ALIASES = {
@@ -271,11 +266,8 @@ THUMBNAIL_ALIASES = {
         'avatar': {'size': (200, 200), 'crop': True},
         'avatar_small': {'size': (100, 100), 'crop': True},
         'avatar_smaller': {'size': (50, 50), 'crop': True},
-        'avatar_smallest': {'size': (25, 25), 'crop': True}
-    },
+        'avatar_smallest': {'size': (25, 25), 'crop': True},
+    }
 }
 
-PUNKWEB_BOARDS = {
-    'BOARD_NAME': 'Punk Web',
-    'CAPTCHAS_ENABLED': True,
-}
+PUNKWEB_BOARDS = {'BOARD_NAME': 'Punk Web', 'CAPTCHAS_ENABLED': True}
