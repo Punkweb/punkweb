@@ -1,8 +1,0 @@
-{% extends 'punkweb_boards/themes/punkweb/base.html' %}
-{% load compress static %}
-
-{% block extrastyle %}
-{% compress css %}
-<link rel="stylesheet" href="{% static 'punkweb/scss/board.scss' %}" type="text/x-scss" />
-{% endcompress %}
-{% endblock %}
