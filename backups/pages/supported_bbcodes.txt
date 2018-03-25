@@ -87,10 +87,10 @@
 [anchor]links[/anchor]
 [size=3]Links[/size]
 
-[url=https://www.punkweb.us/board/]Punkweb[/url]
+[url=https://www.punkweb.net/board/]Punkweb[/url]
 
 [spoiler=Code]
-[code][url=https://www.punkweb.us/board/]Punkweb[/url][/code]
+[code][url=https://www.punkweb.net/board/]Punkweb[/url][/code]
 [/spoiler]
 
 [anchor]images[/anchor]

@@ -3,7 +3,8 @@ from django.contrib.admin.models import LogEntry
 
 
 class LogEntryAdmin(admin.ModelAdmin):
-    readonly_fields = ('content_type',
+    readonly_fields = (
+        'content_type',
         'user',
         'action_time',
         'object_id',

@@ -1,11 +1,11 @@
 [size=2]Navigation[/size]
 [ul]
-[li][url=https://punkweb.us/board/page/docs-index/]Documentation Index[/url][/li]
-[li][url=https://punkweb.us/board/page/docs-quick-start/]Quick Start Tutorial[/url][/li]
-[li][url=https://punkweb.us/board/page/docs-settings/]Punkweb Boards Settings[/url][/li]
-[li][url=https://punkweb.us/board/page/docs-sceditor/]Adding a BBCode editor[/url][/li]
-[li][url=https://punkweb.us/board/page/docs-rest-api/]Adding a REST API[/url][/li]
-[li][url=https://punkweb.us/board/page/docs-captcha/]Adding captcha to your registration form[/url][/li]
+[li][url=https://punkweb.net/board/page/docs-index/]Documentation Index[/url][/li]
+[li][url=https://punkweb.net/board/page/docs-quick-start/]Quick Start Tutorial[/url][/li]
+[li][url=https://punkweb.net/board/page/docs-settings/]Punkweb Boards Settings[/url][/li]
+[li][url=https://punkweb.net/board/page/docs-sceditor/]Adding a BBCode editor[/url][/li]
+[li][url=https://punkweb.net/board/page/docs-rest-api/]Adding a REST API[/url][/li]
+[li][url=https://punkweb.net/board/page/docs-captcha/]Adding captcha to your registration form[/url][/li]
 [/ul]
 
 [size=3]Project Level Settings[/size]
@@ -50,4 +50,4 @@ Lets break down what each of these settings does:
 [/ul]
 
 
-There are many more settings to come, if you need a configuration added to disable certain features, create a thread in the [url=https://www.punkweb.us/board/subcategory/ba2af6d9-0145-43c2-929f-5f94af03732a/]Suggestions Category[/url].
+There are many more settings to come, if you need a configuration added to disable certain features, create a thread in the [url=https://www.punkweb.net/board/subcategory/ba2af6d9-0145-43c2-929f-5f94af03732a/]Suggestions Category[/url].
