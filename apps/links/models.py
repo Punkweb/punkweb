@@ -6,6 +6,8 @@ class Category(models.Model):
     order = models.IntegerField(default=1)
 
     class Meta:
+        verbose_name = 'category'
+        verbose_name_plural = 'categories'
         ordering = ('order',)
 
     def __str__(self):
@@ -14,15 +16,19 @@ class Category(models.Model):
 
 class Link(models.Model):
     category = models.ForeignKey(
-        'Category', related_name='links', null=False, blank=False,
-        on_delete=models.CASCADE)
+        'Category',
+        related_name='links',
+        null=False,
+        blank=False,
+        on_delete=models.CASCADE,
+    )
     display_text = models.CharField(max_length=120, null=False, blank=False)
     external_link = models.CharField(max_length=400, null=False, blank=False)
     active = models.BooleanField(default=True)
     added_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        ordering = ('added_at',)
+        ordering = ('category', 'added_at')
 
     def __str__(self):
         return '{}: {}'.format(self.category.title, self.display_text)

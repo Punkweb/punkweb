@@ -3,11 +3,11 @@ from apps.links.models import Category, Link
 
 
 class CategoryAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('title', 'order')
 
 
 class LinkAdmin(admin.ModelAdmin):
-    pass
+    list_display = ('display_text', 'category', 'active')
 
 
 admin.site.register(Category, CategoryAdmin)

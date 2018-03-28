@@ -8,33 +8,51 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
             name='Category',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                (
+                    'id',
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name='ID',
+                    ),
+                ),
                 ('title', models.CharField(max_length=120)),
                 ('order', models.IntegerField(default=1)),
             ],
-            options={
-                'ordering': ('order',),
-            },
+            options={'ordering': ('order',)},
         ),
         migrations.CreateModel(
             name='Link',
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                (
+                    'id',
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name='ID',
+                    ),
+                ),
                 ('display_text', models.CharField(max_length=120)),
                 ('external_link', models.CharField(max_length=400)),
                 ('active', models.BooleanField(default=True)),
                 ('added_at', models.DateTimeField(auto_now_add=True)),
-                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='links', to='links.Category')),
+                (
+                    'category',
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name='links',
+                        to='links.Category',
+                    ),
+                ),
             ],
-            options={
-                'ordering': ('added_at',),
-            },
+            options={'ordering': ('added_at',)},
         ),
     ]
