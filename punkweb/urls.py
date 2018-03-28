@@ -25,8 +25,8 @@ app_name = 'punkweb'
 
 urlpatterns = [
     url(r'^$', views.index_view, name='index'),
-    url(r'^links/$', views.links_view, name='links'),
     url(r'^pgp/$', views.pgp_view, name='pgp'),
+    url(r'^links/', include('apps.links.urls')),
     url(
         r'^admin/templates/$',
         admin_views.templates_list,

@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'admin_templates',
     # Punkweb
     'punkweb',
+    'apps.links',
 ]
 
 MIDDLEWARE = [
