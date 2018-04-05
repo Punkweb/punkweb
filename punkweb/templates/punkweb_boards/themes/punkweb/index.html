@@ -22,7 +22,7 @@
               <thead data-role="collapsible-toggle" data-key="index-category-{{category.parent.id}}">
                 <tr>
                   <th class="align-left" width="40%">
-                    <a href="{% url 'board:category' category.parent.id %}">{{category.parent.name}}</a>
+                    <a href="{% url 'board:category-detail' category.parent.id %}">{{category.parent.name}}</a>
                   </th>
                   <th class="align-center" width="10%">
                     Threads
@@ -39,7 +39,7 @@
                 {% for child in category.children %}
                 <tr>
                   <td class="align-left">
-                    <div><a href="{% url 'board:subcategory' child.id %}">{{child.name}}</a></div>
+                    <div><a href="{% url 'board:subcategory-detail' child.id %}">{{child.name}}</a></div>
                     <div>{{child.description.rendered}}</div>
                   </td>
                   <td class="align-center">
