@@ -1,6 +1,7 @@
 django
 gunicorn
 
+coreapi
 django-simple-captcha
 djangorestframework
 django-cors-headers
@@ -9,5 +10,5 @@ django-libsass
 python-memcached
 psycopg2
 
-git+https://github.com/shakedown-street/punkweb-boards.git
+git+https://github.com/Punkweb/punkweb-boards.git
 git+https://github.com/Punkweb/punkweb-admin-templates.git

@@ -30,7 +30,7 @@
   {% include 'admin/admin_nav.html' %}
 
   <div class="pageHeader">
-    <div class="djcontainer">
+    <div class="container">
       <div class="pageHeader__flex">
         <div class="pageHeader__left">
           <div class="pageHeader__title">{% if title %}{{title}}{% endif %}</div>
@@ -55,7 +55,7 @@
     {% endif %}
   {% endblock messages %}
   <!-- Content -->
-  <div class="djcontainer">
+  <div class="container">
     <div id="content" class="{% block coltype %}colM{% endblock %}">
       {% block pretitle %}{% endblock %}
       {% block content_title %}{% endblock %}
