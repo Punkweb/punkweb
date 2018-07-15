@@ -48,6 +48,3 @@ Lets break down what each of these settings does:
 [li][b]USER_LASTSEEN_TIMEOUT[/b]: Number of seconds that we will keep track of inactive users for before their last seen is removed from the cache.  Default is 7 days.[/li]
 [li][b]CAPTCHAS_ENABLED[/b]: Require captcha on registration.[/li]
 [/ul]
-
-
-There are many more settings to come, if you need a configuration added to disable certain features, create a thread in the [url=https://www.punkweb.net/board/subcategory/ba2af6d9-0145-43c2-929f-5f94af03732a/]Suggestions Category[/url].

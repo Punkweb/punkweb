@@ -1,7 +1,0 @@
-There are now ranks based on post count.  These ranks are automatically awarded.  Please do not spam or write half baked posts in order to achieve ranks, they don't actually mean anything, they're just a title.
-
-These are going to change, but for now the ranks are as follows:
-Recruit - 1
-Private - 10
-Corporal - 25
-Sergeant - 50

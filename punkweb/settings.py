@@ -52,11 +52,7 @@ INSTALLED_APPS = [
     'precise_bbcode',
     'captcha',
     'punkweb_boards',
-    # Punkweb admin templates
-    'codemirror',
-    'admin_templates',
     # Punkweb
-    'punkweb',
     'apps.links',
 ]
 

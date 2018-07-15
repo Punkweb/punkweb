@@ -8,7 +8,7 @@
 [li][url=https://punkweb.net/board/page/docs-captcha/]Adding captcha to your registration form[/url][/li]
 [/ul]
 
-Want to add a [url=http://www.django-rest-framework.org/]django-rest-framework[/url] API that developers can use to integrate your forum into their software with?  So did I.  Punkweb Boards [url=https://github.com/shakedown-street/punkweb-boards/tree/dev/punkweb_boards/rest]comes shipped[/url] with a django-rest-framework implementation for accessing exactly what data you'd be able to access if you were browsing the forum itself.
+Want to add a [url=http://www.django-rest-framework.org/]django-rest-framework[/url] API that developers can use to integrate your forum into their software with?  So did I.  Punkweb Boards [url=https://github.com/Punkweb/punkweb-boards/tree/dev/punkweb_boards/rest]comes shipped[/url] with a django-rest-framework implementation for accessing exactly what data you'd be able to access if you were browsing the forum itself.
 
 You need only to configure project level settings to be able to implement a full rest API.
 

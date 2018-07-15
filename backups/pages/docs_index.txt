@@ -8,7 +8,13 @@
 [li][url=https://punkweb.net/board/page/docs-captcha/]Adding captcha to your registration form[/url][/li]
 [/ul]
 
-Punkweb Boards changes almost daily, and the documentation is still being written.  Check back here often for updates on the state of the project.  If you have questions on anything even if it's not directly related to Punkweb Boards, create a thread on these forums and we'd be excited to help you out as best as we can.
+[b]Note:[/b] These docs should get you set up without any problems whatsoever, so if you run into any problems [b]PLEASE[/b] create a thread on the forums explaining the issue so that the docs can be corrected.
+
+Punkweb Boards changes almost daily, and the documentation is still being written.  Check back here often for updates on the state of the project.
+
+If you have questions on anything even if it's not directly related to Punkweb Boards, create a thread on these forums and we'd be excited to help you out as best as we can.
+
+[url=https://github.com/Punkweb/punkweb-boards]Github Repository[/url]
 
 [size=2]In the Works[/size]
 
@@ -31,7 +37,7 @@ There are probably additional features that are not included in this list but I'
 [/li]
 [li][url=http://www.django-rest-framework.org/]django-rest-framework[/url] API data access is equivalent to what you'll see and be able to do on the website. The shoutbox and statistics graphs utilize the API.
 [/li]
-[li][url=https://github.com/jrief/django-sass-processor]django-sass-processor[/url] for scss compilation.  I may drop this dependency, since the punkweb theme is more of a contrib than a project feature, and not all themes may need this.
+[li][url=https://github.com/torchbox/django-libsass]django-libsass[/url] for scss compilation.  Only necessary if you intend on creating your own color scheme for the punkweb theme.
 [/li]
 [li][url=https://github.com/SmileyChris/easy-thumbnails]easy-thumbnails[/url] support for user image thumbnailing.
 [/li]
@@ -63,14 +69,14 @@ There are probably additional features that are not included in this list but I'
 [/li]
 [li]Shout box uses the API to get last 25 shouts within the last 24 hours.  Can be configured or disabled in the Punkweb Boards settings module.
 [/li]
+[li]Statistics graphs drawn with [url=http://www.chartjs.org/]Chart.js[/url] integrate with the API.  The graphs hit endpoints that use SQL queries, and load wicked fast regardless of how much data is on the forum.  The current graphs are stable, big plans in the future for the statistics page.
+[/li]
+[li]Private messaging system.
+[/li]
 [/ul]
 
 [size=2]EXPERIMENTAL[/size]
 [ul]
-[li][url=http://www.chartjs.org/]Chart.js[/url] statistics graphs integrates with the API.  The graphs hit endpoints that use SQL queries, and load wicked fast regardless of how much data is on the forum.
-[/li]
-[li]Private messaging system written, but there is no interface yet.
-[/li]
 [li]upvoted_by/downvoted_by fields are on the thread and post models but can't be changed with the exception of through the admin.
 [/li]
 [li]Reporting posts/threads is fully usable but it could be done better and look nicer.
@@ -85,4 +91,4 @@ There are probably additional features that are not included in this list but I'
 
 [size=2]TODO[/size]
 
-See issues on github.
+See [url=https://github.com/Punkweb/punkweb-boards/issues]issues[/url] on github to see what's left before a v1 release.

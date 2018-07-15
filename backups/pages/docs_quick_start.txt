@@ -13,7 +13,7 @@ Punkweb boards can be added into any existing project with very little setup.  
 [size=2]Install[/size]
 
 Add in [b]requirements.txt[/b] (soon to be replaced with a pip package):
-[code]git+https://github.com/shakedown-street/punkweb-boards.git[/code]
+[code]git+https://github.com/Punkweb/punkweb-boards.git[/code]
 
 and [b]pip install -r requirements.txt[/b]
 
