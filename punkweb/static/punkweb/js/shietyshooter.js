@@ -41,24 +41,24 @@ var GameState = (function (_super) {
         _this.enemies = [];
         _this.characterSprite1 = new Image();
         _this.characterSprite1.onload = function () {
-            console.log('Image loaded: ' + 'assets/character-right.png');
+            console.log('Image loaded: ' + 'https://punkweb.net/static/punkweb/js/assets/character-right.png');
         };
-        _this.characterSprite1.src = 'assets/character-right.png';
+        _this.characterSprite1.src = 'https://punkweb.net/static/punkweb/js/assets/character-right.png';
         _this.characterSprite2 = new Image();
         _this.characterSprite2.onload = function () {
-            console.log('Image loaded: ' + 'assets/character-left.png');
+            console.log('Image loaded: ' + 'https://punkweb.net/static/punkweb/js/assets/character-left.png');
         };
-        _this.characterSprite2.src = 'assets/character-left.png';
+        _this.characterSprite2.src = 'https://punkweb.net/static/punkweb/js/assets/character-left.png';
         _this.grassSprite = new Image();
         _this.grassSprite.onload = function () {
-            console.log('Image loaded: ' + 'assets/grass.png');
+            console.log('Image loaded: ' + 'https://punkweb.net/static/punkweb/js/assets/grass.png');
         };
-        _this.grassSprite.src = 'assets/grass.png';
+        _this.grassSprite.src = 'https://punkweb.net/static/punkweb/js/assets/grass.png';
         _this.dirtSprite = new Image();
         _this.dirtSprite.onload = function () {
-            console.log('Image loaded: ' + 'assets/dirt.png');
+            console.log('Image loaded: ' + 'https://punkweb.net/static/punkweb/js/assets/dirt.png');
         };
-        _this.dirtSprite.src = 'assets/dirt.png';
+        _this.dirtSprite.src = 'https://punkweb.net/static/punkweb/js/assets/dirt.png';
         return _this;
     }
     GameState.prototype.onClick = function (canvasEvent) {
