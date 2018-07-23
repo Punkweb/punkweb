@@ -32,6 +32,7 @@ var GameState = (function (_super) {
         _this.characterSprite2 = null;
         _this.grassSprite = null;
         _this.dirtSprite = null;
+        _this.song = null;
         _this.health = 100;
         _this.reloadTime = 40;
         _this.enemyDamage = 5;
@@ -41,9 +42,7 @@ var GameState = (function (_super) {
         _this.enemyProjectiles = [];
         _this.enemies = [];
         _this.characterSprite1 = new Image();
-        _this.characterSprite1.onload = function () {
-            console.log('Image loaded: ' + 'https://punkweb.net/static/punkweb/js/assets/character-right.png');
-        };
+        _this.characterSprite1.onload = function () { };
         _this.characterSprite1.src = 'https://punkweb.net/static/punkweb/js/assets/character-right.png';
         _this.characterSprite2 = new Image();
         _this.characterSprite2.onload = function () {
@@ -60,6 +59,9 @@ var GameState = (function (_super) {
             console.log('Image loaded: ' + 'https://punkweb.net/static/punkweb/js/assets/dirt.png');
         };
         _this.dirtSprite.src = 'https://punkweb.net/static/punkweb/js/assets/dirt.png';
+        _this.song = new Audio('https://punkweb.net/static/punkweb/js/assets/Shiety_Blues-JackStraw.mp3');
+        _this.song.loop = true;
+        _this.song.currentTime = 0;
         _this.gameCtx.canvas.addEventListener('click', _this.onClick.bind(_this), false);
         return _this;
     }
@@ -82,6 +84,7 @@ var GameState = (function (_super) {
             this.enemyProjectiles = [];
             this.enemies = [];
             this.started = true;
+            this.song.play();
         }
     };
     GameState.prototype.init = function () { };
@@ -181,6 +184,8 @@ var GameState = (function (_super) {
                 _this.enemyProjectiles.splice(i, 1);
                 if (_this.health < 1) {
                     _this.started = false;
+                    _this.song.currentTime = 0;
+                    _this.song.pause();
                 }
             }
         });
