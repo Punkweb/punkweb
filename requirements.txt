@@ -11,4 +11,3 @@ python-memcached
 psycopg2
 
 git+https://github.com/Punkweb/punkweb-boards.git
-git+https://github.com/Punkweb/punkweb-admin-templates.git
