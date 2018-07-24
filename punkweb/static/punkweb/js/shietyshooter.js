@@ -32,6 +32,7 @@ var GameState = (function (_super) {
         _this.characterSprite2 = null;
         _this.grassSprite = null;
         _this.dirtSprite = null;
+        _this.skySprite = null;
         _this.song = null;
         _this.health = 100;
         _this.reloadTime = 40;
@@ -41,27 +42,21 @@ var GameState = (function (_super) {
         _this.ownProjectiles = [];
         _this.enemyProjectiles = [];
         _this.enemies = [];
+        _this.skyTick = 0;
         _this.characterSprite1 = new Image();
-        _this.characterSprite1.onload = function () { };
         _this.characterSprite1.src = 'https://punkweb.net/static/punkweb/js/assets/character-right.png';
         _this.characterSprite2 = new Image();
-        _this.characterSprite2.onload = function () {
-            console.log('Image loaded: ' + 'https://punkweb.net/static/punkweb/js/assets/character-left.png');
-        };
         _this.characterSprite2.src = 'https://punkweb.net/static/punkweb/js/assets/character-left.png';
         _this.grassSprite = new Image();
-        _this.grassSprite.onload = function () {
-            console.log('Image loaded: ' + 'https://punkweb.net/static/punkweb/js/assets/grass.png');
-        };
         _this.grassSprite.src = 'https://punkweb.net/static/punkweb/js/assets/grass.png';
         _this.dirtSprite = new Image();
-        _this.dirtSprite.onload = function () {
-            console.log('Image loaded: ' + 'https://punkweb.net/static/punkweb/js/assets/dirt.png');
-        };
         _this.dirtSprite.src = 'https://punkweb.net/static/punkweb/js/assets/dirt.png';
+        _this.skySprite = new Image();
+        _this.skySprite.src = 'https://punkweb.net/static/punkweb/js/assets/clouds.jpg';
         _this.song = new Audio('https://punkweb.net/static/punkweb/js/assets/Shiety_Blues-JackStraw.mp3');
         _this.song.loop = true;
         _this.song.currentTime = 0;
+        _this.song.volume = .35;
         _this.gameCtx.canvas.addEventListener('click', _this.onClick.bind(_this), false);
         return _this;
     }
@@ -89,9 +84,20 @@ var GameState = (function (_super) {
     };
     GameState.prototype.init = function () { };
     GameState.prototype.end = function () { };
+    GameState.prototype.renderSky = function (r, skyTick) {
+        for (var y = 0; y < (1024 * 2); y += 512) {
+            for (var x = 0; x < (1024 * 2); x += 512) {
+                r.image(this.skySprite, 0, 0, 512, 512, x - skyTick, y, 512, 512);
+            }
+        }
+    };
     GameState.prototype.render = function (r) {
         var _this = this;
-        r.rect('#7EC0EE', 0, 0, 1024, 600);
+        this.skyTick++;
+        this.renderSky(r, this.skyTick);
+        if (this.skyTick >= 1024) {
+            this.skyTick = 0;
+        }
         if (!this.started) {
             r.text('Click to start', 12, 160, 'black', '72px Verdana');
             return;
@@ -113,7 +119,8 @@ var GameState = (function (_super) {
                 r.image(_this.characterSprite2, 0, 0, 161, 203, obj.x, dy, 161, 203);
                 var percentHealth = obj.health / 100;
                 r.rect('#282828', obj.x + 80, dy - 40, 104, 12);
-                r.rect('red', obj.x + 82, dy - 38, 100 * percentHealth, 8);
+                r.rect('red', obj.x + 82, dy - 38, 100, 8);
+                r.rect('green', obj.x + 82, dy - 38, 100 * percentHealth, 8);
             });
         }
         if (this.ownProjectiles) {
@@ -128,7 +135,8 @@ var GameState = (function (_super) {
         }
         var percentHealth = this.health / 100;
         r.rect('#282828', 12, 12, 240, 24);
-        r.rect('red', 14, 14, 236 * percentHealth, 20);
+        r.rect('red', 14, 14, 236, 20);
+        r.rect('green', 14, 14, 236 * percentHealth, 20);
     };
     GameState.prototype.update = function (dt) {
         var _this = this;
