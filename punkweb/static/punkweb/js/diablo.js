@@ -526,7 +526,7 @@ var BlackKnightAnim = (function (_super) {
         return _this;
     }
     BlackKnightAnim.prototype.getImageUrl = function () {
-        return "https://punkweb.net/static/js/assets/black_knight.png";
+        return "https://punkweb.net/static/punkweb/js/assets/diablo/black_knight.png";
     };
     return BlackKnightAnim;
 }(squire_1.AnimationDef));
@@ -570,7 +570,7 @@ var CoinsAnim = (function (_super) {
         return _this;
     }
     CoinsAnim.prototype.getImageUrl = function () {
-        return "https://punkweb.net/static/js/assets/items.png";
+        return "https://punkweb.net/static/punkweb/js/assets/diablo/items.png";
     };
     return CoinsAnim;
 }(squire_1.AnimationDef));
@@ -619,7 +619,7 @@ var HeavyArmorItemAnim = (function (_super) {
         return _this;
     }
     HeavyArmorItemAnim.prototype.getImageUrl = function () {
-        return "https://punkweb.net/static/js/assets/items.png";
+        return "https://punkweb.net/static/punkweb/js/assets/diablo/items.png";
     };
     return HeavyArmorItemAnim;
 }(squire_1.AnimationDef));
@@ -1318,7 +1318,7 @@ var HeavyArmorSwordShieldAnim = (function (_super) {
         return _this;
     }
     HeavyArmorSwordShieldAnim.prototype.getImageUrl = function () {
-        return "https://punkweb.net/static/js/assets/heavy_armor_sword_shield.png";
+        return "https://punkweb.net/static/punkweb/js/assets/diablo/heavy_armor_sword_shield.png";
     };
     return HeavyArmorSwordShieldAnim;
 }(squire_1.AnimationDef));
@@ -1431,7 +1431,7 @@ var GameState = (function (_super) {
         _this.terrainSprite.onload = function () {
             console.log('Image loaded: ' + 'assets/terrain.png');
         };
-        _this.terrainSprite.src = 'https://punkweb.net/static/js/assets/terrain.png';
+        _this.terrainSprite.src = 'https://punkweb.net/static/punkweb/js/assets/diablo/terrain.png';
         return _this;
     }
     GameState.prototype.init = function () { };
