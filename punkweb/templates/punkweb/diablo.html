@@ -1,33 +1,12 @@
+{% extends 'punkweb/game.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Punkweb | Diablo</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="description" content="{% block meta_description %}For the record, the music never stopped{% endblock %}">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta name="mobile-web-app-capable" content="yes">
-    <link type="text/css" href="{% static 'punkweb/css/stylesheet.css' %}" rel="Stylesheet" />
-    <style media="screen">
-      html, body {
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-      }
-      * {
-        box-sizing: border-box;
-      }
-      canvas {
-        border: 1px solid black;
-        margin: 0;
-        padding: 0;
-      }
-    </style>
-  </head>
-  <body>
-    <main>
-      <canvas id="diablo" height="600px" width="800px"></canvas>
-      <script type="text/javascript" src="{% static 'punkweb/js/diablo.js' %}"></script>
-    </main>
-  </body>
-</html>
+{% block title %}Diablo{% endblock %}
+{% block header %}<h1>Diablo</h1>{% endblock %}
+{% block canvas %}<canvas id="diablo" height="600px" width="800px"></canvas>{% endblock %}
+{% block content %}
+<p>This is my first try at writing an isometric game.  It is written using my own web game engine, as a test to see what the engine is capable of.</p>
+<p>The engine and game code are both on github.</p>
+<a href="https://github.com/shakedown-street/squire-ts">Engine Repo</a>
+<a href="https://github.com/shakedown-street/diablo">Game Repo</a>
+{% endblock %}
+{% block script %}<script type="text/javascript" src="{% static 'punkweb/js/diablo.js' %}"></script>{% endblock %}

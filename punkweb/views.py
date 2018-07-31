@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, reverse
 
 
-def game_view(request):
-    return render(request, 'punkweb/game.html', {})
+def shietyshooter_view(request):
+    return render(request, 'punkweb/shietyshooter.html', {})
 
 
 def diablo_view(request):

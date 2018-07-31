@@ -25,7 +25,8 @@ app_name = 'punkweb'
 urlpatterns = [
     url(r'^$', views.index_view, name='index'),
     url(r'^pgp/$', views.pgp_view, name='pgp'),
-    url(r'^game/$', views.game_view, name='game'),
+    url(r'^game/$', views.shietyshooter_view, name='game'),
+    url(r'^shietyshooter/$', views.shietyshooter_view, name='shietyshooter'),
     url(r'^diablo/$', views.diablo_view, name='diablo'),
     url(r'^links/', include('apps.links.urls')),
     url(r'^admin/', admin.site.urls),
