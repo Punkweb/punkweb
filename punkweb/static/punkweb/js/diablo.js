@@ -1860,7 +1860,7 @@ var Map = (function () {
             [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
         ];
         this.image = new Image();
-        this.image.src = 'assets/floor2.png';
+        this.image.src = 'https://punkweb.net/static/punkweb/js/assets/diablo/floor2.png';
     }
     Map.prototype.render = function (r) {
         var _this = this;
