@@ -21,11 +21,16 @@
  <nav>
    <p id="navh">Navigation</p>
    <ul>
-     <li><a href="{% url 'index' %}">Home</a></li>
-     <li><a href="{% url 'pgp' %}">PGP Key</a></li>
      <li><a href="{% url 'board:index' %}">Forum</a></li>
+     <br />
+     <h5>DannyClemito</h5>
+     <li><a href="{% url 'links:list' %}">Links</a></li>
+     <li><a href="{% url 'pgp' %}">PGP Key</a></li>
+     <br />
+     <h5>JackStraw</h5>
      <li><a href="{% url 'game' %}">Shiety Shooter</a></li>
      <li><a href="{% url 'diablo' %}">Diablo</a></li>
+     <li><a href="{% url 'music' %}">Music</a></li>
    </ul>
  </nav>
  </body>
