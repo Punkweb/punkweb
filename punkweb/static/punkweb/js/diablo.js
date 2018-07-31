@@ -532,7 +532,7 @@ var BlackKnightAnim = (function (_super) {
 }(squire_1.AnimationDef));
 exports.BlackKnightAnim = BlackKnightAnim;
 
-},{"../squire":16}],2:[function(require,module,exports){
+},{"../squire":17}],2:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -576,7 +576,7 @@ var CoinsAnim = (function (_super) {
 }(squire_1.AnimationDef));
 exports.CoinsAnim = CoinsAnim;
 
-},{"../squire":16}],3:[function(require,module,exports){
+},{"../squire":17}],3:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -625,7 +625,7 @@ var HeavyArmorItemAnim = (function (_super) {
 }(squire_1.AnimationDef));
 exports.HeavyArmorItemAnim = HeavyArmorItemAnim;
 
-},{"../squire":16}],4:[function(require,module,exports){
+},{"../squire":17}],4:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -1324,7 +1324,7 @@ var HeavyArmorSwordShieldAnim = (function (_super) {
 }(squire_1.AnimationDef));
 exports.HeavyArmorSwordShieldAnim = HeavyArmorSwordShieldAnim;
 
-},{"../squire":16}],5:[function(require,module,exports){
+},{"../squire":17}],5:[function(require,module,exports){
 "use strict";
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
@@ -1389,6 +1389,7 @@ var GameState = (function (_super) {
     function GameState(gameCtx) {
         var _this = _super.call(this, gameCtx) || this;
         _this.mouse = new squire_1.Point2d(0, 0);
+        _this.song = null;
         _this.entities = [];
         _this.groundItems = [];
         _this.mouseDownEvent = _this.mouseDown.bind(_this);
@@ -1397,6 +1398,7 @@ var GameState = (function (_super) {
         _this.connection = new squire_1.Connection('ws://localhost:443');
         _this.player = new _1.Player(_this.connection, new squire_1.Point2d(400, 300));
         _this.entities.push(new _1.BlackKnightEntity(new squire_1.Point2d(200, 150)));
+        _this.map = new _1.Map();
         _this.gameCtx.canvas.addEventListener('mousemove', function (canvasEvent) {
             var offsetX, offsetY = 0;
             var element = _this.gameCtx.canvas;
@@ -1432,6 +1434,10 @@ var GameState = (function (_super) {
             console.log('Image loaded: ' + 'assets/terrain.png');
         };
         _this.terrainSprite.src = 'https://punkweb.net/static/punkweb/js/assets/diablo/terrain.png';
+        _this.song = new Audio('https://punkweb.net/static/punkweb/music/orchestral.wav');
+        _this.song.loop = true;
+        _this.song.currentTime = 0;
+        _this.song.volume = .35;
         return _this;
     }
     GameState.prototype.init = function () { };
@@ -1465,9 +1471,10 @@ var GameState = (function (_super) {
         var clickX = e.clientX - offsetX;
         var clickY = e.clientY - offsetY;
         this.player.walkTo = new squire_1.Point2d(clickX, clickY);
+        this.song.play();
     };
     GameState.prototype.render = function (r) {
-        r.image(this.terrainSprite, 0, 0, 910, 610, 0, 0, 910, 610);
+        this.map.render(r);
         var toSort = this.entities.concat(this.player);
         var sortedEntites = lodash_1.orderBy(toSort, [
             function (obj) { return obj.isDead(); },
@@ -1498,7 +1505,7 @@ window.onload = function () {
     diablo.run();
 };
 
-},{"./":9,"./squire":16,"lodash":22}],7:[function(require,module,exports){
+},{"./":9,"./squire":17,"lodash":23}],7:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -1761,7 +1768,7 @@ var HeavyArmorSwordShieldEntity = (function (_super) {
 }(Entity));
 exports.HeavyArmorSwordShieldEntity = HeavyArmorSwordShieldEntity;
 
-},{"./anims":5,"./squire":16}],8:[function(require,module,exports){
+},{"./anims":5,"./squire":17}],8:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -1784,14 +1791,14 @@ var GroundItem = (function () {
     }
     GroundItem.prototype.renderAnim = function (r) {
         var now = Date.now();
-        var frameCount = this.animation.animations["drop"].frames.length;
-        var frameDuration = this.animation.animations["drop"].duration;
+        var frameCount = this.animation.animations['drop'].frames.length;
+        var frameDuration = this.animation.animations['drop'].duration;
         var needsNewFrame = now - this.lastFrameTime > frameDuration;
         if (needsNewFrame && this.frame != frameCount - 1) {
             this.frame = (this.frame + 1) % frameCount;
             this.lastFrameTime = now;
         }
-        this.animation.render(r, "drop", this.frame, 0, this.pos.x, this.pos.y);
+        this.animation.render(r, 'drop', this.frame, 0, this.pos.x, this.pos.y);
     };
     return GroundItem;
 }());
@@ -1823,12 +1830,56 @@ function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
 }
 Object.defineProperty(exports, "__esModule", { value: true });
-__export(require("./ground-item"));
 __export(require("./entity"));
+__export(require("./ground-item"));
+__export(require("./map"));
 __export(require("./player"));
 __export(require("./diablo"));
 
-},{"./diablo":6,"./entity":7,"./ground-item":8,"./player":10}],10:[function(require,module,exports){
+},{"./diablo":6,"./entity":7,"./ground-item":8,"./map":10,"./player":11}],10:[function(require,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var squire_1 = require("./squire");
+var Map = (function () {
+    function Map() {
+        this.image = null;
+        this.mapData = [
+            [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
+            [2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2],
+            [2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2],
+            [2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2],
+            [2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2],
+            [2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2],
+            [2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2],
+            [2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2],
+            [2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2],
+            [2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2],
+            [2, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 2],
+            [2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2],
+            [2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+        ];
+        this.image = new Image();
+        this.image.src = 'assets/floor2.png';
+    }
+    Map.prototype.render = function (r) {
+        var _this = this;
+        r.rect('black', 0, 0, 800, 600);
+        this.mapData.forEach(function (row, rowIdx) {
+            row.forEach(function (column, columnIdx) {
+                var x = rowIdx * 80;
+                var y = columnIdx * 80;
+                var tileType = _this.mapData[rowIdx][columnIdx];
+                var isoPoint = squire_1.IsoHelper.twoDToIso(new squire_1.Point2d(x, y));
+                r.image(_this.image, 160 * tileType, 0, 160, 80, isoPoint.x, isoPoint.y, 160, 80);
+            });
+        });
+    };
+    return Map;
+}());
+exports.Map = Map;
+
+},{"./squire":17}],11:[function(require,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -1873,7 +1924,6 @@ var Player = (function (_super) {
     }
     Player.prototype.render = function (r) {
         _super.prototype.render.call(this, r);
-        r.text(this.name, this.pos.x - 48, this.pos.y - 48, 'white');
     };
     Player.prototype.update = function (dt, entities) {
         if (this.isDead()) {
@@ -1895,7 +1945,7 @@ var Player = (function (_super) {
 }(_1.Entity));
 exports.Player = Player;
 
-},{"./":9,"./anims":5,"./squire":16}],11:[function(require,module,exports){
+},{"./":9,"./anims":5,"./squire":17}],12:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var AnimationDef = (function () {
@@ -1929,7 +1979,7 @@ var AnimationDef = (function () {
 }());
 exports.AnimationDef = AnimationDef;
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 "use strict";
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
@@ -1937,7 +1987,7 @@ function __export(m) {
 Object.defineProperty(exports, "__esModule", { value: true });
 __export(require("./iso-helper"));
 
-},{"./iso-helper":13}],13:[function(require,module,exports){
+},{"./iso-helper":14}],14:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var utils_1 = require("../../../utils");
@@ -1972,7 +2022,7 @@ var IsoHelper = (function () {
 }());
 exports.IsoHelper = IsoHelper;
 
-},{"../../../utils":21}],14:[function(require,module,exports){
+},{"../../../utils":22}],15:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var Connection = (function () {
@@ -1983,7 +2033,7 @@ var Connection = (function () {
 }());
 exports.Connection = Connection;
 
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var Event = (function () {
@@ -1995,7 +2045,7 @@ var Event = (function () {
 }());
 exports.Event = Event;
 
-},{}],16:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 "use strict";
 function __export(m) {
     for (var p in m) if (!exports.hasOwnProperty(p)) exports[p] = m[p];
@@ -2011,7 +2061,7 @@ __export(require("./state-manager"));
 __export(require("./state"));
 __export(require("./utils"));
 
-},{"./animation":11,"./com/csharks/juwalabose":12,"./connection":14,"./event":15,"./renderer":17,"./squire-game":18,"./state":20,"./state-manager":19,"./utils":21}],17:[function(require,module,exports){
+},{"./animation":12,"./com/csharks/juwalabose":13,"./connection":15,"./event":16,"./renderer":18,"./squire-game":19,"./state":21,"./state-manager":20,"./utils":22}],18:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var Renderer = (function () {
@@ -2058,6 +2108,7 @@ var Renderer = (function () {
         this.ctx.lineWidth = lineWidth;
         this.ctx.moveTo(x1, y1);
         this.ctx.lineTo(x2, y2);
+        this.ctx.strokeStyle = color;
         this.ctx.stroke();
     };
     Renderer.prototype.triangle = function (color, x, y, w, h) {
@@ -2073,7 +2124,7 @@ var Renderer = (function () {
 }());
 exports.Renderer = Renderer;
 
-},{}],18:[function(require,module,exports){
+},{}],19:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var _1 = require("./");
@@ -2103,7 +2154,7 @@ var SquireGame = (function () {
 }());
 exports.SquireGame = SquireGame;
 
-},{"./":16}],19:[function(require,module,exports){
+},{"./":17}],20:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var StateManager = (function () {
@@ -2140,7 +2191,7 @@ var StateManager = (function () {
 }());
 exports.StateManager = StateManager;
 
-},{}],20:[function(require,module,exports){
+},{}],21:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var State = (function () {
@@ -2151,7 +2202,7 @@ var State = (function () {
 }());
 exports.State = State;
 
-},{}],21:[function(require,module,exports){
+},{}],22:[function(require,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var Dimension2d = (function () {
@@ -2198,11 +2249,19 @@ var Random = (function () {
     Random.between = function (min, max) {
         return Math.floor(Math.random() * (max - min)) + Math.floor(min);
     };
+    Random.color = function () {
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    };
     return Random;
 }());
 exports.Random = Random;
 
-},{}],22:[function(require,module,exports){
+},{}],23:[function(require,module,exports){
 (function (global){
 /**
  * @license
