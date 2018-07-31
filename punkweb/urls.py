@@ -23,17 +23,21 @@ from punkweb import views
 app_name = 'punkweb'
 
 urlpatterns = [
-    url(r'^$', views.index_view, name='index'),
-    url(r'^pgp/$', views.pgp_view, name='pgp'),
-    url(r'^game/$', views.shietyshooter_view, name='game'),
-    url(r'^shietyshooter/$', views.shietyshooter_view, name='shietyshooter'),
-    url(r'^diablo/$', views.diablo_view, name='diablo'),
-    url(r'^links/', include('apps.links.urls')),
+    # Package urls
     url(r'^admin/', admin.site.urls),
     url(r'^board/', include('punkweb_boards.urls')),
     url(r'^board/page/', include('punkweb_boards.page_urls')),
     url(r'^board/api/', include('punkweb_boards.rest.urls')),
     url(r'^captcha/', include('captcha.urls')),
+
+    # Site urls
+    url(r'^$', views.index_view, name='index'),
+    url(r'^pgp/$', views.pgp_view, name='pgp'),
+    url(r'^links/', include('apps.links.urls')),
+    url(r'^game/$', views.shietyshooter_view, name='game'),
+    url(r'^shietyshooter/$', views.shietyshooter_view, name='shietyshooter'),
+    url(r'^diablo/$', views.diablo_view, name='diablo'),
+    url(r'^music/$', views.music_view, name='music'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
