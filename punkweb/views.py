@@ -17,5 +17,5 @@ def diablo_view(request):
     return render(request, 'punkweb/diablo.html', {})
 
 
-def music_view(request):
-    return render(request, 'punkweb/music.html', {})
+def music_list_view(request):
+    return render(request, 'punkweb/music-list.html', {})

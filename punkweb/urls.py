@@ -37,7 +37,7 @@ urlpatterns = [
     url(r'^game/$', views.shietyshooter_view, name='game'),
     url(r'^shietyshooter/$', views.shietyshooter_view, name='shietyshooter'),
     url(r'^diablo/$', views.diablo_view, name='diablo'),
-    url(r'^music/$', views.music_view, name='music'),
+    url(r'^music/$', views.music_list_view, name='music'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
