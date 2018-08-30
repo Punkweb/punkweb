@@ -1,0 +1,66 @@
+{% extends 'punkweb/base.html' %}
+{% load static %}
+{% load bbcode_tags %}
+{% load thumbnail %}
+
+{% block title %}Stream | {{song.title}} by {{song.album.artist.name}}{% endblock %}
+
+{% block content %}
+<h1>Now Playing</h1>
+<h3>{{song.title}} by <i>{{song.album.artist.name}} {{song.album.title}} {{song.album.year|date:'Y'}}</i></h3>
+<center>
+  <img src="{{song.album.cover_art|thumbnail_url:'avatar'}}" />
+</center>
+<div id="currentTime"></div>
+<hr>
+<h2>Control Buttons</h2>
+<button id="play">Play</button>
+<button id="pause">Pause</button>
+<button id="restart">Restart</button>
+<br><br>
+<a href="{% url 'stream:index' %}">Back to Music</a>
+{% endblock %}
+
+{% block extra_script %}
+<script>
+$(document).ready(function() {
+  var audio = document.createElement('audio');
+  audio.setAttribute('src', '/media/{{song.file}}');
+
+  function timeFormat(time) {
+    var hrs = Math.floor(time / 3600);
+    var mins = Math.floor(time / 60);
+    var secs = Math.floor(time - mins * 60);
+    var str = '';
+
+    if (hrs > 0) {
+      str += '' + hrs + ":" + (mins < 10 ? '0' : '');
+    }
+
+    str += '' + mins + ':' + (secs < 10 ? '0' : '');
+    str += '' + secs;
+    return str;
+  }
+
+  audio.addEventListener('ended', function() {
+    this.play();
+  }, false);
+  audio.addEventListener('canplay', function() { }, false);
+  audio.addEventListener('timeupdate', function() {
+    $('#currentTime').text(timeFormat(audio.currentTime) + ' / ' + timeFormat(audio.duration));
+    // $('#progress').attr('aria-valuenow', audio.currentTime);
+    // $('#progress').attr('aria-valuemax', audio.duration);
+    // $('#progress').width(((audio.currentTime/audio.duration)  * 100) + '%');
+  }, false);
+  $('#play').click(function() {
+    audio.play();
+  });
+  $('#pause').click(function() {
+    audio.pause();
+  });
+  $('#restart').click(function() {
+    audio.currentTime = 0;
+  });
+});
+</script>
+{% endblock %}

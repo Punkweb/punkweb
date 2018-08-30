@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'punkweb_boards',
     # Punkweb
     'apps.links',
+    'apps.music',
 ]
 
 MIDDLEWARE = [
