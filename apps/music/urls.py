@@ -2,7 +2,7 @@ from django.conf.urls import url, include
 
 from apps.music import views
 
-app_name = 'stream'
+app_name = 'music'
 
 urlpatterns = [
     url(r'^$', views.index_view, name='index'),

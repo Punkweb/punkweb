@@ -50,7 +50,7 @@
         <img src="{{album.cover_art|thumbnail_url:'avatar_smaller'}}" alt="" />
       </td>
       <td>
-        {{album.title}}
+        {{album.title}} by {{album.artist.name}}
       </td>
     </tr>
     {% endfor %}
@@ -75,13 +75,13 @@
     {% for compilation in compilations %}
     <tr>
       <td>
-        <a href="{% url 'stream:audio_compilation' compilation.slug %}">{{compilation.title}}</a>
+        <a href="{% url 'music:audio_compilation' compilation.slug %}">{{compilation.title}}</a>
       </td>
       <td>
         {{compilation.created|date:'m/d/Y'}}
       </td>
       <td>
-        {{compilation.updated|date:'m/d/Y'}}
+        {{compilation.modified|date:'m/d/Y'}}
       </td>
     </tr>
     {% endfor %}
@@ -109,7 +109,7 @@
     {% for track in audio %}
     <tr>
       <td>
-        <a href="{% url 'stream:audio' track.slug %}">{{track.title}}</a>
+        <a href="{% url 'music:audio' track.slug %}">{{track.title}}</a>
       </td>
       <td>
         {{track.album.artist.name}}

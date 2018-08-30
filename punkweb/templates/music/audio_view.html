@@ -3,7 +3,7 @@
 {% load bbcode_tags %}
 {% load thumbnail %}
 
-{% block title %}Stream | {{song.title}} by {{song.album.artist.name}}{% endblock %}
+{% block title %}Music | {{song.title}} by {{song.album.artist.name}}{% endblock %}
 
 {% block content %}
 <h1>Now Playing</h1>
@@ -18,7 +18,7 @@
 <button id="pause">Pause</button>
 <button id="restart">Restart</button>
 <br><br>
-<a href="{% url 'stream:index' %}">Back to Music</a>
+<a href="{% url 'music:index' %}">Back to Music</a>
 {% endblock %}
 
 {% block extra_script %}

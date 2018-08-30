@@ -3,7 +3,7 @@
 {% load bbcode_tags %}
 {% load thumbnail %}
 
-{% block title %}Stream | {{compilation.title}}{% endblock %}
+{% block title %}Music | {{compilation.title}}{% endblock %}
 
 {% block content %}
 <h1>Now Playing</h1>
@@ -22,7 +22,7 @@
 <button id="next">Next</button>
 <button id="mute">Toggle Mute</button>
 <br><br>
-<a href="{% url 'stream:index' %}">Back to Music</a>
+<a href="{% url 'music:index' %}">Back to Music</a>
 {% endblock %}
 
 {% block extra_script %}
