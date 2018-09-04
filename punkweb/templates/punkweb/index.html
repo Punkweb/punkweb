@@ -1,41 +1,23 @@
-{% load static %}
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>For the record, the music never stopped</title>
-    <link type="text/css" href="{% static 'punkweb/css/stylesheet.css' %}" rel="Stylesheet" />
-    <meta charset="utf-8">
-  </head>
-  <body>
-    <main>
-      <h1>Where did you come from?</h1>
-      <p class="head">How you ended up here doesn't matter! What matters is that you are here now. And you may or may not be an accomplice in plans for world domination.</p>
-      <h1>What can you do here?</h1>
-      <p class="head">What can you do here? There is a collection of pretty cool links under the navigation tab. There is a multitude of different things to choose from. From some of my favorite articles to very useful information. There is also a <a href="https://punkweb.net/board/">forum</a>,
-        and soon to be a live stream of different Dead music.</p>
-      <footer id="footer">
-        <ul class="foot">
-          <li><a target="_blank" href="http://www.freebsd.org">FreeBSD </a></li>
-          <li> | </li>
-          <li><a target="_blank" href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fpunkweb.net%2F"> Valid HTML </a></li>
-        </ul>
-      </footer>
-    </main>
-    <nav>
-      <p id="navh">Navigation</p>
-      <ul>
-        <li><a href="{% url 'board:index' %}">Forum</a></li>
-        <li><a href="{% url 'music:index' %}">Music</a></li>
-        <br />
-        <h5>DannyClemito</h5>
-        <li><a href="{% url 'links:list' %}">Links</a></li>
-        <li><a href="{% url 'pgp' %}">PGP Key</a></li>
-        <br />
-        <h5>JackStraw</h5>
-        <li><a href="{% url 'game' %}">Shiety Shooter</a></li>
-        <li><a href="{% url 'diablo' %}">Diablo</a></li>
-      </ul>
-    </nav>
-    <div style="margin: 400px 0 0 186px;"><img src="{% static 'punkweb/img/dead.jpg' %}" style="width:38px;height:35px;"></div>
-  </body>
-</html>
+{% extends 'punkweb/base.html' %}
+{% load static bbcode_tags thumbnail %}
+
+{% block title %}Index{% endblock %}
+
+{% block main %}
+<div class="main">
+  <h1>Punkweb</h1>
+  <h2>Where did you come from?</h2>
+  <p>How you ended up here doesn't matter! What matters is that you are here now. And you may or may not be an accomplice in plans for world domination.</p>
+  <h2>What can you do here?</h2>
+  <p>
+    What can you do here? There is a collection of pretty cool links under the navigation tab.
+    There is a multitude of different things to choose from. From some of my favorite articles to very useful information.
+    There is also a <a href="{% url 'board:index' %}">forum</a>, and a stream of different Dead <a href="{% url 'music:index' %}">music</a>.
+  </p>
+  <ul class="foot">
+    <li><a target="_blank" href="http://www.freebsd.org">FreeBSD </a></li>
+    <li> | </li>
+    <li><a target="_blank" href="https://validator.w3.org/nu/?doc=https%3A%2F%2Fpunkweb.net%2F"> Valid HTML </a></li>
+  </ul>
+</div>
+{% endblock %}

@@ -1,4 +1,4 @@
-{% load static %}
+{% load compress static %}
 <!DOCTYPE html>
 <html>
   <head>
@@ -7,81 +7,37 @@
     <meta name="description" content="{% block meta_description %}For the record, the music never stopped{% endblock %}">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="mobile-web-app-capable" content="yes">
-    <style media="screen">
-      html, body {
-        background-color: #282828;
-        color: white;
-        font: normal normal 16px sans-serif;
-        text-shadow: 1px 1px 10px #000000;
-        margin: 0;
-        padding: 0;
-        height: 100%;
-      }
-      h1, h2, h3, h4, h5, h6 {
-        margin: 1rem 0;
-      }
-      * {
-        box-sizing: border-box;
-      }
-      a {
-        color: #FF2F00;
-      }
-      .container {
-        background-color: #404040;
-        max-width: 1056px;
-        padding: 1rem;
-        margin: 0 auto;
-        min-height: 100%;
-      }
-      .canvasContainer {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        margin-top: 2rem;
-      }
-      canvas {
-        border: 1px solid black;
-        margin: 0;
-        padding: 0;
-      }
-      table {
-        border: none;
-        border-collapse: collapse;
-        outline: none;
-        text-align: left;
-        min-width: 480px;
-        width: calc(100% - 1px); }
-        table caption {
-          font-size: 18px;
-          margin-bottom: 1rem; }
-        table th, table td {
-          padding: 1rem; }
-        table th {
-          letter-spacing: 1px; }
-        table td {
-          border: 2px solid #282828; }
-        table thead {
-          background-color: #a72323;
-          color: white;
-          text-align: center; }
-        table tfoot {
-          background-color: #dee2e6; }
-      .full-width {
-        width: 100%;
-      }
-    </style>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600,700|Open+Sans:300,400,600,700" rel="stylesheet">
+    {% compress css %}
+    <link href="{% static 'punkweb/css/elements.scss' %}" rel="stylesheet" type="text/x-scss" />
+    {% endcompress %}
+    <link type="text/css" href="{% static 'punkweb/css/stylesheet.css' %}" rel="stylesheet"/>
   </head>
   <body>
     <div class="container">
-      {% block content %}{% endblock %}
+      <div class="flexContainer">
+        {% block main %}{% endblock %}
+        {% block nav %}
+        <div class="nav">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="{% url 'index' %}">Home</a></li>
+            <li><a href="{% url 'board:index' %}">Forum</a></li>
+            <li><a href="{% url 'music:index' %}">Music</a></li>
+            <h5>DannyClemito</h5>
+            <li><a href="{% url 'links:list' %}">Links</a></li>
+            <li><a href="{% url 'pgp' %}">PGP Key</a></li>
+            <h5>JackStraw</h5>
+            <li><a href="{% url 'game' %}">Shiety Shooter</a></li>
+            <li><a href="{% url 'diablo' %}">Diablo</a></li>
+          </ul>
+        </div>
+        {% endblock %}
+      </div>
     </div>
     <script src="{% static 'punkweb_boards/js/deps/jquery-3.1.1.min.js' %}"></script>
     <script src="{% static 'punkweb_boards/js/deps/lodash.js' %}"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
-    <script src="{% static 'punkweb_boards/js/run-prettify.js' %}"></script>
-    <script src="{% static 'punkweb_boards/sceditor/minified/jquery.sceditor.bbcode.min.js' %}"></script>
-    <script src="{% static 'punkweb_boards/js/ui/spoiler.js' %}"></script>
-    <script src="{% static 'punkweb_boards/js/editor-config.js' %}"></script>
     {% block extra_script %}{% endblock %}
   </body>
 </html>

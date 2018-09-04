@@ -1,24 +1,23 @@
 {% extends 'punkweb/base.html' %}
-{% load static %}
-{% load bbcode_tags %}
-{% load thumbnail %}
+{% load static bbcode_tags thumbnail %}
 
 {% block title %}Music | {{song.title}} by {{song.album.artist.name}}{% endblock %}
 
-{% block content %}
-<h1>Now Playing</h1>
-<h3>{{song.title}} by <i>{{song.album.artist.name}} {{song.album.title}} {{song.album.year|date:'Y'}}</i></h3>
-<center>
-  <img src="{{song.album.cover_art|thumbnail_url:'avatar'}}" />
-</center>
-<div id="currentTime"></div>
-<hr>
-<h2>Control Buttons</h2>
-<button id="play">Play</button>
-<button id="pause">Pause</button>
-<button id="restart">Restart</button>
-<br><br>
-<a href="{% url 'music:index' %}">Back to Music</a>
+{% block main %}
+<div class="main">
+  <h1>Now Playing</h1>
+  <h3><i>{{song.title}}</i> by {{song.album.artist.name}} | {{song.album.title}} {{song.album.year|date:'Y'}}</h3>
+  <center>
+    <img src="{{song.album.cover_art|thumbnail_url:'avatar'}}" />
+  </center>
+  <div id="currentTime"></div>
+  <hr>
+  <button class="button" id="play">Play</button>
+  <button class="button" id="pause">Pause</button>
+  <button class="button" id="restart">Restart</button>
+  <br><br>
+  <a href="{% url 'music:index' %}">Back to Music</a>
+</div>
 {% endblock %}
 
 {% block extra_script %}

@@ -5,24 +5,26 @@
 
 {% block title %}Music | {{compilation.title}}{% endblock %}
 
-{% block content %}
-<h1>Now Playing</h1>
-<h3>{{compilation.title}}</h3>
-<center>
-  <img id="songImage" />
-</center>
-<div id="songTitle"></div>
-<div id="songArtist"></div>
-<div id="songAlbum"></div>
-<div id="songYear"></div>
-<div id="currentTime"></div>
-<hr>
-<h2>Control Buttons</h2>
-<button id="last">Last</button>
-<button id="next">Next</button>
-<button id="mute">Toggle Mute</button>
-<br><br>
-<a href="{% url 'music:index' %}">Back to Music</a>
+{% block main %}
+<div class="main">
+  <h1>Now Playing</h1>
+  <h3>{{compilation.title}}</h3>
+  <center>
+    <img id="songImage" />
+  </center>
+  <div id="songTitle"></div>
+  <div id="songArtist"></div>
+  <div id="songAlbum"></div>
+  <div id="songYear"></div>
+  <div id="currentTime"></div>
+  <hr>
+  <h2>Control Buttons</h2>
+  <button class="button" id="last">Last</button>
+  <button class="button" id="next">Next</button>
+  <button class="button" id="mute">Toggle Mute</button>
+  <br><br>
+  <a href="{% url 'music:index' %}">Back to Music</a>
+</div>
 {% endblock %}
 
 {% block extra_script %}

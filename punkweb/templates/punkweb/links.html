@@ -1,38 +1,18 @@
+{% extends 'punkweb/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html>
-<a target="_blank" href=""></a>
-<head>
-<title>Links</title>
-<link type="text/css" href="{% static 'punkweb/css/stylesheet.css' %}" rel="Stylesheet"/>
-<meta charset="utf-8">
-</head>
- <body>
- <main>
-	<h1>The Links Page</h1>
+{% load bbcode_tags %}
+{% load thumbnail %}
+
+{% block title %}Links{% endblock %}
+
+{% block main %}
+<div class="main">
+  <h1>The Links Page</h1>
   {% for category in categories %}
   <h2>{{category.title}}</h2>
-    {% for link in category.links.all %}
-    <a target="_blank" href="{{link.external_link}}">{{link.display_text}}</a>
-    {% endfor %}
+  {% for link in category.links.all %}
+  <a target="_blank" href="{{link.external_link}}">{{link.display_text}}</a>
   {% endfor %}
- </main>
-
- <nav>
-   <p id="navh">Navigation</p>
-   <ul>
-     <li><a href="{% url 'board:index' %}">Forum</a></li>
-     <li><a href="{% url 'music:index' %}">Music</a></li>
-     <br />
-     <h5>DannyClemito</h5>
-     <li><a href="{% url 'links:list' %}">Links</a></li>
-     <li><a href="{% url 'pgp' %}">PGP Key</a></li>
-     <br />
-     <h5>JackStraw</h5>
-     <li><a href="{% url 'game' %}">Shiety Shooter</a></li>
-     <li><a href="{% url 'diablo' %}">Diablo</a></li>
-   </ul>
- </nav>
- </body>
-
-</html>
+  {% endfor %}
+</div>
+{% endblock %}

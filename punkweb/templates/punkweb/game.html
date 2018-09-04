@@ -1,60 +1,21 @@
+{% extends 'punkweb/base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Punkweb | {% block title %}Game{% endblock %}</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="description" content="{% block meta_description %}For the record, the music never stopped{% endblock %}">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-    <meta name="mobile-web-app-capable" content="yes">
-    <style media="screen">
-      html, body {
-        background-color: #282828;
-        color: white;
-        font: normal normal 16px sans-serif;
-        text-shadow: 1px 1px 10px #000000;
-        margin: 0;
-        padding: 0;
-        height: 100%;
-      }
-      h1, h2, h3, h4, h5, h6 {
-        margin: 1rem 0;
-      }
-      * {
-        box-sizing: border-box;
-      }
-      a {
-        color: #FF2F00;
-      }
-      .container {
-        background-color: #404040;
-        max-width: 1056px;
-        padding: 1rem;
-        margin: 0 auto;
-        min-height: 100%;
-      }
-      .canvasContainer {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        margin-top: 2rem;
-      }
-      canvas {
-        border: 1px solid black;
-        margin: 0;
-        padding: 0;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="container">
-      {% block header %}<h1>Game</h1>{% endblock %}
-      <a href="{% url 'index' %}">Back to homepage</a>
-      <div class="canvasContainer">
-        {% block canvas %}<canvas id="game" height="600px" width="800px"></canvas>{% endblock %}
-      </div>
-      {% block content %}{% endblock %}
-    </div>
-    {% block script %}<script type="text/javascript" src="{% static 'punkweb/js/game.js' %}"></script>{% endblock %}
-  </body>
-</html>
+
+{% block title %}Game{% endblock %}
+
+{% block main %}
+<div class="main">
+  {% block header %}<h1>Game</h1>{% endblock %}
+  <a href="{% url 'index' %}">Back to homepage</a>
+  <div class="canvasContainer">
+    {% block canvas %}<canvas id="game" height="600px" width="800px"></canvas>{% endblock %}
+  </div>
+  {% block content %}{% endblock %}
+</div>
+{% endblock %}
+
+{% block nav %}{% endblock %}
+
+{% block extra_script %}
+{% block script %}<script type="text/javascript" src="{% static 'punkweb/js/game.js' %}"></script>{% endblock %}
+{% endblock %}

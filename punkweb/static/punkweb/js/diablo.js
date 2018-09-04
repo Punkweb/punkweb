@@ -1434,7 +1434,7 @@ var GameState = (function (_super) {
             console.log('Image loaded: ' + 'assets/terrain.png');
         };
         _this.terrainSprite.src = 'https://punkweb.net/static/punkweb/js/assets/diablo/terrain.png';
-        _this.song = new Audio('https://punkweb.net/static/punkweb/music/orchestral.wav');
+        _this.song = new Audio('https://punkweb.net/media/music/audio/orchestral.wav');
         _this.song.loop = true;
         _this.song.currentTime = 0;
         _this.song.volume = .35;
