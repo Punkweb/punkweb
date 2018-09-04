@@ -84,8 +84,7 @@ class Audio(UUIDPrimaryKey, UploadedAtMixin, TrackInformationMixin):
             'album__artist__name', 'album__title', 'disc_num', 'track_num', 'title',)
 
     def __str__(self):
-        return '{} - {} - {}'.format(self.title,
-            self.album.artist.name, self.album.title)
+        return '{}'.format(self.title)
 
 
 class AudioCompilation(UUIDPrimaryKey, CreatedModifiedMixin):
