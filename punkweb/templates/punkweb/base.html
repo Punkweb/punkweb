@@ -19,13 +19,13 @@
         {% block main %}{% endblock %}
         {% block nav %}
         <div class="nav">
-          <h4>Navigation</h4>
+          <h3>Navigation</h3>
           <ul>
             <li><a href="{% url 'index' %}">Home</a></li>
-            <li><a href="{% url 'board:index' %}">Forum</a></li>
-            <li><a href="{% url 'music:index' %}">Music</a></li>
-            <h5>DannyClemito</h5>
             <li><a href="{% url 'links:list' %}">Links</a></li>
+            <li><a href="{% url 'music:index' %}">Music</a></li>
+            <li><a href="{% url 'board:index' %}">Forum</a></li>
+            <h5>DannyClemito</h5>
             <li><a href="{% url 'pgp' %}">PGP Key</a></li>
             <h5>JackStraw</h5>
             <li><a href="{% url 'game' %}">Shiety Shooter</a></li>
