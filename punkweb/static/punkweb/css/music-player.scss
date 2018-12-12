@@ -46,7 +46,10 @@
     margin: 0 1.5rem;
     height: 5px;
   }
-  &__tracker {
+  &__volume {
+
+  }
+  #tracker {
     background-color: $oc-gray-6;
     position: absolute;
     top: 0;
@@ -54,9 +57,6 @@
     right: 0;
     bottom: 0;
     width: 100%;
-  }
-  &__volume {
-
   }
   #currentTime, #totalTime {
     text-align: center;
