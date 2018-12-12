@@ -147,7 +147,7 @@
       </div>
       <div class="musicPlayer__timeline">
         <div id="currentTime"></div>
-        <div class="musicPlayer__trackerContainer">
+        <div class="musicPlayer__trackerContainer" id="trackerContainer">
           <div id="tracker"></div>
           <div id="tracked"></div>
         </div>
@@ -215,7 +215,7 @@ $(document).ready(function() {
     audio.setAttribute('src', self.attr('data-file'));
     audio.play();
   });
-  $('#tracker').click(function(e) {
+  $('#trackerContainer').click(function(e) {
     var self = $(this);
     var offset = self.offset();
     var x = e.clientX - offset.left;

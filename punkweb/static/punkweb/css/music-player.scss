@@ -44,6 +44,7 @@
     width: 100%;
     flex: 1;
     margin: 0 1.5rem;
+    padding: 1rem 0;
     height: 5px;
   }
   &__volume {
@@ -51,11 +52,11 @@
   }
   #tracker {
     background-color: $oc-gray-6;
+    height: 5px;
     position: absolute;
-    top: 0;
     left: 0;
     right: 0;
-    bottom: 0;
+    top: calc(50% - 2.5px);
     width: 100%;
   }
   #currentTime, #totalTime {
@@ -66,9 +67,8 @@
     height: 5px;
     background-color: $oc-gray-4;
     width: 20%;
-    position: relative;
-    top: 0;
+    position: absolute;
+    top: calc(50% - 2.5px);
     left: 0;
-    bottom: 0;
   }
 }
