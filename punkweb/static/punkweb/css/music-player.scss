@@ -1,0 +1,74 @@
+.musicPlayer {
+  background-color: $oc-gray-7;
+  box-shadow: 0px 2px 4px rgba(33, 37, 41, 0.5);
+  display: none;
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 124px;
+  &__container {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 auto;
+    max-width: 1280px;
+    min-height: 100%;
+    padding: 0 1rem;
+    width: 100%;
+  }
+  &__info {
+    display: flex;
+    align-items: center;
+  }
+  &__image {
+    height: 96px;
+    width: 96px;
+    margin-right: 2rem;
+  }
+  &__controls {
+    flex: 1;
+    margin: 0 4rem;
+  }
+  &__buttons {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  &__timeline {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  &__trackerContainer {
+    position: relative;
+    width: 100%;
+    flex: 1;
+    margin: 0 1.5rem;
+    height: 5px;
+  }
+  &__tracker {
+    background-color: $oc-gray-6;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+  }
+  &__volume {
+
+  }
+  #currentTime, #totalTime {
+    text-align: center;
+    width: 60px;
+  }
+  #tracked {
+    height: 5px;
+    background-color: $oc-gray-4;
+    width: 20%;
+    position: relative;
+    top: 0;
+    left: 0;
+    bottom: 0;
+  }
+}

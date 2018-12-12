@@ -4,7 +4,7 @@
 {% block title %}Music{% endblock %}
 
 {% block main %}
-<div class="main">
+<div class="main" style="margin-bottom: 140px;">
   <h1>Music</h1>
   <h3>Artists</h3>
   <div class="tableContainer">
@@ -113,7 +113,8 @@
         {% for track in audio %}
         <tr>
           <td>
-            <a href="{% url 'music:audio' track.slug %}">{{track.title}}</a>
+            <a class="trackTitle" data-title="{{track.title}}" data-artist-name="{{track.album.artist.name}}" data-art-url="{{track.album.cover_art|thumbnail_url:'avatar_small'}}" data-file="/media/{{track.file}}">{{track.title}}</a>
+            <!-- <a href="{% url 'music:audio' track.slug %}">{{track.title}}</a> -->
           </td>
           <td>
             {{track.album.artist.name}}
@@ -127,9 +128,93 @@
     </table>
   </div>
 </div>
+<div class="musicPlayer">
+  <div class="musicPlayer__container">
+    <div class="musicPlayer__info">
+      <div class="musicPlayer__image">
+        <img id="songImage" alt="">
+      </div>
+      <div>
+        <div id="songName"></div>
+        <div id="artistName"></div>
+      </div>
+    </div>
+    <div class="musicPlayer__controls">
+      <div class="musicPlayer__buttons">
+        <button class="button" id="play"><i class="fas fa-play"></i></button>
+        <button class="button" id="pause"><i class="fas fa-pause"></i></button>
+        <button class="button" id="restart"><i class="fas fa-undo"></i></button>
+      </div>
+      <div class="musicPlayer__timeline">
+        <div id="currentTime"></div>
+        <div class="musicPlayer__trackerContainer">
+          <div class="musicPlayer__tracker"></div>
+          <div id="tracked"></div>
+        </div>
+        <div id="totalTime"></div>
+      </div>
+    </div>
+    <div class="musicPlayer__volume">
+
+    </div>
+  </div>
+</div>
 {% endblock %}
 
 {% block extra_script %}
 <script>
+$(document).ready(function() {
+  var audio = document.createElement('audio');
+  var musicPlayer = $('.musicPlayer');
+  var songImage = $('#songImage');
+  var songName = $('#songName');
+  var artistName = $('#artistName')
+
+  $('#currentTime').text('0:00');
+  $('#totalTime').text('0:00');
+
+  function timeFormat(time) {
+    var hrs = Math.floor(time / 3600);
+    var mins = Math.floor(time / 60);
+    var secs = Math.floor(time - mins * 60);
+    var str = '';
+
+    if (hrs > 0) {
+      str += '' + hrs + ":" + (mins < 10 ? '0' : '');
+    }
+
+    str += '' + mins + ':' + (secs < 10 ? '0' : '');
+    str += '' + secs;
+    return str;
+  }
+
+  audio.addEventListener('ended', function() {
+    this.play();
+  }, false);
+  audio.addEventListener('canplay', function() { }, false);
+  audio.addEventListener('timeupdate', function() {
+    $('#currentTime').text(timeFormat(audio.currentTime));
+    $('#totalTime').text(timeFormat(audio.duration));
+    $('#tracked').width(((audio.currentTime/audio.duration)  * 100) + '%');
+  }, false);
+  $('#play').click(function() {
+    audio.play();
+  });
+  $('#pause').click(function() {
+    audio.pause();
+  });
+  $('#restart').click(function() {
+    audio.currentTime = 0;
+  });
+  $('.trackTitle').click(function() {
+    var self = $(this);
+    musicPlayer.show();
+    songImage.attr('src', self.attr('data-art-url'));
+    songName.text(self.attr('data-title'));
+    artistName.text(self.attr('data-artist-name'));
+    audio.setAttribute('src', self.attr('data-file'));
+    audio.play();
+  });
+});
 </script>
 {% endblock %}
