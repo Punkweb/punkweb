@@ -1,39 +1,39 @@
 {% extends 'punkweb/base.html' %}
 {% load static bbcode_tags thumbnail %}
 
-{% block title %}Music{% endblock %}
+{% block title %}Music | {{artist.name}}{% endblock %}
 
 {% block main %}
-<div class="main" style="margin-bottom: 140px;">
-  <h1>Music</h1>
-  <h3>Artists</h3>
+<div class="main">
+  <br><br>
+  <a href="{% url 'music:index' %}">Back to Music</a>
+  <h1>{{artist.name}}</h1>
+  <h3>Albums</h3>
   <div class="tableContainer">
     <table>
       <thead>
         <tr>
-          <th width="75px">Artist</th>
+          <th width="75px">Album</th>
           <th></th>
-          <th>Genre</th>
+          <th>Year</th>
         </tr>
       </thead>
       <tbody>
-        {% for artist in artists %}
+        {% for album in albums %}
         <tr>
           <td>
-            <img src="{{artist.image|thumbnail_url:'avatar_smaller'}}" alt="" />
+            <img src="{{album.cover_art|thumbnail_url:'avatar_smaller'}}" alt="" />
           </td>
           <td>
-            <a href="{% url 'music:artist' artist.slug %}">{{artist.name}}</a>
+            <a href="{% url 'music:album' album.slug %}">{{album.title}}</a>
           </td>
-          <td>
-            {{artist.genre}}
-          </td>
+          <td>{{album.year|date:'Y'}}</td>
         </tr>
         {% endfor %}
       </tbody>
     </table>
   </div>
-  <h3>Compilations</h3>
+  <h3>Playlists</h3>
   <div class="tableContainer">
     <table>
       <thead>
@@ -47,7 +47,7 @@
         </tr>
       </thead>
       <tbody>
-        {% for compilation in compilations %}
+        {% for compilation in featured_on_compilations %}
         <tr>
           <td>
             <a href="{% url 'music:audio_compilation' compilation.slug %}">{{compilation.title}}</a>

@@ -1,0 +1,164 @@
+{% extends 'punkweb/base.html' %}
+{% load static bbcode_tags thumbnail %}
+
+{% block title %}Music | {{album.artist.name}} | {{album.title}}{% endblock %}
+
+{% block main %}
+<div class="main">
+  <br><br>
+  <div>
+    <a href="{% url 'music:artist' album.artist.slug %}">Back to {{album.artist.name}}</a>
+  </div>
+  <br>
+  <div>
+    <img src="{{album.cover_art|thumbnail_url:'avatar'}}" alt="" />
+    <h4>{{album.title}}</h4>
+    <p>{{album.year|date:'M Y'}}</p>
+  </div>
+  <div class="tableContainer">
+    <table>
+      <thead>
+        <tr>
+          <th width="75px">
+            #
+          </th>
+          <th>
+            Title
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for song in songs %}
+        <tr>
+          <td>{{song.track_num}}</td>
+          <td>
+            <a class="trackTitle" data-title="{{song.title}}" data-artist-name="{{song.album.artist.name}}" data-art-url="{{song.album.cover_art|thumbnail_url:'avatar_small'}}" data-file="/media/{{song.file}}">{{song.title}}</a>
+            <!-- <a href="{% url 'music:audio' song.slug %}">{{song.title}}</a> -->
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="musicPlayer">
+  <div class="musicPlayer__container">
+    <div class="musicPlayer__info">
+      <div class="musicPlayer__image">
+        <img id="songImage" alt="">
+      </div>
+      <div>
+        <div id="songName"></div>
+        <div id="artistName"></div>
+      </div>
+    </div>
+    <div class="musicPlayer__controls">
+      <div class="musicPlayer__buttons">
+        <button class="button" id="play"><i class="fas fa-play"></i></button>
+        <button class="button" id="pause"><i class="fas fa-pause"></i></button>
+        <button class="button" id="restart"><i class="fas fa-undo"></i></button>
+      </div>
+      <div class="musicPlayer__flex">
+        <div id="currentTime"></div>
+        <div class="musicPlayer__trackerContainer" id="trackerContainer">
+          <div id="tracker"></div>
+          <div id="tracked"></div>
+        </div>
+        <div id="totalTime"></div>
+        <div class="musicPlayer__flex">
+          <i class="fas fa-volume-up" id="volumeIcon"></i>
+          <div class="musicPlayer__volumeContainer" id="volumeContainer">
+            <div id="volume_tracker"></div>
+            <div id="volume_level"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_script %}
+<script>
+$(document).ready(function() {
+  var audio = document.createElement('audio');
+  var musicPlayer = $('.musicPlayer');
+  var songImage = $('#songImage');
+  var songName = $('#songName');
+  var artistName = $('#artistName')
+  audio.volume = .9;
+  $('#volume_level').width('90%');
+
+  $('#currentTime').text('0:00');
+  $('#totalTime').text('0:00');
+
+  function timeFormat(time) {
+    var hrs = Math.floor(time / 3600);
+    var mins = Math.floor(time / 60);
+    var secs = Math.floor(time - mins * 60);
+    var str = '';
+
+    if (hrs > 0) {
+      str += '' + hrs + ":" + (mins < 10 ? '0' : '');
+    }
+
+    str += '' + mins + ':' + (secs < 10 ? '0' : '');
+    str += '' + secs;
+    return str;
+  }
+
+  audio.addEventListener('ended', function() {
+    this.play();
+  }, false);
+  audio.addEventListener('canplay', function() { }, false);
+  audio.addEventListener('timeupdate', function() {
+    $('#currentTime').text(timeFormat(audio.currentTime));
+    $('#totalTime').text(timeFormat(audio.duration));
+    $('#tracked').width(((audio.currentTime/audio.duration)  * 100) + '%');
+  }, false);
+  $('#play').click(function() {
+    audio.play();
+  });
+  $('#pause').click(function() {
+    audio.pause();
+  });
+  $('#restart').click(function() {
+    audio.currentTime = 0;
+  });
+  $('.trackTitle').click(function() {
+    var self = $(this);
+    musicPlayer.show();
+    songImage.attr('src', self.attr('data-art-url'));
+    songName.text(self.attr('data-title'));
+    artistName.text(self.attr('data-artist-name'));
+    audio.setAttribute('src', self.attr('data-file'));
+    audio.play();
+  });
+  $('#volumeContainer').click(function(e) {
+    var self = $(this);
+    var offset = self.offset();
+    var x = e.clientX - offset.left;
+    var y = e.clientY - offset.top;
+    var width = self.width();
+    var clickPercent = (x / width);
+    if (clickPercent > .95) {
+      clickPercent = 1;
+    } else if (clickPercent < .05) {
+      clickPercent = 0;
+    }
+    audio.volume = clickPercent;
+    $('#volume_level').width((clickPercent * 100)  + '%');
+  });
+  $('#trackerContainer').click(function(e) {
+    var self = $(this);
+    var offset = self.offset();
+    var x = e.clientX - offset.left;
+    var y = e.clientY - offset.top;
+    var width = self.width();
+    var clickPercent = (x / width);
+    var toDuration = audio.duration * clickPercent;
+    audio.currentTime = toDuration;
+  });
+});
+</script>
+{% endblock %}

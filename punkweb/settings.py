@@ -244,7 +244,7 @@ LOGGING = {
 
 # Non default app configuration
 
-admin.site.site_header = 'Punk Web'
+# admin.site.site_header = 'Punk Web'
 
 LOGIN_REDIRECT_URL = '/board/'
 

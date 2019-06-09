@@ -25,6 +25,30 @@ def audio_view(request, slug):
     return render(request, 'music/audio_view.html', context)
 
 
+def artist_view(request, slug):
+    artist = models.Artist.objects.get(slug=slug)
+    albums = models.Album.objects.filter(artist=artist)
+    songs = models.Audio.objects.filter(album__artist=artist)
+    featured_on_compilations = models.AudioCompilation.objects.filter(
+        tracks__id__in=songs)
+    context = {
+        'artist': artist,
+        'albums': albums,
+        'featured_on_compilations': featured_on_compilations,
+    }
+    return render(request, 'music/artist.html', context)
+
+
+def album_view(request, slug):
+    album = models.Album.objects.get(slug=slug)
+    songs = models.Audio.objects.filter(album=album)
+    context = {
+        'album': album,
+        'songs': songs,
+    }
+    return render(request, 'music/album.html', context)
+
+
 def audio_compilation_view(request, slug):
     compilation = models.AudioCompilation.objects.get(slug=slug)
     tracks = compilation.tracks
