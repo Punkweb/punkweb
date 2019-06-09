@@ -30,7 +30,7 @@ def artist_view(request, slug):
     albums = models.Album.objects.filter(artist=artist)
     songs = models.Audio.objects.filter(album__artist=artist)
     featured_on_compilations = models.AudioCompilation.objects.filter(
-        tracks__id__in=songs)
+        tracks__id__in=songs).distinct()
     context = {
         'artist': artist,
         'albums': albums,

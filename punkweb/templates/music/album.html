@@ -4,7 +4,7 @@
 {% block title %}Music | {{album.artist.name}} | {{album.title}}{% endblock %}
 
 {% block main %}
-<div class="main">
+<div class="main" style="margin-bottom: 140px;">
   <br><br>
   <div>
     <a href="{% url 'music:artist' album.artist.slug %}">Back to {{album.artist.name}}</a>

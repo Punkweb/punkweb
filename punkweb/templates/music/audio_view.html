@@ -4,7 +4,7 @@
 {% block title %}Music | {{song.title}} by {{song.album.artist.name}}{% endblock %}
 
 {% block main %}
-<div class="main">
+<div class="main" style="margin-bottom: 140px;">
   <h1>Now Playing</h1>
   <h3><i>{{song.title}}</i> by {{song.album.artist.name}} | {{song.album.title}} {{song.album.year|date:'Y'}}</h3>
   <center>
