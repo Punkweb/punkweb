@@ -46,4 +46,10 @@ ul {
     margin-left: 0;
     margin-top: 1rem;
   }
+  .hideOnMobile {
+    display: none;
+  }
+  .musicPlayer__controls {
+    margin: 0;
+  }
 }

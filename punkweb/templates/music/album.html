@@ -43,7 +43,7 @@
 </div>
 <div class="musicPlayer">
   <div class="musicPlayer__container">
-    <div class="musicPlayer__info">
+    <div class="musicPlayer__info hideOnMobile">
       <div class="musicPlayer__image">
         <img id="songImage" alt="">
       </div>
@@ -64,7 +64,7 @@
           <div id="tracked"></div>
         </div>
         <div id="totalTime"></div>
-        <div class="musicPlayer__flex">
+        <div class="musicPlayer__flex hideOnMobile">
           <i class="fas fa-volume-up" id="volumeIcon"></i>
           <div class="musicPlayer__volumeContainer" id="volumeContainer">
             <div id="volume_tracker"></div>
@@ -100,8 +100,8 @@ $(document).ready(function() {
   init();
 
   function init() {
-    audio.volume = .9;
-    $('#volume_level').width('90%');
+    audio.volume = 1;
+    $('#volume_level').width('100%');
     $('#currentTime').text('0:00');
     $('#totalTime').text('0:00');
   }
