@@ -137,6 +137,9 @@ $(document).ready(function() {
   }
 
   audio.addEventListener('ended', function() {
+    if (trackNum >= srcList.length - 1) {
+      return;
+    }
     trackNum++;
     loadTrack(trackNum);
   }, false);
