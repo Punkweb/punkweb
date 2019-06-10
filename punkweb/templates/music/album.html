@@ -32,7 +32,7 @@
         <tr>
           <td>{{song.track_num}}</td>
           <td>
-            <a class="trackTitle" data-title="{{song.title}}" data-artist-name="{{song.album.artist.name}}" data-art-url="{{song.album.cover_art|thumbnail_url:'avatar_small'}}" data-file="/media/{{song.file}}">{{song.title}}</a>
+            <a class="trackTitle" data-index="{{forloop.counter0}}" data-title="{{song.title}}" data-artist-name="{{song.album.artist.name}}" data-art-url="{{song.album.cover_art|thumbnail_url:'avatar_small'}}" data-file="/media/{{song.file}}">{{song.title}}</a>
             <!-- <a href="{% url 'music:audio' song.slug %}">{{song.title}}</a> -->
           </td>
         </tr>
@@ -56,7 +56,6 @@
       <div class="musicPlayer__buttons">
         <button class="button" id="play"><i class="fas fa-play"></i></button>
         <button class="button" id="pause"><i class="fas fa-pause"></i></button>
-        <button class="button" id="restart"><i class="fas fa-undo"></i></button>
       </div>
       <div class="musicPlayer__flex">
         <div id="currentTime"></div>
@@ -82,15 +81,45 @@
 <script>
 $(document).ready(function() {
   var audio = document.createElement('audio');
+  var trackNum = 0;
+  var srcList = [];
+  {% for song in songs.all %}
+  srcList.push({
+    'title': '{{song.title}}',
+    'artist': '{{song.album.artist.name}}',
+    'album': '{{song.album.title}}',
+    'year': '{{song.album.year}}',
+    'image': '{{song.album.cover_art|thumbnail_url:"avatar"}}',
+    'file': '/media/{{song.file}}'
+  });
+  {% endfor %}
   var musicPlayer = $('.musicPlayer');
-  var songImage = $('#songImage');
+  var artistName = $('#artistName');
   var songName = $('#songName');
-  var artistName = $('#artistName')
-  audio.volume = .9;
-  $('#volume_level').width('90%');
+  var songImage = $('#songImage');
+  init();
 
-  $('#currentTime').text('0:00');
-  $('#totalTime').text('0:00');
+  function init() {
+    audio.volume = .9;
+    $('#volume_level').width('90%');
+    $('#currentTime').text('0:00');
+    $('#totalTime').text('0:00');
+  }
+
+  function updateInfo() {
+    artistName.text(srcList[trackNum].artist);
+    songName.text(srcList[trackNum].title);
+    songImage.attr('src', srcList[trackNum].image);
+  }
+
+  function loadTrack(index) {
+    trackNum = index;
+    musicPlayer.show();
+    audio.setAttribute('src', srcList[index].file);
+    audio.load();
+    audio.play();
+    updateInfo();
+  }
 
   function timeFormat(time) {
     var hrs = Math.floor(time / 3600);
@@ -108,7 +137,8 @@ $(document).ready(function() {
   }
 
   audio.addEventListener('ended', function() {
-    this.play();
+    trackNum++;
+    loadTrack(trackNum);
   }, false);
   audio.addEventListener('canplay', function() { }, false);
   audio.addEventListener('timeupdate', function() {
@@ -122,17 +152,10 @@ $(document).ready(function() {
   $('#pause').click(function() {
     audio.pause();
   });
-  $('#restart').click(function() {
-    audio.currentTime = 0;
-  });
   $('.trackTitle').click(function() {
     var self = $(this);
-    musicPlayer.show();
-    songImage.attr('src', self.attr('data-art-url'));
-    songName.text(self.attr('data-title'));
-    artistName.text(self.attr('data-artist-name'));
-    audio.setAttribute('src', self.attr('data-file'));
-    audio.play();
+    var index = parseInt(self.attr('data-index'));
+    loadTrack(index);
   });
   $('#volumeContainer').click(function(e) {
     var self = $(this);
