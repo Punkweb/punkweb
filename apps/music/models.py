@@ -39,6 +39,7 @@ class Artist(UUIDPrimaryKey):
     bio = BBCodeTextField(max_length=5096, blank=True, null=True)
     image = ThumbnailerImageField(
         upload_to=artist_image_upload_to, blank=True, null=True)
+    is_listed = models.BooleanField(default=False)
 
     class Meta:
         ordering = ('name',)
@@ -56,6 +57,7 @@ class Album(UUIDPrimaryKey):
     cover_art = ThumbnailerImageField(
         upload_to=album_cover_upload_to, blank=True, null=True)
     genre = models.CharField(max_length=256)
+    is_listed = models.BooleanField(default=False)
 
     class Meta:
         ordering = ('artist', 'title', 'year',)
@@ -71,6 +73,7 @@ class TrackInformationMixin(models.Model):
         blank=True, null=True, related_name='tracks', on_delete=models.SET_NULL)
     disc_num = models.IntegerField()
     track_num = models.IntegerField()
+    is_listed = models.BooleanField(default=False)
 
     class Meta:
         abstract = True

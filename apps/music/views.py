@@ -3,10 +3,31 @@ from django.shortcuts import render, redirect
 from apps.music import models
 
 
+def listed_artists(request):
+    objects = models.Artist.objects
+    if request.user and request.user.is_superuser:
+        return objects.all()
+    return objects.filter(is_listed=True)
+
+
+def listed_albums(request):
+    objects = models.Album.objects
+    if request.user and request.user.is_superuser:
+        return objects.all()
+    return objects.filter(is_listed=True)
+
+
+def listed_audio(request):
+    objects = models.Audio.objects
+    if request.user and request.user.is_superuser:
+        return objects.all()
+    return objects.filter(is_listed=True)
+
+
 def index_view(request):
-    artists = models.Artist.objects.all()
-    albums = models.Album.objects.all()
-    audio = models.Audio.objects.all()
+    artists = listed_artists(request)
+    albums = listed_albums(request)
+    audio = listed_audio(request)
     compilations = models.AudioCompilation.objects.all()
     context = {
         'artists': artists,
@@ -18,7 +39,7 @@ def index_view(request):
 
 
 def audio_view(request, slug):
-    song = models.Audio.objects.get(slug=slug)
+    song = listed_audio(request).get(slug=slug)
     context = {
         'song': song
     }
@@ -26,9 +47,9 @@ def audio_view(request, slug):
 
 
 def artist_view(request, slug):
-    artist = models.Artist.objects.get(slug=slug)
-    albums = models.Album.objects.filter(artist=artist)
-    songs = models.Audio.objects.filter(album__artist=artist)
+    artist = listed_artists(request).get(slug=slug)
+    albums = listed_albums(request).filter(artist=artist)
+    songs = listed_audio(request).filter(album__artist=artist)
     featured_on_compilations = models.AudioCompilation.objects.filter(
         tracks__id__in=songs).distinct()
     context = {
@@ -40,8 +61,8 @@ def artist_view(request, slug):
 
 
 def album_view(request, slug):
-    album = models.Album.objects.get(slug=slug)
-    songs = models.Audio.objects.filter(album=album)
+    album = listed_albums(request).get(slug=slug)
+    songs = listed_audio(request).filter(album=album)
     context = {
         'album': album,
         'songs': songs,

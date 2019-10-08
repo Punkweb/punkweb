@@ -3,15 +3,15 @@ from . import models
 
 
 class ArtistAdmin(admin.ModelAdmin):
-    list_display = ('name', 'genre',)
+    list_display = ('name', 'genre', 'is_listed',)
 
 
 class AlbumAdmin(admin.ModelAdmin):
-    list_display = ('title', 'year', 'genre',)
+    list_display = ('title', 'year', 'genre', 'is_listed',)
 
 
 class MusicAdmin(admin.ModelAdmin):
-    list_display = ('title', 'album', 'disc_num', 'track_num',)
+    list_display = ('title', 'album', 'disc_num', 'track_num', 'is_listed',)
 
 
 class CompilationAdmin(admin.ModelAdmin):
