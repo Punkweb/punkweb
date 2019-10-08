@@ -7,7 +7,12 @@
 <div class="main" style="margin-bottom: 140px;">
   <br><br>
   <a href="{% url 'music:index' %}">Back to Music</a>
-  <h1>{{artist.name}}</h1>
+  <div class="artistHeader">
+    <div class="artistHeader__imgWrap">
+      <img src="{{artist.image.url}}" />
+    </div>
+    <h1 class="artistHeader__artistName">{{artist.name}}</h1>
+  </div>
   <h3>Albums</h3>
   <div class="tableContainer">
     <table>
@@ -62,5 +67,13 @@
     </table>
   </div>
   {% endif %}
+  <div class="artistAbout">
+    <h3>About</h3>
+    {% if artist.bio %}
+    <p>{{artist.bio}}</p>
+    {% else %}
+    <p>This artist doesn't have a bio.</p>
+    {% endif %}
+  </div>
 </div>
 {% endblock %}
