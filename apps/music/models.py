@@ -73,7 +73,6 @@ class TrackInformationMixin(models.Model):
         blank=True, null=True, related_name='tracks', on_delete=models.SET_NULL)
     disc_num = models.IntegerField()
     track_num = models.IntegerField()
-    is_listed = models.BooleanField(default=False)
 
     class Meta:
         abstract = True

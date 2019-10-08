@@ -21,7 +21,7 @@ def listed_audio(request):
     objects = models.Audio.objects
     if request.user and request.user.is_superuser:
         return objects.all()
-    return objects.filter(is_listed=True)
+    return objects.filter(album__is_listed=True)
 
 
 def index_view(request):

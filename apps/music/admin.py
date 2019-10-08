@@ -11,7 +11,7 @@ class AlbumAdmin(admin.ModelAdmin):
 
 
 class MusicAdmin(admin.ModelAdmin):
-    list_display = ('title', 'album', 'disc_num', 'track_num', 'is_listed',)
+    list_display = ('title', 'album', 'disc_num', 'track_num',)
 
 
 class CompilationAdmin(admin.ModelAdmin):
