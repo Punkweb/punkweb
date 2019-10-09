@@ -32,7 +32,7 @@ def index_view(request):
         'artists': artists,
         'albums': albums,
         'audio': audio,
-        'latest_releases': audio.order_by('uploaded_at')[:10]
+        'latest_releases': audio.order_by('-uploaded_at')[:10]
     }
     return render(request, 'music/index.html', context)
 
