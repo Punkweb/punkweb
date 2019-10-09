@@ -13,7 +13,8 @@
   <div>
     <img src="{{album.cover_art|thumbnail_url:'avatar'}}" alt="" />
     <h4>{{album.title}}</h4>
-    <p>{{album.year|date:'M Y'}}</p>
+    <p>{{album.year|date:'Y'}} • {{songs.count}} song{{songs.count|pluralize:",s"}}</p>
+    <p></p>
   </div>
   <div class="tableContainer">
     <table>

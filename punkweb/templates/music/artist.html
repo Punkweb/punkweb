@@ -14,66 +14,20 @@
     <h1 class="artistHeader__artistName">{{artist.name}}</h1>
   </div>
   <h3>Albums</h3>
-  <div class="tableContainer">
-    <table>
-      <thead>
-        <tr>
-          <th width="75px">Album</th>
-          <th></th>
-          <th>Year</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for album in albums %}
-        <tr>
-          <td>
-            <img src="{{album.cover_art|thumbnail_url:'avatar_smaller'}}" alt="" />
-          </td>
-          <td>
-            <a href="{% url 'music:album' album.slug %}">{{album.title}}</a>
-          </td>
-          <td>{{album.year|date:'Y'}}</td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+  <div class="albumList">
+    {% for album in albums %}
+    <div class="albumContainer">
+      <div class="albumImage">
+        <a href="{% url 'music:album' album.slug %}"><img src="{{album.cover_art|thumbnail_url:'avatar'}}" alt="{{album.title}}" /></a>
+      </div>
+      <h4 class="albumName"><a href="{% url 'music:album' album.slug %}">{{album.title}}</a></h4>
+      <label>{{album.year|date:'Y'}}</label>
+    </div>
+    {% endfor %}
   </div>
-  {% if featured_on_compilations %}
-  <h3>Playlists</h3>
-  <div class="tableContainer">
-    <table>
-      <thead>
-        <tr>
-          <th>
-            Name
-          </th>
-          <th>
-            Created
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for compilation in featured_on_compilations %}
-        <tr>
-          <td>
-            <a href="{% url 'music:audio_compilation' compilation.slug %}">{{compilation.title}}</a>
-          </td>
-          <td>
-            {{compilation.created|date:'m/d/Y'}}
-          </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
-  </div>
-  {% endif %}
   <div class="artistAbout">
     <h3>About</h3>
-    {% if artist.bio %}
     <p>{{artist.bio}}</p>
-    {% else %}
-    <p>This artist doesn't have a bio.</p>
-    {% endif %}
   </div>
 </div>
 {% endblock %}
