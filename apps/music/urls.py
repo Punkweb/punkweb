@@ -9,6 +9,4 @@ urlpatterns = [
     url(r'^artist/(?P<slug>[\w-]+)/$', views.artist_view, name='artist'),
     url(r'^album/(?P<slug>[\w-]+)/$', views.album_view, name='album'),
     url(r'^audio/(?P<slug>[\w-]+)/$', views.audio_view, name='audio'),
-    url(r'^audio/compilation/(?P<slug>[\w-]+)/$',
-        views.audio_compilation_view, name='audio_compilation'),
 ]

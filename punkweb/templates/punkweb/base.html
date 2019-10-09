@@ -24,19 +24,6 @@
     <div class="container">
       <div class="flexContainer">
         {% block main %}{% endblock %}
-        {% block nav %}
-        <div class="nav">
-          <h3>Navigation</h3>
-          <ul>
-            <li><a href="{% url 'index' %}">Home</a></li>
-            <li><a href="{% url 'music:index' %}">Music</a></li>
-            <li><a href="{% url 'board:index' %}">Forum</a></li>
-            <h5>Pork</h5>
-            <li><a href="{% url 'game' %}">Shooter Game</a></li>
-            <li><a href="{% url 'diablo' %}">Diablo</a></li>
-          </ul>
-        </div>
-        {% endblock %}
       </div>
     </div>
     <script src="{% static 'punkweb_boards/js/deps/jquery-3.1.1.min.js' %}"></script>

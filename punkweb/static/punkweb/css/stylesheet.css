@@ -38,6 +38,12 @@ ul {
   padding: 0;
 }
 
+.disc {
+  list-style: disc;
+  margin: 1rem 0;
+  padding-left: 40px;
+}
+
 @media only screen and (max-width: 840px) {
   .flexContainer {
     flex-direction: column;

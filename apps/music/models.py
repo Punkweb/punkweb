@@ -87,14 +87,3 @@ class Audio(UUIDPrimaryKey, UploadedAtMixin, TrackInformationMixin):
 
     def __str__(self):
         return '{}'.format(self.title)
-
-
-class AudioCompilation(UUIDPrimaryKey, CreatedModifiedMixin):
-    title = models.CharField(max_length=256, blank=False, null=False)
-    slug = models.SlugField(max_length=256, blank=False, null=False)
-    thumbnail = ThumbnailerImageField(
-        upload_to=audio_compilation_upload_to, blank=True, null=True)
-    tracks = models.ManyToManyField(Audio)
-
-    def __str__(self):
-        return '{} - {}'.format(self.created, self.title)

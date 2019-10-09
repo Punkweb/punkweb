@@ -14,12 +14,6 @@ class MusicAdmin(admin.ModelAdmin):
     list_display = ('title', 'album', 'disc_num', 'track_num',)
 
 
-class CompilationAdmin(admin.ModelAdmin):
-    list_display = ('title', 'created',)
-    ordering = ('created',)
-
-
 admin.site.register(models.Artist, ArtistAdmin)
 admin.site.register(models.Album, AlbumAdmin)
 admin.site.register(models.Audio, MusicAdmin)
-admin.site.register(models.AudioCompilation, CompilationAdmin)

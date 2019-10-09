@@ -28,12 +28,10 @@ def index_view(request):
     artists = listed_artists(request)
     albums = listed_albums(request)
     audio = listed_audio(request)
-    compilations = models.AudioCompilation.objects.all()
     context = {
         'artists': artists,
         'albums': albums,
         'audio': audio,
-        'compilations': compilations
     }
     return render(request, 'music/index.html', context)
 
@@ -50,12 +48,9 @@ def artist_view(request, slug):
     artist = listed_artists(request).get(slug=slug)
     albums = listed_albums(request).filter(artist=artist)
     songs = listed_audio(request).filter(album__artist=artist)
-    featured_on_compilations = models.AudioCompilation.objects.filter(
-        tracks__id__in=songs).distinct()
     context = {
         'artist': artist,
         'albums': albums,
-        'featured_on_compilations': featured_on_compilations,
     }
     return render(request, 'music/artist.html', context)
 
@@ -68,13 +63,3 @@ def album_view(request, slug):
         'songs': songs,
     }
     return render(request, 'music/album.html', context)
-
-
-def audio_compilation_view(request, slug):
-    compilation = models.AudioCompilation.objects.get(slug=slug)
-    tracks = compilation.tracks
-    context = {
-        'compilation': compilation,
-        'tracks': tracks
-    }
-    return render(request, 'music/audio_compilation_view.html', context)
