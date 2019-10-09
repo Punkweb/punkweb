@@ -9,33 +9,28 @@
   <div>
     <a href="{% url 'index' %}">Back to Punkweb</a>
   </div>
-  <h1>Music</h1>
-  <h3>Artists</h3>
-  <div class="tableContainer">
-    <table>
-      <thead>
-        <tr>
-          <th width="75px">Artist</th>
-          <th></th>
-          <th>Genre</th>
-        </tr>
-      </thead>
-      <tbody>
-        {% for artist in artists %}
-        <tr>
-          <td>
-            <img src="{{artist.image|thumbnail_url:'avatar_smaller'}}" alt="" />
-          </td>
-          <td>
-            <a href="{% url 'music:artist' artist.slug %}">{{artist.name}}</a>
-          </td>
-          <td>
-            {{artist.genre}}
-          </td>
-        </tr>
-        {% endfor %}
-      </tbody>
-    </table>
+  <h1>Punkweb Music</h1>
+  <h2>Artists</h2>
+  <div class="artistList">
+    {% for artist in artists %}
+    <div class="artistContainer">
+      <div class="artistImage">
+        <a href="{% url 'music:artist' artist.slug %}"><img src="{{artist.image|thumbnail_url:'avatar'}}" alt="{{artist.name}}" /></a>
+      </div>
+      <h4 class="artistName"><a href="{% url 'music:artist' artist.slug %}">{{artist.name}}</a></h4>
+      <label>{{artist.genre}}</label>
+    </div>
+    {% endfor %}
+  </div>
+  <h2>Latest Releases</h2>
+  <div class="latestReleases">
+    <ol>
+      {% for song in latest_releases %}
+      <li>
+        <a class="trackTitle" href="{% url 'music:album' song.album.slug %}">{{song.title}}</a> • {{song.album.artist.name}}
+      </li>
+      {% endfor %}
+    </ol>
   </div>
 </div>
 {% endblock %}

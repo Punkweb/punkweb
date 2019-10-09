@@ -1,0 +1,27 @@
+.artist {
+  &List {
+    border-top: 1px solid $oc-gray-4;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+  &Container {
+    padding: 1rem;
+    width: 200px;
+  }
+  &Image {
+  }
+  &Name {
+    color: white !important;
+    margin: 0;
+    a {
+      color: white !important;
+    }
+  }
+}
+
+.latestReleases {
+  border-top: 1px solid $oc-gray-4;
+  padding-top: 1rem;
+
+}
