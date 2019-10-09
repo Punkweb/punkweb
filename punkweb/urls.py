@@ -32,13 +32,10 @@ urlpatterns = [
 
     # Site urls
     url(r'^$', views.index_view, name='index'),
-    url(r'^pgp/$', views.pgp_view, name='pgp'),
-    url(r'^links/', include('apps.links.urls')),
     url(r'^music/', include('apps.music.urls')),
     url(r'^game/$', views.shietyshooter_view, name='game'),
     url(r'^shietyshooter/$', views.shietyshooter_view, name='shietyshooter'),
     url(r'^diablo/$', views.diablo_view, name='diablo'),
-    # url(r'^music/$', views.music_list_view, name='music'),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

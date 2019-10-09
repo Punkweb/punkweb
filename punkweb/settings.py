@@ -53,7 +53,6 @@ INSTALLED_APPS = [
     'captcha',
     'punkweb_boards',
     # Punkweb
-    'apps.links',
     'apps.music',
 ]
 
