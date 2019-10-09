@@ -6,22 +6,22 @@ from apps.music import models
 def listed_artists(request):
     objects = models.Artist.objects
     if request.user and request.user.is_superuser:
-        return objects.all()
-    return objects.filter(is_listed=True)
+        return objects.all().order_by('name')
+    return objects.filter(is_listed=True).order_by('name')
 
 
 def listed_albums(request):
     objects = models.Album.objects
     if request.user and request.user.is_superuser:
-        return objects.all()
-    return objects.filter(is_listed=True)
+        return objects.all().order_by('-year')
+    return objects.filter(is_listed=True).order_by('-year')
 
 
 def listed_audio(request):
     objects = models.Audio.objects
     if request.user and request.user.is_superuser:
-        return objects.all()
-    return objects.filter(album__is_listed=True)
+        return objects.all().order_by('disc_num', 'track_num')
+    return objects.filter(album__is_listed=True).order_by('disc_num', 'track_num')
 
 
 def index_view(request):
