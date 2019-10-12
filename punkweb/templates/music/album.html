@@ -13,7 +13,7 @@
   <div>
     <img src="{{album.cover_art|thumbnail_url:'avatar'}}" alt="" />
     <h4>{{album.title}}</h4>
-    <p>{{album.year|date:'Y'}} • {{songs.count}} song{{songs.count|pluralize:",s"}}</p>
+    <p>{{album.release_date|date:'Y'}} • {{songs.count}} song{{songs.count|pluralize:",s"}}</p>
     <p></p>
   </div>
   <div class="tableContainer">
@@ -89,7 +89,7 @@ $(document).ready(function() {
     'title': '{{song.title}}',
     'artist': '{{song.album.artist.name}}',
     'album': '{{song.album.title}}',
-    'year': '{{song.album.year}}',
+    'release_date': '{{song.album.release_date}}',
     'image': '{{song.album.cover_art|thumbnail_url:"avatar"}}',
     'file': '/media/{{song.file}}'
   });

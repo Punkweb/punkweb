@@ -6,7 +6,7 @@
 {% block main %}
 <div class="main" style="margin-bottom: 140px;">
   <h1>Now Playing</h1>
-  <h3><i>{{song.title}}</i> by {{song.album.artist.name}} | {{song.album.title}} {{song.album.year|date:'Y'}}</h3>
+  <h3><i>{{song.title}}</i> by {{song.album.artist.name}} | {{song.album.title}} {{song.album.release_date|date:'Y'}}</h3>
   <center>
     <img src="{{song.album.cover_art|thumbnail_url:'avatar'}}" />
   </center>

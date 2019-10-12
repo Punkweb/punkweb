@@ -5,16 +5,9 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('music', '0004_remove_audio_is_listed'),
-    ]
+    dependencies = [("music", "0004_remove_audio_is_listed")]
 
     operations = [
-        migrations.RemoveField(
-            model_name='audiocompilation',
-            name='tracks',
-        ),
-        migrations.DeleteModel(
-            name='AudioCompilation',
-        ),
+        migrations.RemoveField(model_name="audiocompilation", name="tracks"),
+        migrations.DeleteModel(name="AudioCompilation"),
     ]

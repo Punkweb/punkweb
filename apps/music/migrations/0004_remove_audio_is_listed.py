@@ -5,13 +5,6 @@ from django.db import migrations
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('music', '0003_auto_20191007_2036'),
-    ]
+    dependencies = [("music", "0003_auto_20191007_2036")]
 
-    operations = [
-        migrations.RemoveField(
-            model_name='audio',
-            name='is_listed',
-        ),
-    ]
+    operations = [migrations.RemoveField(model_name="audio", name="is_listed")]

@@ -14,73 +14,154 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Album',
+            name="Album",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('slug', models.SlugField(max_length=256, unique=True)),
-                ('title', models.CharField(max_length=256)),
-                ('year', models.DateField()),
-                ('cover_art', easy_thumbnails.fields.ThumbnailerImageField(blank=True, null=True, upload_to=apps.music.models.album_cover_upload_to)),
-                ('genre', models.CharField(max_length=256)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                ("slug", models.SlugField(max_length=256, unique=True)),
+                ("title", models.CharField(max_length=256)),
+                ("year", models.DateField()),
+                (
+                    "cover_art",
+                    easy_thumbnails.fields.ThumbnailerImageField(
+                        blank=True,
+                        null=True,
+                        upload_to=apps.music.models.album_cover_upload_to,
+                    ),
+                ),
+                ("genre", models.CharField(max_length=256)),
+            ],
+            options={"ordering": ("artist", "title", "year")},
+        ),
+        migrations.CreateModel(
+            name="Artist",
+            fields=[
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                ("slug", models.SlugField(max_length=256, unique=True)),
+                ("name", models.CharField(max_length=256)),
+                ("genre", models.CharField(max_length=256)),
+                (
+                    "_bio_rendered",
+                    models.TextField(blank=True, editable=False, null=True),
+                ),
+                (
+                    "bio",
+                    precise_bbcode.fields.BBCodeTextField(
+                        blank=True,
+                        max_length=5096,
+                        no_rendered_field=True,
+                        null=True,
+                    ),
+                ),
+                (
+                    "image",
+                    easy_thumbnails.fields.ThumbnailerImageField(
+                        blank=True,
+                        null=True,
+                        upload_to=apps.music.models.artist_image_upload_to,
+                    ),
+                ),
+            ],
+            options={"ordering": ("name",)},
+        ),
+        migrations.CreateModel(
+            name="Audio",
+            fields=[
+                ("uploaded_at", models.DateTimeField(auto_now_add=True)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                ("slug", models.SlugField(max_length=256, unique=True)),
+                ("title", models.CharField(max_length=256)),
+                ("disc_num", models.IntegerField()),
+                ("track_num", models.IntegerField()),
+                (
+                    "file",
+                    models.FileField(
+                        upload_to=apps.music.models.audio_upload_to
+                    ),
+                ),
+                (
+                    "album",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="tracks",
+                        to="music.Album",
+                    ),
+                ),
             ],
             options={
-                'ordering': ('artist', 'title', 'year'),
+                "ordering": (
+                    "album__artist__name",
+                    "album__title",
+                    "disc_num",
+                    "track_num",
+                    "title",
+                )
             },
         ),
         migrations.CreateModel(
-            name='Artist',
+            name="AudioCompilation",
             fields=[
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('slug', models.SlugField(max_length=256, unique=True)),
-                ('name', models.CharField(max_length=256)),
-                ('genre', models.CharField(max_length=256)),
-                ('_bio_rendered', models.TextField(blank=True, editable=False, null=True)),
-                ('bio', precise_bbcode.fields.BBCodeTextField(blank=True, max_length=5096, no_rendered_field=True, null=True)),
-                ('image', easy_thumbnails.fields.ThumbnailerImageField(blank=True, null=True, upload_to=apps.music.models.artist_image_upload_to)),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                ("modified", models.DateTimeField(auto_now=True)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                ("title", models.CharField(max_length=256)),
+                ("slug", models.SlugField(max_length=256)),
+                (
+                    "thumbnail",
+                    easy_thumbnails.fields.ThumbnailerImageField(
+                        blank=True,
+                        null=True,
+                        upload_to=apps.music.models.audio_compilation_upload_to,
+                    ),
+                ),
+                ("tracks", models.ManyToManyField(to="music.Audio")),
             ],
-            options={
-                'ordering': ('name',),
-            },
-        ),
-        migrations.CreateModel(
-            name='Audio',
-            fields=[
-                ('uploaded_at', models.DateTimeField(auto_now_add=True)),
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('slug', models.SlugField(max_length=256, unique=True)),
-                ('title', models.CharField(max_length=256)),
-                ('disc_num', models.IntegerField()),
-                ('track_num', models.IntegerField()),
-                ('file', models.FileField(upload_to=apps.music.models.audio_upload_to)),
-                ('album', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, related_name='tracks', to='music.Album')),
-            ],
-            options={
-                'ordering': ('album__artist__name', 'album__title', 'disc_num', 'track_num', 'title'),
-            },
-        ),
-        migrations.CreateModel(
-            name='AudioCompilation',
-            fields=[
-                ('created', models.DateTimeField(auto_now_add=True)),
-                ('modified', models.DateTimeField(auto_now=True)),
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('title', models.CharField(max_length=256)),
-                ('slug', models.SlugField(max_length=256)),
-                ('thumbnail', easy_thumbnails.fields.ThumbnailerImageField(blank=True, null=True, upload_to=apps.music.models.audio_compilation_upload_to)),
-                ('tracks', models.ManyToManyField(to='music.Audio')),
-            ],
-            options={
-                'abstract': False,
-            },
+            options={"abstract": False},
         ),
         migrations.AddField(
-            model_name='album',
-            name='artist',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='albums', to='music.Artist'),
+            model_name="album",
+            name="artist",
+            field=models.ForeignKey(
+                on_delete=django.db.models.deletion.CASCADE,
+                related_name="albums",
+                to="music.Artist",
+            ),
         ),
     ]

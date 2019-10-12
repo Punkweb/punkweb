@@ -38,6 +38,32 @@
   }
 }
 
+.album {
+  &List {
+    border-top: 1px solid $oc-gray-4;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1rem 0;
+    justify-content: flex-start;
+  }
+  &Container {
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+    width: 200px;
+  }
+  &Image {
+    height: 200px;
+    width: 200px;
+  }
+  &Name {
+    color: white !important;
+    margin: 0;
+    a {
+      color: white !important;
+    }
+  }
+}
+
 .artistAbout {
   p {
     white-space: pre-wrap;
@@ -46,25 +72,11 @@
   }
 }
 
-.album {
-  &List {
-    border-top: 1px solid $oc-gray-4;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-  }
-  &Container {
-    padding: 1rem;
-    width: 200px;
-  }
-  &Image {
-  }
-  &Name {
-    color: white !important;
+.eventsSection {
+  p {
+    white-space: pre-wrap;
     margin: 0;
-    a {
-      color: white !important;
-    }
+    padding: 1rem 0;
   }
 }
 

@@ -26,3 +26,19 @@ class UUIDPrimaryKey(models.Model):
 
     class Meta:
         abstract = True
+
+
+class AddressMixin(models.Model):
+    address_line = models.CharField(max_length=256, null=True, blank=True)
+    zip_code = models.CharField(max_length=256, null=True, blank=True)
+    city = models.CharField(max_length=256, null=True, blank=True)
+    state = models.CharField(max_length=256, null=True, blank=True)
+    country = models.CharField(max_length=256, null=True, blank=True)
+
+    @property
+    def full_address(self):
+        return '{}, {}, {} {}'.format(
+            self.address_line, self.city, self.state, self.zip_code)
+
+    class Meta:
+        abstract = True

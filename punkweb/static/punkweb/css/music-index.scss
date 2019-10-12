@@ -3,13 +3,17 @@
     border-top: 1px solid $oc-gray-4;
     display: flex;
     flex-wrap: wrap;
+    padding: 1rem 0;
     justify-content: flex-start;
   }
   &Container {
-    padding: 1rem;
+    margin-bottom: 1rem;
+    margin-right: 1rem;
     width: 200px;
   }
   &Image {
+    height: 200px;
+    width: 200px;
   }
   &Name {
     color: white !important;
@@ -20,7 +24,7 @@
   }
 }
 
-.latestReleases {
+.section {
   border-top: 1px solid $oc-gray-4;
   padding-top: 1rem;
 }

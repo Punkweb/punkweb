@@ -5,24 +5,22 @@ from django.db import migrations, models
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('music', '0002_auto_20180830_0317'),
-    ]
+    dependencies = [("music", "0002_auto_20180830_0317")]
 
     operations = [
         migrations.AddField(
-            model_name='album',
-            name='is_listed',
+            model_name="album",
+            name="is_listed",
             field=models.BooleanField(default=False),
         ),
         migrations.AddField(
-            model_name='artist',
-            name='is_listed',
+            model_name="artist",
+            name="is_listed",
             field=models.BooleanField(default=False),
         ),
         migrations.AddField(
-            model_name='audio',
-            name='is_listed',
+            model_name="audio",
+            name="is_listed",
             field=models.BooleanField(default=False),
         ),
     ]

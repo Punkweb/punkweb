@@ -6,14 +6,18 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('music', '0001_initial'),
-    ]
+    dependencies = [("music", "0001_initial")]
 
     operations = [
         migrations.AlterField(
-            model_name='audio',
-            name='album',
-            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='tracks', to='music.Album'),
-        ),
+            model_name="audio",
+            name="album",
+            field=models.ForeignKey(
+                blank=True,
+                null=True,
+                on_delete=django.db.models.deletion.SET_NULL,
+                related_name="tracks",
+                to="music.Album",
+            ),
+        )
     ]

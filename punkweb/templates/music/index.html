@@ -10,6 +10,21 @@
     <a href="{% url 'index' %}">Back to Punkweb</a>
   </div>
   <h1>Punkweb Music</h1>
+  <p>Listen to some of our featured artists, only found here on Punkweb.net!</p>
+  {% if events_this_week.count > 0 %}
+  <h2>Events This Week</h2>
+  <div class="artistList">
+    {% for event in events_this_week %}
+    <div class="artistContainer">
+      <div class="artistImage">
+        <a href="#"><img src="{{event.event_image|thumbnail_url:'avatar_no_crop'}}" alt="{{event.title}}" /></a>
+      </div>
+      <h4 class="artistName"><a href="#">{{event.title}}</a></h4>
+      <label>{{event.event_date|date:'D, M j'}}</label>
+    </div>
+    {% endfor %}
+  </div>
+  {% endif %}
   <h2>Artists</h2>
   <div class="artistList">
     {% for artist in artists %}
@@ -23,11 +38,11 @@
     {% endfor %}
   </div>
   <h2>Latest Releases</h2>
-  <div class="latestReleases">
+  <div class="section">
     <ol>
-      {% for song in latest_releases %}
+      {% for album in latest_releases %}
       <li>
-        <a class="trackTitle" href="{% url 'music:album' song.album.slug %}">{{song.title}}</a> • {{song.album.artist.name}}
+        <a class="trackTitle" href="{% url 'music:album' album.slug %}">{{album.title}}</a> • {{album.artist.name}}
       </li>
       {% endfor %}
     </ol>
