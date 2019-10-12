@@ -168,6 +168,7 @@ STATICFILES_FINDERS = (
     "compressor.finders.CompressorFinder",
 )
 
+COMPRESS_OFFLINE = True
 COMPRESS_PRECOMPILERS = (("text/x-scss", "django_libsass.SassCompiler"),)
 
 CODEMIRROR_PATH = os.path.join(STATIC_URL, "punkweb", "codemirror")
