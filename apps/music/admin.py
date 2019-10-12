@@ -7,7 +7,7 @@ class ArtistAdmin(admin.ModelAdmin):
 
 
 class AlbumAdmin(admin.ModelAdmin):
-    list_display = ("title", "release_date", "genre", "is_listed")
+    list_display = ("title", "artist", "release_date", "is_listed")
 
 
 class AudioAdmin(admin.ModelAdmin):

@@ -6,22 +6,40 @@ from apps.music import models
 
 def listed_artists(request):
     objects = models.Artist.objects
+
     if request.user and request.user.is_superuser:
-        return objects.all().order_by("name")
-    return objects.filter(is_listed=True).order_by("name")
+        return objects.filter(
+            albums__isnull=False
+        ).distinct().order_by("name")
+
+    listed = objects.filter(
+        is_listed=True,
+        albums__isnull=False,
+    ).distinct()
+    return listed.order_by("name")
 
 
 def listed_albums(request):
     objects = models.Album.objects
+
     if request.user and request.user.is_superuser:
-        return objects.all().order_by("-release_date")
-    return objects.filter(is_listed=True).order_by("-release_date")
+        return objects.filter(
+            tracks__isnull=False
+        ).distinct().order_by("-release_date")
+
+    listed = objects.filter(
+        is_listed=True,
+        tracks__isnull=False,
+    ).distinct()
+    return listed.order_by("-release_date")
 
 
 def listed_audio(request):
     objects = models.Audio.objects
+
     if request.user and request.user.is_superuser:
         return objects.all().order_by("disc_num", "track_num")
+
     return objects.filter(album__is_listed=True).order_by(
         "disc_num", "track_num"
     )
@@ -41,7 +59,7 @@ def index_view(request):
         "artists": artists,
         "albums": albums,
         "audio": audio,
-        "latest_releases": albums.order_by("-release_date")[:10],
+        "latest_releases": albums.order_by("-release_date")[:5],
         "events_this_week": events_this_week,
     }
     return render(request, "music/index.html", context)
@@ -50,7 +68,6 @@ def index_view(request):
 def artist_view(request, slug):
     artist = listed_artists(request).get(slug=slug)
     albums = listed_albums(request).filter(artist=artist)
-
     latest_release = albums.order_by('-release_date').first()
 
     today_beginning = datetime.datetime.combine(

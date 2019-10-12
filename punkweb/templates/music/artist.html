@@ -20,7 +20,7 @@
         <a href="{% url 'music:album' latest_release.slug %}"><img src="{{latest_release.cover_art|thumbnail_url:'avatar'}}" alt="{{latest_release.title}}" /></a>
       </div>
       <h4 class="albumName"><a href="{% url 'music:album' latest_release.slug %}">{{latest_release.title}}</a></h4>
-      <label>{{latest_release.release_date|date:'D, M j'}}</label>
+      <label>{{latest_release.release_date|date:'M j, Y'}}</label>
     </div>
   </div>
   <h3>Albums</h3>
@@ -84,7 +84,7 @@
           <tr>
             <td><a href="#"><img src="{{event.event_image|thumbnail_url:'avatar_smaller_no_crop'}}" alt=""></a></td>
             <td><span>{{event.venue}}, {{event.city}}</span></td>
-            <td>{{event.event_date|date:'D, M j'}}</td>
+            <td>{{event.event_date|date:'D, M j, Y'}}</td>
           </tr>
           {% endfor %}
         </tbody>
