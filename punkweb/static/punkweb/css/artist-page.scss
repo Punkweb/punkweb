@@ -40,7 +40,6 @@
 
 .album {
   &List {
-    border-top: 1px solid $oc-gray-4;
     display: flex;
     flex-wrap: wrap;
     padding: 1rem 0;
@@ -66,7 +65,6 @@
 
 .artistAbout {
   p {
-    white-space: pre-wrap;
     margin: 0;
     padding: 1rem 0;
   }
@@ -74,7 +72,6 @@
 
 .eventsSection {
   p {
-    white-space: pre-wrap;
     margin: 0;
     padding: 1rem 0;
   }

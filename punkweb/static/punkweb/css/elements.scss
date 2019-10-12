@@ -108,10 +108,10 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 hr {
-  background-color: $oc-gray-4;
+  background-color: $oc-gray-7;
   border: 0;
   border-radius: 2px;
-  color: $oc-gray-4;
+  color: $oc-gray-7;
   height: 2px;
   width: 100%;
 }
@@ -192,13 +192,19 @@ table {
     letter-spacing: 1px;
   }
   td {
-    
+
   }
   thead {
     color: white;
   }
   tfoot {
     background-color: $oc-gray-9;
+  }
+}
+
+.noBorderTable {
+  tr {
+    border: none;
   }
 }
 

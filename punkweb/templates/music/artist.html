@@ -14,6 +14,7 @@
     <h1 class="artistHeader__artistName">{{artist.name}}</h1>
   </div>
   <h3>Latest Release</h3>
+  <hr />
   <div class="albumList">
     <div class="albumContainer">
       <div class="albumImage">
@@ -24,6 +25,7 @@
     </div>
   </div>
   <h3>Albums</h3>
+  <hr />
   <div class="albumList">
     {% for album in albums %}
     <div class="albumContainer">
@@ -37,15 +39,21 @@
   </div>
   <div class="artistAbout">
     <h3>About</h3>
-    <p>{{artist.bio}}</p>
+    <hr />
+    {% if artist.bio.rendered %}
+    <p>{{artist.bio.rendered}}</p>
+    {% else %}
+    <p>This artist does not have a description yet.</p>
+    {% endif %}
   </div>
   <div class="eventsSection">
     <h3>Upcoming Events</h3>
+    <hr />
     {% if upcoming_events.count < 1 %}
     <p>This artist has no scheduled events.</p>
     {% else %}
     <div class="tableContainer">
-      <table>
+      <table class="noBorderTable">
         <thead>
           <tr>
             <th>Event</th>
@@ -67,11 +75,12 @@
   </div>
   <div class="eventsSection">
     <h3>Past Events</h3>
+    <hr />
     {% if past_events.count < 1 %}
     <p>This artist has no past events.</p>
     {% else %}
     <div class="tableContainer">
-      <table>
+      <table class="noBorderTable">
         <thead>
           <tr>
             <th>Event</th>
