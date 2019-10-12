@@ -125,7 +125,6 @@ class ArtistEvent(UUIDPrimaryKey, CreatedModifiedMixin, AddressMixin):
     slug = models.SlugField(
         max_length=256, blank=False, null=False, unique=True
     )
-    title = models.CharField(max_length=256, blank=False, null=False)
     venue = models.CharField(max_length=256, blank=True, null=True)
     artist = models.ForeignKey(
         "Artist",
@@ -140,7 +139,7 @@ class ArtistEvent(UUIDPrimaryKey, CreatedModifiedMixin, AddressMixin):
     )
 
     class Meta:
-        ordering = ("-event_date", "title")
+        ordering = ("-event_date", )
 
     def __str__(self):
-        return "{}".format(self.title)
+        return "{} at {}, {}".format(self.artist.name, self.venue, self.city)

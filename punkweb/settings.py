@@ -261,6 +261,9 @@ REST_FRAMEWORK = {
 THUMBNAIL_ALIASES = {
     "": {
         "avatar_no_crop": {"size": (200, 200), "crop": False},
+        "avatar_small_no_crop": {"size": (100, 100), "crop": False},
+        "avatar_smaller_no_crop": {"size": (50, 50), "crop": False},
+        "avatar_smallest_no_crop": {"size": (25, 25), "crop": False},
         "avatar": {"size": (200, 200), "crop": True},
         "avatar_small": {"size": (100, 100), "crop": True},
         "avatar_smaller": {"size": (50, 50), "crop": True},

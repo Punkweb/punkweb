@@ -15,7 +15,7 @@ class AudioAdmin(admin.ModelAdmin):
 
 
 class ArtistEventAdmin(admin.ModelAdmin):
-    list_display = ("title", "artist", "venue", "event_date")
+    list_display = ("artist", "venue", "event_date")
 
 
 admin.site.register(models.Artist, ArtistAdmin)
