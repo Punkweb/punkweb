@@ -68,6 +68,7 @@ class ArtistSerializer(serializers.ModelSerializer):
     class Meta:
         model = Artist
         fields = "__all__"
+        lookup_field = 'slug'
 
 
 class AlbumSerializer(serializers.ModelSerializer):
@@ -93,6 +94,7 @@ class ArtistViewSet(
 ):
     queryset = Artist.objects.order_by("name")
     serializer_class = ArtistSerializer
+    lookup_field = 'slug'
 
     def get_queryset(self):
         qs = self.queryset
