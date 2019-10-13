@@ -109,6 +109,9 @@ class AlbumViewSet(
 
     def get_queryset(self):
         qs = self.queryset
+        artist_id = self.request.query_params.get('artist_id')
+        if artist_id:
+            qs = qs.filter(artist__id=artist_id)
         return qs.all()
 
 
@@ -124,6 +127,9 @@ class AudioViewSet(
 
     def get_queryset(self):
         qs = self.queryset
+        artist_id = self.request.query_params.get('artist_id')
+        if artist_id:
+            qs = qs.filter(album__artist__id=artist_id)
         return qs.all()
 
 
@@ -135,4 +141,7 @@ class ArtistEventViewSet(
 
     def get_queryset(self):
         qs = self.queryset
+        artist_id = self.request.query_params.get('artist_id')
+        if artist_id:
+            qs = qs.filter(artist__id=artist_id)
         return qs.all()
