@@ -72,10 +72,15 @@ class ArtistSerializer(serializers.ModelSerializer):
 
 
 class AlbumSerializer(serializers.ModelSerializer):
+    artist_slug = serializers.SerializerMethodField()
+
     class Meta:
         model = Album
         fields = "__all__"
         lookup_field = 'slug'
+
+    def get_artist_slug(self, obj):
+        return obj.artist.slug
 
 
 class AudioSerializer(serializers.ModelSerializer):
