@@ -75,6 +75,7 @@ class AlbumSerializer(serializers.ModelSerializer):
     class Meta:
         model = Album
         fields = "__all__"
+        lookup_field = 'slug'
 
 
 class AudioSerializer(serializers.ModelSerializer):
@@ -106,6 +107,7 @@ class AlbumViewSet(
 ):
     queryset = Album.objects.order_by("artist", "title", "-release_date")
     serializer_class = AlbumSerializer
+    lookup_field = 'slug'
 
     def get_queryset(self):
         qs = self.queryset
