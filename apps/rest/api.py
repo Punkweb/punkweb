@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework import serializers, viewsets, permissions, mixins, views
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken as OriginalObtain
-from rest_framework.decorators import list_route
+from rest_framework.decorators import action, list_route
 from rest_framework.response import Response
 
 from apps.music.models import (
@@ -120,6 +120,11 @@ class AlbumViewSet(
         if artist_id:
             qs = qs.filter(artist__id=artist_id)
         return qs.all()
+
+    @action(detail=False, methods=['get'])
+    def latest_releases(self, request):
+        qs = self.get_queryset()
+        return Response(qs.order_by("-release_date")[:5])
 
 
 class AudioViewSet(
