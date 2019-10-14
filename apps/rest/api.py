@@ -73,6 +73,7 @@ class ArtistSerializer(serializers.ModelSerializer):
 
 class AlbumSerializer(serializers.ModelSerializer):
     artist_slug = serializers.SerializerMethodField()
+    artist_name = serializers.SerializerMethodField()
 
     class Meta:
         model = Album
@@ -81,6 +82,9 @@ class AlbumSerializer(serializers.ModelSerializer):
 
     def get_artist_slug(self, obj):
         return obj.artist.slug
+
+    def get_artist_name(self, obj):
+        return obj.artist.name
 
 
 class AudioSerializer(serializers.ModelSerializer):
