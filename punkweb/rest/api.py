@@ -139,7 +139,7 @@ class AudioSerializer(serializers.ModelSerializer):
     def get_artist_name(self, obj):
         return obj.album.artist.name
 
-    def get_thumbnail(self, obj):
+    def get_album_thumbnail(self, obj):
         request = self.context.get('request')
         return request.build_absolute_uri(get_thumbnailer(obj.album.cover_art)['avatar'].url)
 
