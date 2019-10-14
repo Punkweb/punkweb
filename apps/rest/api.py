@@ -123,8 +123,10 @@ class AlbumViewSet(
 
     @action(detail=False, methods=['get'])
     def latest_releases(self, request):
-        qs = self.get_queryset()
-        return Response(qs.order_by("-release_date")[:5])
+        qs = self.get_queryset().order_by("-release_date")[:5]
+        serializer_class = self.get_serializer_class()
+        serializer = serializer_class(qs.all(), many=True)
+        return Response(serializer.data)
 
 
 class AudioViewSet(
