@@ -184,7 +184,7 @@ class AlbumViewSet(
         artist_id = self.request.query_params.get('artist_id')
         if artist_id:
             qs = qs.filter(artist__id=artist_id)
-        return qs.order_by("artist", "title", "-release_date")
+        return qs.order_by("artist", "-release_date", "title")
 
     @action(detail=False, methods=['get'])
     def latest_releases(self, request):
