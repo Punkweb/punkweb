@@ -3,7 +3,7 @@ from django.shortcuts import get_object_or_404
 from rest_framework import serializers, viewsets, permissions, mixins, views
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken as OriginalObtain
-from rest_framework.decorators import action, list_route
+from rest_framework.decorators import action
 from rest_framework.response import Response
 from easy_thumbnails.files import get_thumbnailer
 
@@ -14,8 +14,36 @@ from apps.music.models import (
     ArtistEvent,
 )
 
-from apps.rest.permissions import IsTargetUser
-from apps.rest import utils as rest_utils
+from punkweb.rest.permissions import IsTargetUser
+from punkweb.rest import utils as rest_utils
+
+
+class UserCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = get_user_model()
+        fields = ('id', 'username', 'email', 'password')
+        read_only_fields = ('id', )
+        extra_kwargs = {
+            'password': {'write_only': True},
+        }
+
+    def create(self, validated_data):
+        user = get_user_model().objects.create_user(
+            validated_data['username'],
+            validated_data['email'],
+            validated_data['password']
+        )
+        return user
+
+
+class UserCreateView(views.APIView):
+    def post(self, request):
+        serializer = UserCreateSerializer(data=request.data)
+        if serializer.is_valid():
+            user = serializer.save()
+            if user:
+                return Response(serializer.data, status=201)
+        return Response(serializer.errors, status=400)
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -42,7 +70,7 @@ class UserViewSet(
     serializer_class = UserSerializer
     permission_classes = (permissions.IsAuthenticated, IsTargetUser)
 
-    @list_route()
+    @action(detail=False, methods=['get'])
     def from_token(self, request, *args, **kwargs):
         token_string = request.query_params.get("token")
         if not token_string:

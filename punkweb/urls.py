@@ -32,7 +32,7 @@ urlpatterns = [
     url(r"^captcha/", include("captcha.urls")),
     # Site urls
     url(r"^$", views.index_view, name="index"),
-    url(r"^api/", include("apps.rest.urls")),
+    url(r"^api/", include("punkweb.rest.urls")),
     url(r"^music/", include("apps.music.urls")),
     url(r"^game/$", views.shietyshooter_view, name="game"),
     url(r"^shietyshooter/$", views.shietyshooter_view, name="shietyshooter"),
