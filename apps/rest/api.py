@@ -5,6 +5,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken as OriginalObtain
 from rest_framework.decorators import action, list_route
 from rest_framework.response import Response
+from easy_thumbnails.files import get_thumbnailer
 
 from apps.music.models import (
     Artist,
@@ -66,15 +67,22 @@ obtain_auth_token = ObtainAuthToken.as_view()
 
 
 class ArtistSerializer(serializers.ModelSerializer):
+    thumbnail = serializers.SerializerMethodField()
+
     class Meta:
         model = Artist
         fields = "__all__"
         lookup_field = 'slug'
 
+    def get_thumbnail(self, obj):
+        request = self.context.get('request')
+        return request.build_absolute_uri(get_thumbnailer(obj.image)['avatar'].url)
+
 
 class AlbumSerializer(serializers.ModelSerializer):
     artist_slug = serializers.SerializerMethodField()
     artist_name = serializers.SerializerMethodField()
+    thumbnail = serializers.SerializerMethodField()
 
     class Meta:
         model = Album
@@ -86,6 +94,10 @@ class AlbumSerializer(serializers.ModelSerializer):
 
     def get_artist_name(self, obj):
         return obj.artist.name
+
+    def get_thumbnail(self, obj):
+        request = self.context.get('request')
+        return request.build_absolute_uri(get_thumbnailer(obj.cover_art)['avatar'].url)
 
 
 class AudioSerializer(serializers.ModelSerializer):
