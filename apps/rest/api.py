@@ -145,6 +145,9 @@ class AudioViewSet(
         artist_id = self.request.query_params.get('artist_id')
         if artist_id:
             qs = qs.filter(album__artist__id=artist_id)
+        album_id = self.request.query_params.get('album_id')
+        if album_id:
+            qs = qs.filter(album__id=album_id)
         return qs.order_by(
             "disc_num",
             "track_num",
