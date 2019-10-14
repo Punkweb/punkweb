@@ -107,9 +107,15 @@ class AudioSerializer(serializers.ModelSerializer):
 
 
 class ArtistEventSerializer(serializers.ModelSerializer):
+    thumbnail = serializers.SerializerMethodField()
+
     class Meta:
         model = ArtistEvent
         fields = "__all__"
+
+    def get_thumbnail(self, obj):
+        request = self.context.get('request')
+        return request.build_absolute_uri(get_thumbnailer(obj.event_image)['avatar'].url)
 
 
 class ArtistViewSet(
