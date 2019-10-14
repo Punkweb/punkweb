@@ -14,6 +14,7 @@ from apps.music.models import (
 )
 
 from apps.rest.permissions import IsTargetUser
+from apps.rest import utils as rest_utils
 
 
 class UserSerializer(serializers.ModelSerializer):
@@ -102,28 +103,28 @@ class ArtistEventSerializer(serializers.ModelSerializer):
 class ArtistViewSet(
     mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet
 ):
-    queryset = Artist.objects.order_by("name")
+    queryset = Artist.objects.none()
     serializer_class = ArtistSerializer
     lookup_field = 'slug'
 
     def get_queryset(self):
-        qs = self.queryset
-        return qs.all()
+        qs = rest_utils.listed_artists(self.request)
+        return qs.order_by("name")
 
 
 class AlbumViewSet(
     mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet
 ):
-    queryset = Album.objects.order_by("artist", "title", "-release_date")
+    queryset = Album.objects.none()
     serializer_class = AlbumSerializer
     lookup_field = 'slug'
 
     def get_queryset(self):
-        qs = self.queryset
+        qs = rest_utils.listed_albums(self.request)
         artist_id = self.request.query_params.get('artist_id')
         if artist_id:
             qs = qs.filter(artist__id=artist_id)
-        return qs.all()
+        return qs.order_by("artist", "title", "-release_date")
 
     @action(detail=False, methods=['get'])
     def latest_releases(self, request):
@@ -136,19 +137,19 @@ class AlbumViewSet(
 class AudioViewSet(
     mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet
 ):
-    queryset = Audio.objects.order_by(
-        "disc_num",
-        "track_num",
-        "title",
-    )
+    queryset = Audio.objects.none()
     serializer_class = AudioSerializer
 
     def get_queryset(self):
-        qs = self.queryset
+        qs = rest_utils.listed_audio(self.request)
         artist_id = self.request.query_params.get('artist_id')
         if artist_id:
             qs = qs.filter(album__artist__id=artist_id)
-        return qs.all()
+        return qs.order_by(
+            "disc_num",
+            "track_num",
+            "title",
+        )
 
 
 class ArtistEventViewSet(
