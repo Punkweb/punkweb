@@ -131,6 +131,10 @@ class AlbumViewSet(
     serializer_class = AlbumSerializer
     lookup_field = 'slug'
 
+    def get_serializer_context(self):
+        context = super(AlbumViewSet, self).get_serializer_context()
+        return context
+
     def get_queryset(self):
         qs = rest_utils.listed_albums(self.request)
         artist_id = self.request.query_params.get('artist_id')
@@ -141,8 +145,7 @@ class AlbumViewSet(
     @action(detail=False, methods=['get'])
     def latest_releases(self, request):
         qs = self.get_queryset().order_by("-release_date")[:5]
-        serializer_class = self.get_serializer_class()
-        serializer = serializer_class(qs.all(), many=True)
+        serializer = self.get_serializer(qs.all(), many=True)
         return Response(serializer.data)
 
 
