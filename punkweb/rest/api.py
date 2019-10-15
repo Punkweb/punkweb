@@ -1,3 +1,4 @@
+import datetime
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 from rest_framework import serializers, viewsets, permissions, mixins, views
@@ -226,3 +227,14 @@ class ArtistEventViewSet(
         if artist_id:
             qs = qs.filter(artist__id=artist_id)
         return qs.all()
+
+    @action(detail=False, methods=['get'])
+    def this_week(self, request):
+        qs = self.get_queryset()
+        today_beginning = datetime.datetime.combine(
+            datetime.date.today(), datetime.time())
+        one_week_from_now = today_beginning + datetime.timedelta(days=7)
+        qs = qs.filter(
+            event_date__gte=today_beginning, event_date__lte=one_week_from_now)
+        serializer = self.get_serializer(qs.all(), many=True)
+        return Response(serializer.data)
