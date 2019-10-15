@@ -22,7 +22,7 @@ from punkweb.rest import utils as rest_utils
 class UserCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = get_user_model()
-        fields = ('id', 'username', 'email', 'password')
+        fields = ('id', 'username', 'password')
         read_only_fields = ('id', )
         extra_kwargs = {
             'password': {'write_only': True},
@@ -31,7 +31,6 @@ class UserCreateSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         user = get_user_model().objects.create_user(
             validated_data['username'],
-            validated_data['email'],
             validated_data['password']
         )
         return user
