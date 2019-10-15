@@ -160,10 +160,10 @@ class ArtistEventSerializer(serializers.ModelSerializer):
         return request.build_absolute_uri(get_thumbnailer(obj.event_image)['avatar'].url)
 
     def get_artist_name(self, obj):
-        return obj.arist.name
+        return obj.artist.name
 
     def get_artist_slug(self, obj):
-        return obj.arist.slug
+        return obj.artist.slug
 
 
 class ArtistViewSet(
