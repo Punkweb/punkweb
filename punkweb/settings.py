@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.postgres",
     # Punkweb boards
+    "django_extensions",
     "compressor",
     "easy_thumbnails",
     "rest_framework",

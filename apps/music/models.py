@@ -125,6 +125,7 @@ class ArtistEvent(UUIDPrimaryKey, CreatedModifiedMixin, AddressMixin):
     slug = models.SlugField(
         max_length=256, blank=False, null=False, unique=True
     )
+    title = models.CharField(max_length=256, blank=False, null=False)
     venue = models.CharField(max_length=256, blank=True, null=True)
     artist = models.ForeignKey(
         "Artist",
