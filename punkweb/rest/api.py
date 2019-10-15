@@ -151,6 +151,7 @@ class ArtistEventSerializer(serializers.ModelSerializer):
     class Meta:
         model = ArtistEvent
         fields = "__all__"
+        lookup_field = 'slug'
 
     def get_thumbnail(self, obj):
         request = self.context.get('request')
@@ -220,6 +221,7 @@ class ArtistEventViewSet(
 ):
     queryset = ArtistEvent.objects.order_by("-event_date")
     serializer_class = ArtistEventSerializer
+    lookup_field = 'slug'
 
     def get_queryset(self):
         qs = self.queryset
