@@ -5,7 +5,6 @@
 [li][url=https://punkweb.net/board/page/docs-settings/]Punkweb Boards Settings[/url][/li]
 [li][url=https://punkweb.net/board/page/docs-sceditor/]Adding a BBCode editor[/url][/li]
 [li][url=https://punkweb.net/board/page/docs-rest-api/]Adding a REST API[/url][/li]
-[li][url=https://punkweb.net/board/page/docs-captcha/]Adding captcha to your registration form[/url][/li]
 [/ul]
 
 The bbcode editor is provided by [url=https://www.sceditor.com/]sceditor[/url].  Sceditor is a lightweight, open source, WYSIWYG BBCode and (X)HTML editor.

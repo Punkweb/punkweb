@@ -12,13 +12,6 @@
     <link href="{% static 'punkweb/css/elements.scss' %}" rel="stylesheet" type="text/x-scss" />
     {% endcompress %}
     <link type="text/css" href="{% static 'punkweb/css/stylesheet.css' %}" rel="stylesheet"/>
-    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-    <script>
-      (adsbygoogle = window.adsbygoogle || []).push({
-        google_ad_client: "ca-pub-4375744853076348",
-        enable_page_level_ads: true
-      });
-    </script>
   </head>
   <body>
     <div class="container">
@@ -30,14 +23,5 @@
     <script src="{% static 'punkweb_boards/js/deps/lodash.js' %}"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
     {% block extra_script %}{% endblock %}
-    <!-- Global Site Tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-125324127-1"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'UA-125324127-1');
-    </script>
   </body>
 </html>

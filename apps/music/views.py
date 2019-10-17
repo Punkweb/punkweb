@@ -1,99 +1,104 @@
 import datetime
-from django.shortcuts import render, redirect
+from rest_framework import viewsets, permissions, mixins, views
+from rest_framework.decorators import action
+from rest_framework.response import Response
 
-from apps.music import models
+from apps.music.models import (
+    Artist,
+    Album,
+    Audio,
+    ArtistEvent,
+)
 
+from apps.music.serializers import (
+    ArtistSerializer,
+    AlbumSerializer,
+    AudioSerializer,
+    ArtistEventSerializer,
+)
 
-def listed_artists(request):
-    objects = models.Artist.objects
-
-    if request.user and request.user.is_superuser:
-        return objects.filter(
-            albums__isnull=False
-        ).distinct().order_by("name")
-
-    listed = objects.filter(
-        is_listed=True,
-        albums__isnull=False,
-    ).distinct()
-    return listed.order_by("name")
-
-
-def listed_albums(request):
-    objects = models.Album.objects
-
-    if request.user and request.user.is_superuser:
-        return objects.filter(
-            tracks__isnull=False
-        ).distinct().order_by("-release_date")
-
-    listed = objects.filter(
-        is_listed=True,
-        tracks__isnull=False,
-    ).distinct()
-    return listed.order_by("-release_date")
+from punkweb.rest import utils as rest_utils
 
 
-def listed_audio(request):
-    objects = models.Audio.objects
+class ArtistViewSet(
+    mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet
+):
+    queryset = Artist.objects.none()
+    serializer_class = ArtistSerializer
+    lookup_field = 'slug'
 
-    if request.user and request.user.is_superuser:
-        return objects.all().order_by("disc_num", "track_num")
-
-    return objects.filter(album__is_listed=True).order_by(
-        "disc_num", "track_num"
-    )
-
-
-def index_view(request):
-    artists = listed_artists(request)
-    albums = listed_albums(request)
-    audio = listed_audio(request)
-
-    today_beginning = datetime.datetime.combine(datetime.date.today(), datetime.time())
-    one_week_from_now = today_beginning + datetime.timedelta(days=7)
-    events_this_week = models.ArtistEvent.objects.filter(
-        event_date__gte=today_beginning, event_date__lte=one_week_from_now)
-
-    context = {
-        "artists": artists,
-        "albums": albums,
-        "audio": audio,
-        "latest_releases": albums.order_by("-release_date")[:5],
-        "events_this_week": events_this_week,
-    }
-    return render(request, "music/index.html", context)
+    def get_queryset(self):
+        qs = rest_utils.listed_artists(self.request)
+        return qs.order_by("name")
 
 
-def artist_view(request, slug):
-    artist = listed_artists(request).get(slug=slug)
-    albums = listed_albums(request).filter(artist=artist)
-    latest_release = albums.order_by('-release_date').first()
+class AlbumViewSet(
+    mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet
+):
+    queryset = Album.objects.none()
+    serializer_class = AlbumSerializer
+    lookup_field = 'slug'
 
-    today_beginning = datetime.datetime.combine(
-        datetime.date.today(), datetime.time())
-    events = artist.events.all()
+    def get_serializer_context(self):
+        context = super(AlbumViewSet, self).get_serializer_context()
+        return context
 
-    past_events = events.filter(event_date__lte=today_beginning)
-    upcoming_events = events.filter(event_date__gte=today_beginning)
-    context = {
-        "artist": artist,
-        "albums": albums,
-        "latest_release": latest_release,
-        "past_events": past_events,
-        "upcoming_events": upcoming_events,
-    }
-    return render(request, "music/artist.html", context)
+    def get_queryset(self):
+        qs = rest_utils.listed_albums(self.request)
+        artist_id = self.request.query_params.get('artist_id')
+        if artist_id:
+            qs = qs.filter(artist__id=artist_id)
+        return qs.order_by("artist", "-release_date", "title")
 
-
-def album_view(request, slug):
-    album = listed_albums(request).get(slug=slug)
-    songs = listed_audio(request).filter(album=album)
-    context = {"album": album, "songs": songs}
-    return render(request, "music/album.html", context)
+    @action(detail=False, methods=['get'])
+    def latest_releases(self, request):
+        qs = self.get_queryset().order_by("-release_date")[:5]
+        serializer = self.get_serializer(qs.all(), many=True)
+        return Response(serializer.data)
 
 
-def audio_view(request, slug):
-    song = listed_audio(request).get(slug=slug)
-    context = {"song": song}
-    return render(request, "music/audio_view.html", context)
+class AudioViewSet(
+    mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet
+):
+    queryset = Audio.objects.none()
+    serializer_class = AudioSerializer
+
+    def get_queryset(self):
+        qs = rest_utils.listed_audio(self.request)
+        artist_id = self.request.query_params.get('artist_id')
+        if artist_id:
+            qs = qs.filter(album__artist__id=artist_id)
+        album_id = self.request.query_params.get('album_id')
+        if album_id:
+            qs = qs.filter(album__id=album_id)
+        return qs.order_by(
+            "disc_num",
+            "track_num",
+            "title",
+        )
+
+
+class ArtistEventViewSet(
+    mixins.RetrieveModelMixin, mixins.ListModelMixin, viewsets.GenericViewSet
+):
+    queryset = ArtistEvent.objects.order_by("-event_date")
+    serializer_class = ArtistEventSerializer
+    lookup_field = 'slug'
+
+    def get_queryset(self):
+        qs = self.queryset
+        artist_id = self.request.query_params.get('artist_id')
+        if artist_id:
+            qs = qs.filter(artist__id=artist_id)
+        return qs.all()
+
+    @action(detail=False, methods=['get'])
+    def this_week(self, request):
+        qs = self.get_queryset()
+        today_beginning = datetime.datetime.combine(
+            datetime.date.today(), datetime.time())
+        one_week_from_now = today_beginning + datetime.timedelta(days=7)
+        qs = qs.filter(
+            event_date__gte=today_beginning, event_date__lte=one_week_from_now)
+        serializer = self.get_serializer(qs.all(), many=True)
+        return Response(serializer.data)

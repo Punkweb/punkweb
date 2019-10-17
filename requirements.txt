@@ -2,7 +2,6 @@ django
 gunicorn
 
 coreapi
-django-simple-captcha
 djangorestframework
 django-cors-headers
 django-compressor

@@ -5,7 +5,6 @@
 [li][url=https://punkweb.net/board/page/docs-settings/]Punkweb Boards Settings[/url][/li]
 [li][url=https://punkweb.net/board/page/docs-sceditor/]Adding a BBCode editor[/url][/li]
 [li][url=https://punkweb.net/board/page/docs-rest-api/]Adding a REST API[/url][/li]
-[li][url=https://punkweb.net/board/page/docs-captcha/]Adding captcha to your registration form[/url][/li]
 [/ul]
 
 Punkweb boards can be added into any existing project with very little setup.  Here I'll cover how to add a basic forum to your existing or brand new website.
@@ -27,7 +26,7 @@ Then in settings.py "[b]INSTALLED_APPS[/b]" add:
 ]
 [/code]
 
-There are other apps you can add that will provide additional functionality, such as a rest_framework API and captcha, although these won't be covered in the quick start.
+There are other apps you can add that will provide additional functionality, such as a rest_framework API, although these won't be covered in the quick start.
 
 [size=2]Context processors[/size]
 
