@@ -4,14 +4,9 @@
 [li][url=https://punkweb.net/board/page/docs-quick-start/]Quick Start Tutorial[/url][/li]
 [li][url=https://punkweb.net/board/page/docs-settings/]Punkweb Boards Settings[/url][/li]
 [li][url=https://punkweb.net/board/page/docs-sceditor/]Adding a BBCode editor[/url][/li]
-[li][url=https://punkweb.net/board/page/docs-rest-api/]Adding a REST API[/url][/li]
 [/ul]
 
 [b]Note:[/b] These docs should get you set up without any problems whatsoever, so if you run into any problems [b]PLEASE[/b] create a thread on the forums explaining the issue so that the docs can be corrected.
-
-Punkweb Boards changes almost daily, and the documentation is still being written.  Check back here often for updates on the state of the project.
-
-If you have questions on anything even if it's not directly related to Punkweb Boards, create a thread on these forums and we'd be excited to help you out as best as we can.
 
 [url=https://github.com/Punkweb/punkweb-boards]Github Repository[/url]
 
@@ -34,7 +29,7 @@ There are probably additional features that are not included in this list but I'
 [ul]
 [li][url=https://github.com/ellmetha/django-precise-bbcode]django-precise-bbcode[/url] support for all bbcode and emojis.  Allows admins to add custom emojis and tags from within the admin control panel.  Punkweb Boards as it exists currently wouldn't be possible without this project.
 [/li]
-[li][url=http://www.django-rest-framework.org/]django-rest-framework[/url] API data access is equivalent to what you'll see and be able to do on the website. The shoutbox and statistics graphs utilize the API.
+[li][url=http://www.django-rest-framework.org/]django-rest-framework[/url] API views and serializers ready to plug into your own django API.
 [/li]
 [li][url=https://github.com/torchbox/django-libsass]django-libsass[/url] for scss compilation.  Only necessary if you intend on creating your own color scheme for the punkweb theme.
 [/li]
@@ -58,24 +53,14 @@ There are probably additional features that are not included in this list but I'
 [/li]
 [li]Keyword content searching.  Uses a combination of trigram searching and full text searching and orders results by relevancy.
 [/li]
-[li]A notification is created when a user is tagged in a post or a thread. Clicking the notification links to the thread or exact post that the user was tagged in and is marked as read.
-[/li]
 [li]See users that are currently online (within the last 5 minutes), and the last time they were seen (within the last 7 days)
 [/li]
 [li]Punkweb Boards settings module overridable from the project level settings module.
-[/li]
-[li]Shout box uses the API to get last 25 shouts within the last 24 hours.  Can be configured or disabled in the Punkweb Boards settings module.
-[/li]
-[li]Statistics graphs drawn with [url=http://www.chartjs.org/]Chart.js[/url] integrate with the API.  The graphs hit endpoints that use SQL queries, and load wicked fast regardless of how much data is on the forum.  The current graphs are stable, big plans in the future for the statistics page.
-[/li]
-[li]Private messaging system.
 [/li]
 [/ul]
 
 [size=2]EXPERIMENTAL[/size]
 [ul]
-[li]upvoted_by/downvoted_by fields are on the thread and post models but can't be changed with the exception of through the admin.
-[/li]
 [li]Reporting posts/threads is fully usable but it could be done better and look nicer.
 [/li]
 [li]User ranks are assignable in the admin interface, users assigned to user ranks will have their name formatted by the username modifier bbcode field on the rank object unless they have a username modifier specifically set on their user object.
