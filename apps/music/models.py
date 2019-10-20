@@ -53,6 +53,10 @@ class Artist(UUIDPrimaryKey):
     )
     is_listed = models.BooleanField(default=False)
 
+    spreadshirt_shop_slug = models.SlugField(
+        max_length=256, blank=True, null=True,
+    )
+
     class Meta:
         ordering = ("name",)
 
