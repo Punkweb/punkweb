@@ -21,6 +21,13 @@ class UploadedAtMixin(models.Model):
         abstract = True
 
 
+class OccurredAtMixin(models.Model):
+    occurred_at = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        abstract = True
+
+
 class UUIDPrimaryKey(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
 

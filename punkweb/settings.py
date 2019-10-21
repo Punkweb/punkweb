@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     "precise_bbcode",
     "punkweb_boards",
     # Punkweb
+    "apps.analytics",
     "apps.music",
 ]
 

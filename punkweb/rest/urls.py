@@ -1,6 +1,10 @@
 from django.conf.urls import url, include
 from rest_framework import routers
 
+from apps.analytics.views import (
+    AnalyticsEventViewSet,
+)
+
 from apps.music.views import (
     ArtistViewSet,
     AlbumViewSet,
@@ -26,6 +30,9 @@ from punkweb.rest.views import (
 )
 
 router = routers.DefaultRouter()
+
+router.register(
+    r"analytics/analytics_events", AnalyticsEventViewSet, base_name="analytics_events")
 
 router.register(r"board/categories", CategoryViewSet, base_name="categories")
 router.register(r"board/subcategories", SubcategoryViewSet, base_name="subcategories")
