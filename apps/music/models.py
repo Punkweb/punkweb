@@ -104,6 +104,7 @@ class TrackInformationMixin(models.Model):
     )
     disc_num = models.IntegerField()
     track_num = models.IntegerField()
+    bbcode_lyrics = BBCodeTextField(max_length=32768, blank=True, null=True)
 
     class Meta:
         abstract = True
