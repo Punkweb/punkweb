@@ -20,4 +20,4 @@ class AnalyticsEventViewSet(
 
     def get_queryset(self):
         qs = self.queryset
-        return qs.order_by("occurred_at")
+        return qs.order_by("-occurred_at")

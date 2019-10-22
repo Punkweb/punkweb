@@ -1,6 +1,10 @@
 from rest_framework import serializers
 from easy_thumbnails.files import get_thumbnailer
 
+from apps.analytics.models import (
+    AnalyticsEvent,
+)
+
 from apps.music.models import (
     Artist,
     Album,
@@ -47,6 +51,7 @@ class AudioSerializer(serializers.ModelSerializer):
     artist_name = serializers.SerializerMethodField()
     album_release_date = serializers.SerializerMethodField()
     album_thumbnail = serializers.SerializerMethodField()
+    total_song_plays = serializers.SerializerMethodField()
 
     class Meta:
         model = Audio
@@ -61,6 +66,15 @@ class AudioSerializer(serializers.ModelSerializer):
     def get_album_thumbnail(self, obj):
         request = self.context.get('request')
         return request.build_absolute_uri(get_thumbnailer(obj.album.cover_art)['avatar'].url)
+
+    def get_total_song_plays(self, obj):
+        finished_song_events = AnalyticsEvent.objects.filter(
+            action__iexact="finished_song",
+            metadata__isnull=False,
+            metadata__song_id__isnull=False,
+            metadata__song_id=str(obj.id),
+        )
+        return finished_song_events.count()
 
 
 class ArtistEventSerializer(serializers.ModelSerializer):

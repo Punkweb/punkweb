@@ -14,7 +14,7 @@ class AnalyticsEvent(UUIDPrimaryKey, OccurredAtMixin):
     metadata = JSONField(null=True, blank=True)
 
     class Meta:
-        ordering = ("category", "action", "label", )
+        ordering = ("-occurred_at", )
 
     def __str__(self):
         return "{}: {}: {}".format(self.category, self.action, self.label)
