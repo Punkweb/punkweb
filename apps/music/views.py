@@ -42,10 +42,13 @@ class ArtistViewSet(
 
     @action(detail=True, methods=['get'])
     def top_10(self, request, *args, **kwargs):
-        all_song_ids = [song.id for song in rest_utils.listed_audio(request) if song.total_plays > 0]
+        artist_songs = rest_utils.listed_audio(request).filter(
+            album__artist__id=self.get_object().id
+        )
+        all_song_ids = [song.id for song in artist_songs if song.total_plays > 0]
         songs = Audio.objects.filter(id__in=all_song_ids)
-        sorted(songs, key=lambda song: song.total_plays)
-        serializer = AudioSerializer(songs, many=True, context={"request": request})
+        sorted(songs, key=lambda song: song.total_plays, reverse=True)
+        serializer = AudioSerializer(songs[:10], many=True, context={"request": request})
         return Response(serializer.data, status=200)
 
 
