@@ -47,8 +47,8 @@ class ArtistViewSet(
         )
         all_song_ids = [song.id for song in artist_songs if song.total_plays > 0]
         songs = Audio.objects.filter(id__in=all_song_ids)
-        sorted(songs, key=lambda song: song.total_plays, reverse=True)
-        serializer = AudioSerializer(songs[:10], many=True, context={"request": request})
+        sorted_songs = sorted(songs, key=lambda song: song.total_plays, reverse=True)
+        serializer = AudioSerializer(sorted_songs[:10], many=True, context={"request": request})
         return Response(serializer.data, status=200)
 
 
