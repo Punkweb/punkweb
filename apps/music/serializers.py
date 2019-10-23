@@ -1,3 +1,6 @@
+import datetime
+from django.db.models.functions import TruncDate
+from django.db.models import Count
 from rest_framework import serializers
 from easy_thumbnails.files import get_thumbnailer
 
@@ -11,10 +14,14 @@ from apps.music.models import (
     Audio,
     ArtistEvent,
 )
+from punkweb.rest.utils import (
+    listed_audio,
+)
 
 
 class ArtistSerializer(serializers.ModelSerializer):
     thumbnail = serializers.SerializerMethodField()
+    plays_this_week = serializers.SerializerMethodField()
 
     class Meta:
         model = Artist
@@ -25,11 +32,37 @@ class ArtistSerializer(serializers.ModelSerializer):
         request = self.context.get('request')
         return request.build_absolute_uri(get_thumbnailer(obj.image)['avatar'].url)
 
+    def get_plays_this_week(self, obj):
+        all_song_ids = listed_audio(
+            self.context.get('request')
+        ).filter(
+            album__artist__id=obj.id
+        ).distinct().values_list('id', flat=True)
+        all_song_ids = map(lambda x: str(x), all_song_ids.all())
+        last_week = datetime.datetime.today() - datetime.timedelta(days=7)
+        tomorrow = datetime.datetime.today() + datetime.timedelta(days=1)
+        finished_song_events = AnalyticsEvent.objects.filter(
+            action__iexact="finished_song",
+            metadata__isnull=False,
+            metadata__song_id__isnull=False,
+            metadata__song_id__in=all_song_ids,
+            occurred_at__range=[
+                last_week.strftime('%Y-%m-%d'),
+                tomorrow.strftime('%Y-%m-%d'),
+            ]
+        ).annotate(
+            date=TruncDate('occurred_at')
+        ).values('date').annotate(
+            plays=Count('id')
+        ).values('date', 'plays').order_by('-date')[:7]
+        return finished_song_events
+
 
 class AlbumSerializer(serializers.ModelSerializer):
     artist_slug = serializers.SerializerMethodField()
     artist_name = serializers.SerializerMethodField()
     thumbnail = serializers.SerializerMethodField()
+    total_song_plays = serializers.SerializerMethodField()
 
     class Meta:
         model = Album
@@ -45,6 +78,21 @@ class AlbumSerializer(serializers.ModelSerializer):
     def get_thumbnail(self, obj):
         request = self.context.get('request')
         return request.build_absolute_uri(get_thumbnailer(obj.cover_art)['avatar'].url)
+
+    def get_total_song_plays(self, obj):
+        all_song_ids = listed_audio(
+            self.context.get('request')
+        ).filter(
+            album__id=obj.id
+        ).distinct().values_list('id', flat=True)
+        all_song_ids = map(lambda x: str(x), all_song_ids.all())
+        finished_song_events = AnalyticsEvent.objects.filter(
+            action__iexact="finished_song",
+            metadata__isnull=False,
+            metadata__song_id__isnull=False,
+            metadata__song_id__in=all_song_ids,
+        )
+        return finished_song_events.count()
 
 
 class AudioSerializer(serializers.ModelSerializer):
@@ -73,7 +121,7 @@ class AudioSerializer(serializers.ModelSerializer):
             metadata__isnull=False,
             metadata__song_id__isnull=False,
             metadata__song_id=str(obj.id),
-        )
+        ).distinct()
         return finished_song_events.count()
 
 
