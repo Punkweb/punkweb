@@ -8,5 +8,6 @@ django-compressor
 django-libsass
 python-memcached
 psycopg2
+mutagen
 
 git+https://github.com/Punkweb/punkweb-boards.git

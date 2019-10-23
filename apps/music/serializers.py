@@ -3,6 +3,7 @@ from django.db.models.functions import TruncDate
 from django.db.models import Count
 from rest_framework import serializers
 from easy_thumbnails.files import get_thumbnailer
+from mutagen.mp3 import MP3
 
 from apps.analytics.models import (
     AnalyticsEvent,
@@ -99,7 +100,8 @@ class AudioSerializer(serializers.ModelSerializer):
     artist_name = serializers.SerializerMethodField()
     album_release_date = serializers.SerializerMethodField()
     album_thumbnail = serializers.SerializerMethodField()
-    total_song_plays = serializers.SerializerMethodField()
+    duration = serializers.SerializerMethodField()
+    total_plays = serializers.ReadOnlyField()
 
     class Meta:
         model = Audio
@@ -115,14 +117,12 @@ class AudioSerializer(serializers.ModelSerializer):
         request = self.context.get('request')
         return request.build_absolute_uri(get_thumbnailer(obj.album.cover_art)['avatar'].url)
 
-    def get_total_song_plays(self, obj):
-        finished_song_events = AnalyticsEvent.objects.filter(
-            action__iexact="finished_song",
-            metadata__isnull=False,
-            metadata__song_id__isnull=False,
-            metadata__song_id=str(obj.id),
-        ).distinct()
-        return finished_song_events.count()
+    def get_duration(self, obj):
+        if obj.file.url.endswith(".mp3"):
+            mp3Audio = MP3(obj.file)
+            return mp3Audio.info.length
+        else:
+            return 0
 
 
 class ArtistEventSerializer(serializers.ModelSerializer):

@@ -1,7 +1,16 @@
 import datetime
+from django.db.models.functions import TruncDate
+from django.db.models import Count
 from rest_framework import viewsets, permissions, mixins, views
 from rest_framework.decorators import action
 from rest_framework.response import Response
+
+from apps.analytics.models import (
+    AnalyticsEvent,
+)
+from apps.analytics.serializers import (
+    AnalyticsEventSerializer,
+)
 
 from apps.music.models import (
     Artist,
@@ -30,6 +39,14 @@ class ArtistViewSet(
     def get_queryset(self):
         qs = rest_utils.listed_artists(self.request)
         return qs.order_by("name")
+
+    @action(detail=True, methods=['get'])
+    def top_10(self, request, *args, **kwargs):
+        all_song_ids = [song.id for song in rest_utils.listed_audio(request) if song.total_plays > 0]
+        songs = Audio.objects.filter(id__in=all_song_ids)
+        sorted(songs, key=lambda song: song.total_plays)
+        serializer = AudioSerializer(songs, many=True, context={"request": request})
+        return Response(serializer.data, status=200)
 
 
 class AlbumViewSet(

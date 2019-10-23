@@ -3,6 +3,10 @@ from django.db import models
 from easy_thumbnails.fields import ThumbnailerImageField
 from precise_bbcode.fields import BBCodeTextField
 
+from apps.analytics.models import (
+    AnalyticsEvent,
+)
+
 from punkweb.mixins import (
     UploadedAtMixin,
     CreatedModifiedMixin,
@@ -122,6 +126,16 @@ class Audio(UUIDPrimaryKey, UploadedAtMixin, TrackInformationMixin):
             "track_num",
             "title",
         )
+
+    @property
+    def total_plays(self):
+        finished_song_events = AnalyticsEvent.objects.filter(
+            action__iexact="finished_song",
+            metadata__isnull=False,
+            metadata__song_id__isnull=False,
+            metadata__song_id=str(self.id),
+        ).distinct()
+        return finished_song_events.count()
 
     def __str__(self):
         return "{}".format(self.title)
