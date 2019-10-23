@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     "punkweb_boards",
     # Punkweb
     "apps.analytics",
+    "apps.contact",
     "apps.music",
 ]
 

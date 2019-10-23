@@ -5,6 +5,10 @@ from apps.analytics.views import (
     AnalyticsEventViewSet,
 )
 
+from apps.contact.views import (
+    ContactFormViewSet,
+)
+
 from apps.music.views import (
     ArtistViewSet,
     AlbumViewSet,
@@ -33,6 +37,7 @@ router = routers.DefaultRouter()
 
 router.register(
     r"analytics/analytics_events", AnalyticsEventViewSet, base_name="analytics_events")
+router.register(r"contact_forms", ContactFormViewSet, base_name="contact_forms")
 
 router.register(r"board/categories", CategoryViewSet, base_name="categories")
 router.register(r"board/subcategories", SubcategoryViewSet, base_name="subcategories")
