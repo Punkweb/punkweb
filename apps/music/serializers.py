@@ -98,6 +98,7 @@ class AlbumSerializer(serializers.ModelSerializer):
 
 class AudioSerializer(serializers.ModelSerializer):
     artist_name = serializers.SerializerMethodField()
+    artist_slug = serializers.SerializerMethodField()
     album_release_date = serializers.SerializerMethodField()
     album_thumbnail = serializers.SerializerMethodField()
     album_thumbnail_lrg = serializers.SerializerMethodField()
@@ -110,6 +111,9 @@ class AudioSerializer(serializers.ModelSerializer):
 
     def get_artist_name(self, obj):
         return obj.album.artist.name
+
+    def get_album_slug(self, obj):
+        return obj.album.slug
 
     def get_album_release_date(self, obj):
         return obj.album.release_date
