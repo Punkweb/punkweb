@@ -100,6 +100,7 @@ class AudioSerializer(serializers.ModelSerializer):
     artist_name = serializers.SerializerMethodField()
     album_release_date = serializers.SerializerMethodField()
     album_thumbnail = serializers.SerializerMethodField()
+    album_thumbnail_lrg = serializers.SerializerMethodField()
     duration = serializers.SerializerMethodField()
     total_plays = serializers.ReadOnlyField()
 
@@ -116,6 +117,10 @@ class AudioSerializer(serializers.ModelSerializer):
     def get_album_thumbnail(self, obj):
         request = self.context.get('request')
         return request.build_absolute_uri(get_thumbnailer(obj.album.cover_art)['avatar'].url)
+
+    def get_album_thumbnail_lrg(self, obj):
+        request = self.context.get('request')
+        return request.build_absolute_uri(get_thumbnailer(obj.album.cover_art)['avatar_lrg'].url)
 
     def get_duration(self, obj):
         if obj.file.url.endswith(".mp3"):
