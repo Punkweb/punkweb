@@ -98,7 +98,7 @@ class AlbumSerializer(serializers.ModelSerializer):
 
 class AudioSerializer(serializers.ModelSerializer):
     artist_name = serializers.SerializerMethodField()
-    artist_slug = serializers.SerializerMethodField()
+    album_slug = serializers.SerializerMethodField()
     album_release_date = serializers.SerializerMethodField()
     album_thumbnail = serializers.SerializerMethodField()
     album_thumbnail_lrg = serializers.SerializerMethodField()
