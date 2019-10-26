@@ -21,6 +21,8 @@ class UserCreateSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
+    manager_for = serializers.SerializerMethodField()
+
     class Meta:
         model = get_user_model()
         exclude = ("password", "groups", "user_permissions", "email", )
@@ -31,3 +33,6 @@ class UserSerializer(serializers.ModelSerializer):
             "is_superuser",
             "username",
         )
+
+    def get_manager_for(self, obj):
+        return obj.manager_for.values_list('slug', flat=True).distinct()

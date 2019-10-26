@@ -1,4 +1,6 @@
 from django.db import models
+from django.conf import settings
+from django.contrib.auth import get_user_model
 
 from easy_thumbnails.fields import ThumbnailerImageField
 from precise_bbcode.fields import BBCodeTextField
@@ -56,6 +58,15 @@ class Artist(UUIDPrimaryKey):
         upload_to=artist_image_upload_to, blank=True, null=True
     )
     is_listed = models.BooleanField(default=False)
+    managers = models.ManyToManyField(
+        settings.AUTH_USER_MODEL,
+        related_name="manager_for",
+        blank=True,
+        help_text="""
+        Punkweb users who are able to edit this artist as well as upload tracks
+        and events for them.
+        """
+    )
 
     spreadshirt_shop_slug = models.SlugField(
         max_length=256, blank=True, null=True,

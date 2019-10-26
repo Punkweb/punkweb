@@ -21,13 +21,18 @@ from punkweb.rest.utils import (
 
 
 class ArtistSerializer(serializers.ModelSerializer):
+    is_manager = serializers.SerializerMethodField()
     thumbnail = serializers.SerializerMethodField()
     plays_this_week = serializers.SerializerMethodField()
 
     class Meta:
         model = Artist
-        fields = "__all__"
+        exclude = ("managers", )
         lookup_field = 'slug'
+
+    def get_is_manager(self, obj):
+        request = self.context.get('request')
+        return request.user in obj.managers.all()
 
     def get_thumbnail(self, obj):
         request = self.context.get('request')
