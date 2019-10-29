@@ -145,6 +145,7 @@ class Audio(UUIDPrimaryKey, UploadedAtMixin, TrackInformationMixin):
             metadata__isnull=False,
             metadata__song_id__isnull=False,
             metadata__song_id=str(self.id),
+            metadata__user_is_staff=False,
         ).distinct()
         return finished_song_events.count()
 

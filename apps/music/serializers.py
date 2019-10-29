@@ -52,6 +52,7 @@ class ArtistSerializer(serializers.ModelSerializer):
             metadata__isnull=False,
             metadata__song_id__isnull=False,
             metadata__song_id__in=all_song_ids,
+            metadata__user_is_staff=False,
             occurred_at__range=[
                 last_week.strftime('%Y-%m-%d'),
                 tomorrow.strftime('%Y-%m-%d'),
@@ -97,6 +98,7 @@ class AlbumSerializer(serializers.ModelSerializer):
             metadata__isnull=False,
             metadata__song_id__isnull=False,
             metadata__song_id__in=all_song_ids,
+            metadata__user_is_staff=False,
         )
         return finished_song_events.count()
 
