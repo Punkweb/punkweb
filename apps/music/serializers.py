@@ -47,8 +47,8 @@ class ArtistSerializer(serializers.ModelSerializer):
         all_song_ids = map(lambda x: str(x), all_song_ids.all())
         last_week = datetime.datetime.today() - datetime.timedelta(days=7)
         tomorrow = datetime.datetime.today() + datetime.timedelta(days=1)
-        finished_song_events = AnalyticsEvent.objects.filter(
-            action__iexact="finished_song",
+        song_play_events = AnalyticsEvent.objects.filter(
+            action__iexact="30_second_song_play",
             metadata__isnull=False,
             metadata__song_id__isnull=False,
             metadata__song_id__in=all_song_ids,
@@ -62,7 +62,7 @@ class ArtistSerializer(serializers.ModelSerializer):
         ).values('date').annotate(
             plays=Count('id')
         ).values('date', 'plays').order_by('-date')[:7]
-        return finished_song_events
+        return song_play_events
 
 
 class AlbumSerializer(serializers.ModelSerializer):
@@ -93,14 +93,14 @@ class AlbumSerializer(serializers.ModelSerializer):
             album__id=obj.id
         ).distinct().values_list('id', flat=True)
         all_song_ids = map(lambda x: str(x), all_song_ids.all())
-        finished_song_events = AnalyticsEvent.objects.filter(
-            action__iexact="finished_song",
+        song_play_events = AnalyticsEvent.objects.filter(
+            action__iexact="30_second_song_play",
             metadata__isnull=False,
             metadata__song_id__isnull=False,
             metadata__song_id__in=all_song_ids,
             metadata__user_is_staff=False,
         )
-        return finished_song_events.count()
+        return song_play_events.count()
 
 
 class AudioSerializer(serializers.ModelSerializer):
