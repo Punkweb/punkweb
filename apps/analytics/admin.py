@@ -11,3 +11,4 @@ class ClientErrorAdmin(admin.ModelAdmin):
 
 
 admin.site.register(models.AnalyticsEvent, AnalyticsEventAdmin)
+admin.site.register(models.ClientError, ClientErrorAdmin)
