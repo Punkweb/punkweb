@@ -3,6 +3,7 @@ from rest_framework import routers
 
 from apps.analytics.views import (
     AnalyticsEventViewSet,
+    ClientErrorViewSet,
 )
 
 from apps.contact.views import (
@@ -37,6 +38,8 @@ router = routers.DefaultRouter()
 
 router.register(
     r"analytics/analytics_events", AnalyticsEventViewSet, base_name="analytics_events")
+router.register(
+    r"analytics/client_errors", ClientErrorViewSet, base_name="client_errors")
 router.register(r"contact_forms", ContactFormViewSet, base_name="contact_forms")
 
 router.register(r"board/categories", CategoryViewSet, base_name="categories")
