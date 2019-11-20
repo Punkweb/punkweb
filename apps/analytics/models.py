@@ -21,7 +21,7 @@ class AnalyticsEvent(UUIDPrimaryKey, OccurredAtMixin):
 
 
 class ClientError(UUIDPrimaryKey, OccurredAtMixin):
-    error_body = models.CharField(max_length=2048, null=False, blank=False)
+    error_body = models.TextField(max_length=2048, null=False, blank=False)
 
     class Meta:
         ordering = ("-occurred_at", )
