@@ -156,6 +156,8 @@ class ArtistEventSerializer(serializers.ModelSerializer):
         lookup_field = 'slug'
 
     def get_thumbnail(self, obj):
+        if not obj.event_image:
+            return None
         request = self.context.get('request')
         return request.build_absolute_uri(get_thumbnailer(obj.event_image)['avatar'].url)
 

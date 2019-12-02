@@ -9,5 +9,7 @@ django-libsass
 python-memcached
 psycopg2
 mutagen
+boto3
+django-storages
 
 git+https://github.com/Punkweb/punkweb-boards.git
