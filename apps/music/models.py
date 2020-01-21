@@ -97,7 +97,7 @@ class Album(UUIDPrimaryKey):
     )
     genre = models.CharField(max_length=256)
     record_label_tag = models.CharField(max_length=256, blank=True, null=True)
-    youtube_tag = models.CharField(max_length=256, blank=True, null=True)
+    youtube_tag = BBCodeTextField(max_length=256, blank=True, null=True)
     is_listed = models.BooleanField(default=False)
 
     class Meta:
