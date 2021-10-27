@@ -9,14 +9,41 @@ from rest_framework.response import Response
 from punkweb.rest.permissions import IsTargetUser
 from punkweb.rest.serializers import UserCreateSerializer, UserSerializer
 
+import time
+
+reg_fingerprints = []
+
 
 class UserCreateView(views.APIView):
     def post(self, request):
         serializer = UserCreateSerializer(data=request.data)
-        if serializer.is_valid():
-            user = serializer.save()
-            if user:
-                return Response(serializer.data, status=201)
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=409)
+
+        # ----------------------------------
+        # If the same ip has reg'd an account in the past two minutes,
+        # return 401. Their ip is removed from the list when another
+        # request has been made and more than two minutes has passed.
+        forwarded = request.META.get('HTTP_X_FORWARDED_FOR')
+        if forwarded:
+            ip = forwarded.split(',')[-1].strip()
+        else:
+            ip = request.META.get('REMOTE_ADDR')
+        
+
+        for fp in reg_fingerprints:
+            if fp.get('ip') == ip:
+                if time.time() - fp.get('timestamp') > 120:
+                    reg_fingerprints.remove(fp)
+                else:
+                    return Response(serializer.errors, status=401)
+
+        reg_fingerprints.append({'ip': ip, 'timestamp': time.time()})
+        # ----------------------------------
+
+        user = serializer.save()
+        if user:
+            return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
 
 

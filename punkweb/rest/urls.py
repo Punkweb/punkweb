@@ -37,25 +37,25 @@ from punkweb.rest.views import (
 router = routers.DefaultRouter()
 
 router.register(
-    r"analytics/analytics_events", AnalyticsEventViewSet, base_name="analytics_events")
+    r"analytics/analytics_events", AnalyticsEventViewSet, basename="analytics_events")
 router.register(
-    r"analytics/client_errors", ClientErrorViewSet, base_name="client_errors")
-router.register(r"contact_forms", ContactFormViewSet, base_name="contact_forms")
+    r"analytics/client_errors", ClientErrorViewSet, basename="client_errors")
+router.register(r"contact_forms", ContactFormViewSet, basename="contact_forms")
 
-router.register(r"board/categories", CategoryViewSet, base_name="categories")
-router.register(r"board/subcategories", SubcategoryViewSet, base_name="subcategories")
-router.register(r"board/threads", ThreadViewSet, base_name="threads")
-router.register(r"board/posts", PostViewSet, base_name="posts")
+router.register(r"board/categories", CategoryViewSet, basename="categories")
+router.register(r"board/subcategories", SubcategoryViewSet, basename="subcategories")
+router.register(r"board/threads", ThreadViewSet, basename="threads")
+router.register(r"board/posts", PostViewSet, basename="posts")
 # router.register(r"board/conversations", ConversationViewSet, base_name="conversations")
 # router.register(r"board/messages", MessageViewSet, base_name="messages")
-router.register(r"board/shouts", ShoutViewSet, base_name="shouts")
-router.register(r"board/profiles", BoardProfileViewSet, base_name="profiles")
+router.register(r"board/shouts", ShoutViewSet, basename="shouts")
+router.register(r"board/profiles", BoardProfileViewSet, basename="profiles")
 
-router.register(r"artists", ArtistViewSet, base_name="artists")
-router.register(r"albums", AlbumViewSet, base_name="albums")
-router.register(r"audio", AudioViewSet, base_name="audio")
-router.register(r"artist_events", ArtistEventViewSet, base_name="artist_events")
-router.register(r"users", UserViewSet, base_name="users")
+router.register(r"artists", ArtistViewSet, basename="artists")
+router.register(r"albums", AlbumViewSet, basename="albums")
+router.register(r"audio", AudioViewSet, basename="audio")
+router.register(r"artist_events", ArtistEventViewSet, basename="artist_events")
+router.register(r"users", UserViewSet, basename="users")
 
 urlpatterns = [
     url(r"^", include(router.urls)),
