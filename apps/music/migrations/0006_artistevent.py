@@ -9,26 +9,54 @@ import uuid
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('music', '0005_auto_20191009_0050'),
+        ("music", "0005_auto_20191009_0050"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='ArtistEvent',
+            name="ArtistEvent",
             fields=[
-                ('created', models.DateTimeField(auto_now_add=True)),
-                ('modified', models.DateTimeField(auto_now=True)),
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('slug', models.SlugField(max_length=256, unique=True)),
-                ('title', models.CharField(max_length=256)),
-                ('venue', models.CharField(blank=True, max_length=256, null=True)),
-                ('address', models.CharField(blank=True, max_length=256, null=True)),
-                ('event_date', models.DateField()),
-                ('event_image', models.ImageField(blank=True, null=True, upload_to=apps.music.models.artist_event_upload_to)),
-                ('artist', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='events', to='music.Artist')),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                ("modified", models.DateTimeField(auto_now=True)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                ("slug", models.SlugField(max_length=256, unique=True)),
+                ("title", models.CharField(max_length=256)),
+                (
+                    "venue",
+                    models.CharField(blank=True, max_length=256, null=True),
+                ),
+                (
+                    "address",
+                    models.CharField(blank=True, max_length=256, null=True),
+                ),
+                ("event_date", models.DateField()),
+                (
+                    "event_image",
+                    models.ImageField(
+                        blank=True,
+                        null=True,
+                        upload_to=apps.music.models.artist_event_upload_to,
+                    ),
+                ),
+                (
+                    "artist",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="events",
+                        to="music.Artist",
+                    ),
+                ),
             ],
             options={
-                'ordering': ('-event_date', 'title'),
+                "ordering": ("-event_date", "title"),
             },
         ),
     ]

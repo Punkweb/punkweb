@@ -5,9 +5,7 @@ def listed_artists(request):
     objects = music_models.Artist.objects
 
     if request.user and request.user.is_superuser:
-        return objects.filter(
-            albums__isnull=False
-        ).distinct().order_by("name")
+        return objects.filter(albums__isnull=False).distinct().order_by("name")
 
     listed = objects.filter(
         is_listed=True,
@@ -20,9 +18,11 @@ def listed_albums(request):
     objects = music_models.Album.objects
 
     if request.user and request.user.is_superuser:
-        return objects.filter(
-            tracks__isnull=False
-        ).distinct().order_by("-release_date")
+        return (
+            objects.filter(tracks__isnull=False)
+            .distinct()
+            .order_by("-release_date")
+        )
 
     listed = objects.filter(
         is_listed=True,

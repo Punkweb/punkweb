@@ -24,21 +24,20 @@ class UserCreateView(views.APIView):
         # If the same ip has reg'd an account in the past two minutes,
         # return 401. Their ip is removed from the list when another
         # request has been made and more than two minutes has passed.
-        forwarded = request.META.get('HTTP_X_FORWARDED_FOR')
+        forwarded = request.META.get("HTTP_X_FORWARDED_FOR")
         if forwarded:
-            ip = forwarded.split(',')[-1].strip()
+            ip = forwarded.split(",")[-1].strip()
         else:
-            ip = request.META.get('REMOTE_ADDR')
-        
+            ip = request.META.get("REMOTE_ADDR")
 
         for fp in reg_fingerprints:
-            if fp.get('ip') == ip:
-                if time.time() - fp.get('timestamp') > 120:
+            if fp.get("ip") == ip:
+                if time.time() - fp.get("timestamp") > 120:
                     reg_fingerprints.remove(fp)
                 else:
                     return Response(serializer.errors, status=401)
 
-        reg_fingerprints.append({'ip': ip, 'timestamp': time.time()})
+        reg_fingerprints.append({"ip": ip, "timestamp": time.time()})
         # ----------------------------------
 
         user = serializer.save()
@@ -57,7 +56,7 @@ class UserViewSet(
     serializer_class = UserSerializer
     permission_classes = (permissions.IsAuthenticated, IsTargetUser)
 
-    @action(detail=False, methods=['get'])
+    @action(detail=False, methods=["get"])
     def from_token(self, request, *args, **kwargs):
         token_string = request.query_params.get("token")
         if not token_string:

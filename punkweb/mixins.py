@@ -44,8 +44,9 @@ class AddressMixin(models.Model):
 
     @property
     def full_address(self):
-        return '{}, {}, {} {}'.format(
-            self.address_line, self.city, self.state, self.zip_code)
+        return "{}, {}, {} {}".format(
+            self.address_line, self.city, self.state, self.zip_code
+        )
 
     class Meta:
         abstract = True

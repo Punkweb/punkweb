@@ -6,14 +6,14 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('music', '0009_auto_20191012_1743'),
+        ("music", "0009_auto_20191012_1743"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='artistevent',
-            name='title',
-            field=models.CharField(default='Event', max_length=256),
+            model_name="artistevent",
+            name="title",
+            field=models.CharField(default="Event", max_length=256),
             preserve_default=False,
         ),
     ]

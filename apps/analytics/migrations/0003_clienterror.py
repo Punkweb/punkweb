@@ -7,19 +7,27 @@ import uuid
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('analytics', '0002_auto_20191021_2115'),
+        ("analytics", "0002_auto_20191021_2115"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='ClientError',
+            name="ClientError",
             fields=[
-                ('occurred_at', models.DateTimeField(auto_now_add=True)),
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('error_body', models.CharField(max_length=2048)),
+                ("occurred_at", models.DateTimeField(auto_now_add=True)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                ("error_body", models.CharField(max_length=2048)),
             ],
             options={
-                'ordering': ('-occurred_at',),
+                "ordering": ("-occurred_at",),
             },
         ),
     ]

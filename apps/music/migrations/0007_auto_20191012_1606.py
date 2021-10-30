@@ -6,17 +6,17 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('music', '0006_artistevent'),
+        ("music", "0006_artistevent"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='album',
-            options={'ordering': ('artist', 'title', '-release_date')},
+            name="album",
+            options={"ordering": ("artist", "title", "-release_date")},
         ),
         migrations.RenameField(
-            model_name='album',
-            old_name='year',
-            new_name='release_date',
+            model_name="album",
+            old_name="year",
+            new_name="release_date",
         ),
     ]

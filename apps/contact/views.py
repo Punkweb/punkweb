@@ -12,9 +12,7 @@ from apps.contact.serializers import (
 )
 
 
-class ContactFormViewSet(
-    mixins.CreateModelMixin, viewsets.GenericViewSet
-):
+class ContactFormViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
     queryset = ContactForm.objects.all()
     serializer_class = ContactFormSerializer
 

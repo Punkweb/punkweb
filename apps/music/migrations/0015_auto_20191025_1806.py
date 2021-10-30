@@ -7,13 +7,18 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('music', '0014_artist_managers'),
+        ("music", "0014_artist_managers"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='artist',
-            name='managers',
-            field=models.ManyToManyField(blank=True, help_text='\n        Punkweb users who are able to edit this artist as well as upload tracks\n        and events for them.\n        ', related_name='manager_for', to=settings.AUTH_USER_MODEL),
+            model_name="artist",
+            name="managers",
+            field=models.ManyToManyField(
+                blank=True,
+                help_text="\n        Punkweb users who are able to edit this artist as well as upload tracks\n        and events for them.\n        ",
+                related_name="manager_for",
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
     ]

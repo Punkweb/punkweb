@@ -8,13 +8,17 @@ class Migration(migrations.Migration):
 
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('music', '0013_album_record_label_tag'),
+        ("music", "0013_album_record_label_tag"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='artist',
-            name='managers',
-            field=models.ManyToManyField(blank=True, help_text='\n        Punkweb users who are able to edit this artist as well as upload tracks\n        and events for them.\n        ', to=settings.AUTH_USER_MODEL),
+            model_name="artist",
+            name="managers",
+            field=models.ManyToManyField(
+                blank=True,
+                help_text="\n        Punkweb users who are able to edit this artist as well as upload tracks\n        and events for them.\n        ",
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
     ]

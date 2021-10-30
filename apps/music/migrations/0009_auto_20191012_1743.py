@@ -6,16 +6,16 @@ from django.db import migrations
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('music', '0008_auto_20191012_1659'),
+        ("music", "0008_auto_20191012_1659"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='artistevent',
-            options={'ordering': ('-event_date',)},
+            name="artistevent",
+            options={"ordering": ("-event_date",)},
         ),
         migrations.RemoveField(
-            model_name='artistevent',
-            name='title',
+            model_name="artistevent",
+            name="title",
         ),
     ]

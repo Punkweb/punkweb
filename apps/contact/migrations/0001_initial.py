@@ -8,22 +8,29 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='ContactForm',
+            name="ContactForm",
             fields=[
-                ('created', models.DateTimeField(auto_now_add=True)),
-                ('modified', models.DateTimeField(auto_now=True)),
-                ('id', models.UUIDField(default=uuid.uuid4, editable=False, primary_key=True, serialize=False)),
-                ('contact_info', models.CharField(max_length=256)),
-                ('subject', models.CharField(max_length=256)),
-                ('body', models.CharField(max_length=2000)),
+                ("created", models.DateTimeField(auto_now_add=True)),
+                ("modified", models.DateTimeField(auto_now=True)),
+                (
+                    "id",
+                    models.UUIDField(
+                        default=uuid.uuid4,
+                        editable=False,
+                        primary_key=True,
+                        serialize=False,
+                    ),
+                ),
+                ("contact_info", models.CharField(max_length=256)),
+                ("subject", models.CharField(max_length=256)),
+                ("body", models.CharField(max_length=2000)),
             ],
             options={
-                'ordering': ('-created',),
+                "ordering": ("-created",),
             },
         ),
     ]

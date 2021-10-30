@@ -7,18 +7,20 @@ import precise_bbcode.fields
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('music', '0011_artist_spreadshirt_shop_slug'),
+        ("music", "0011_artist_spreadshirt_shop_slug"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='audio',
-            name='_bbcode_lyrics_rendered',
+            model_name="audio",
+            name="_bbcode_lyrics_rendered",
             field=models.TextField(blank=True, editable=False, null=True),
         ),
         migrations.AddField(
-            model_name='audio',
-            name='bbcode_lyrics',
-            field=precise_bbcode.fields.BBCodeTextField(blank=True, max_length=32768, no_rendered_field=True, null=True),
+            model_name="audio",
+            name="bbcode_lyrics",
+            field=precise_bbcode.fields.BBCodeTextField(
+                blank=True, max_length=32768, no_rendered_field=True, null=True
+            ),
         ),
     ]

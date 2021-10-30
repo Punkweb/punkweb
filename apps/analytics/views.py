@@ -14,9 +14,7 @@ from apps.analytics.serializers import (
 )
 
 
-class AnalyticsEventViewSet(
-    mixins.CreateModelMixin, viewsets.GenericViewSet
-):
+class AnalyticsEventViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
     queryset = AnalyticsEvent.objects.all()
     serializer_class = AnalyticsEventSerializer
 
@@ -25,9 +23,7 @@ class AnalyticsEventViewSet(
         return qs.order_by("-occurred_at")
 
 
-class ClientErrorViewSet(
-    mixins.CreateModelMixin, viewsets.GenericViewSet
-):
+class ClientErrorViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
     queryset = ClientError.objects.all()
     serializer_class = ClientErrorSerializer
 

@@ -7,18 +7,20 @@ import precise_bbcode.fields
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('music', '0016_album_youtube_tag'),
+        ("music", "0016_album_youtube_tag"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='album',
-            name='_youtube_tag_rendered',
+            model_name="album",
+            name="_youtube_tag_rendered",
             field=models.TextField(blank=True, editable=False, null=True),
         ),
         migrations.AlterField(
-            model_name='album',
-            name='youtube_tag',
-            field=precise_bbcode.fields.BBCodeTextField(blank=True, max_length=256, no_rendered_field=True, null=True),
+            model_name="album",
+            name="youtube_tag",
+            field=precise_bbcode.fields.BBCodeTextField(
+                blank=True, max_length=256, no_rendered_field=True, null=True
+            ),
         ),
     ]

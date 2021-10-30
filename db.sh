@@ -1,6 +1,6 @@
 #!/bin/bash
 sudo apt-get update
-sudo apt-get install python-pip python-dev python3-dev libpq-dev postgresql postgresql-contrib libz-dev libjpeg-dev libfreetype6-dev
+sudo apt-get install postgresql postgresql-contrib
 
 echo "CREATE DATABASE punkweb; \
 CREATE USER punkweb WITH PASSWORD 'punkweb'; \

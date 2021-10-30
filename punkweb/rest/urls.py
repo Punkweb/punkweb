@@ -37,13 +37,19 @@ from punkweb.rest.views import (
 router = routers.DefaultRouter()
 
 router.register(
-    r"analytics/analytics_events", AnalyticsEventViewSet, basename="analytics_events")
+    r"analytics/analytics_events",
+    AnalyticsEventViewSet,
+    basename="analytics_events",
+)
 router.register(
-    r"analytics/client_errors", ClientErrorViewSet, basename="client_errors")
+    r"analytics/client_errors", ClientErrorViewSet, basename="client_errors"
+)
 router.register(r"contact_forms", ContactFormViewSet, basename="contact_forms")
 
 router.register(r"board/categories", CategoryViewSet, basename="categories")
-router.register(r"board/subcategories", SubcategoryViewSet, basename="subcategories")
+router.register(
+    r"board/subcategories", SubcategoryViewSet, basename="subcategories"
+)
 router.register(r"board/threads", ThreadViewSet, basename="threads")
 router.register(r"board/posts", PostViewSet, basename="posts")
 # router.register(r"board/conversations", ConversationViewSet, base_name="conversations")
@@ -61,5 +67,5 @@ urlpatterns = [
     url(r"^", include(router.urls)),
     url(r"^auth/", include("rest_framework.urls", namespace="rest_framework")),
     url(r"^token-auth/", obtain_auth_token),
-    url(r"^register/", UserCreateView.as_view(), name='create-account'),
+    url(r"^register/", UserCreateView.as_view(), name="create-account"),
 ]

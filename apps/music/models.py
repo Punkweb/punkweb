@@ -65,11 +65,13 @@ class Artist(UUIDPrimaryKey):
         help_text="""
         Punkweb users who are able to edit this artist as well as upload tracks
         and events for them.
-        """
+        """,
     )
 
     spreadshirt_shop_slug = models.SlugField(
-        max_length=256, blank=True, null=True,
+        max_length=256,
+        blank=True,
+        null=True,
     )
 
     class Meta:
@@ -173,7 +175,7 @@ class ArtistEvent(UUIDPrimaryKey, CreatedModifiedMixin, AddressMixin):
     )
 
     class Meta:
-        ordering = ("-event_date", )
+        ordering = ("-event_date",)
 
     def __str__(self):
         return "{} at {}, {}".format(self.artist.name, self.venue, self.city)

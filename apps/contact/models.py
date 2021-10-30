@@ -12,7 +12,7 @@ class ContactForm(UUIDPrimaryKey, CreatedModifiedMixin):
     body = models.TextField(max_length=2000, null=False, blank=False)
 
     class Meta:
-        ordering = ("-created", )
+        ordering = ("-created",)
 
     def __str__(self):
         return "{}: {}".format(self.contact_info, self.subject)
