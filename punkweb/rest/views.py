@@ -35,7 +35,7 @@ class UserCreateView(views.APIView):
                 if time.time() - fp.get("timestamp") > 120:
                     reg_fingerprints.remove(fp)
                 else:
-                    return Response(serializer.errors, status=401)
+                    return Response("Spam detected", status=401)
 
         reg_fingerprints.append({"ip": ip, "timestamp": time.time()})
         # ----------------------------------
