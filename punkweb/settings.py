@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "easy_thumbnails",
     "corsheaders",
     "rest_framework",
+    "rest_framework.authtoken",
     # PunkwebBB
     "precise_bbcode",
     "punkweb_bb",
