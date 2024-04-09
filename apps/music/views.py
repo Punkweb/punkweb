@@ -1,6 +1,5 @@
 import datetime
 
-from punkweb.rest import utils as rest_utils
 from rest_framework import mixins, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -12,6 +11,7 @@ from apps.music.serializers import (
     ArtistSerializer,
     AudioSerializer,
 )
+from punkweb.rest import utils as rest_utils
 
 
 class ArtistViewSet(

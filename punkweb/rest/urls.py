@@ -1,3 +1,6 @@
+from django.urls import include, path
+from rest_framework import routers
+
 from apps.analytics.views import AnalyticsEventViewSet, ClientErrorViewSet
 from apps.contact.views import ContactFormViewSet
 from apps.music.views import (
@@ -6,9 +9,7 @@ from apps.music.views import (
     ArtistViewSet,
     AudioViewSet,
 )
-from django.urls import include, path
 from punkweb.rest.views import UserCreateView, UserViewSet, obtain_auth_token
-from rest_framework import routers
 
 router = routers.DefaultRouter()
 

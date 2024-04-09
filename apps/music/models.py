@@ -2,14 +2,14 @@ from django.conf import settings
 from django.db import models
 from easy_thumbnails.fields import ThumbnailerImageField
 from precise_bbcode.fields import BBCodeTextField
+
+from apps.analytics.models import AnalyticsEvent
 from punkweb.mixins import (
     AddressMixin,
     CreatedModifiedMixin,
     UploadedAtMixin,
     UUIDPrimaryKey,
 )
-
-from apps.analytics.models import AnalyticsEvent
 
 
 def audio_upload_to(instance, filename):
@@ -51,21 +51,6 @@ class Artist(UUIDPrimaryKey):
         upload_to=artist_image_upload_to, blank=True, null=True
     )
     is_listed = models.BooleanField(default=False)
-    managers = models.ManyToManyField(
-        settings.AUTH_USER_MODEL,
-        related_name="manager_for",
-        blank=True,
-        help_text="""
-        Punkweb users who are able to edit this artist as well as upload tracks
-        and events for them.
-        """,
-    )
-
-    spreadshirt_shop_slug = models.SlugField(
-        max_length=256,
-        blank=True,
-        null=True,
-    )
 
     class Meta:
         ordering = ("name",)
@@ -137,7 +122,6 @@ class Audio(UUIDPrimaryKey, UploadedAtMixin, TrackInformationMixin):
             metadata__isnull=False,
             metadata__song_id__isnull=False,
             metadata__song_id=str(self.id),
-            metadata__user_is_staff=False,
         ).distinct()
         return song_play_events.count()
 

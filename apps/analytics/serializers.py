@@ -1,9 +1,6 @@
 from rest_framework import serializers
 
-from apps.analytics.models import (
-    AnalyticsEvent,
-    ClientError,
-)
+from apps.analytics.models import AnalyticsEvent, ClientError
 
 
 class AnalyticsEventSerializer(serializers.ModelSerializer):

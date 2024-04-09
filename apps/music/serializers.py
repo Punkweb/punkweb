@@ -4,26 +4,21 @@ from django.db.models import Count
 from django.db.models.functions import TruncDate
 from easy_thumbnails.files import get_thumbnailer
 from mutagen.mp3 import MP3
-from punkweb.rest.utils import listed_audio
 from rest_framework import serializers
 
 from apps.analytics.models import AnalyticsEvent
 from apps.music.models import Album, Artist, ArtistEvent, Audio
+from punkweb.rest.utils import listed_audio
 
 
 class ArtistSerializer(serializers.ModelSerializer):
-    is_manager = serializers.SerializerMethodField()
     thumbnail = serializers.SerializerMethodField()
     plays_this_week = serializers.SerializerMethodField()
 
     class Meta:
         model = Artist
-        exclude = ("managers",)
+        fields = "__all__"
         lookup_field = "slug"
-
-    def get_is_manager(self, obj):
-        request = self.context.get("request")
-        return request.user in obj.managers.all()
 
     def get_thumbnail(self, obj):
         request = self.context.get("request")
@@ -45,7 +40,6 @@ class ArtistSerializer(serializers.ModelSerializer):
                 metadata__isnull=False,
                 metadata__song_id__isnull=False,
                 metadata__song_id__in=all_song_ids,
-                metadata__user_is_staff=False,
                 occurred_at__range=[
                     last_week.strftime("%Y-%m-%d"),
                     tomorrow.strftime("%Y-%m-%d"),

@@ -1,6 +1,8 @@
+import time
+
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
-from rest_framework import viewsets, permissions, mixins, views
+from rest_framework import mixins, permissions, views, viewsets
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.views import ObtainAuthToken as OriginalObtain
 from rest_framework.decorators import action
@@ -8,8 +10,6 @@ from rest_framework.response import Response
 
 from punkweb.rest.permissions import IsTargetUser
 from punkweb.rest.serializers import UserCreateSerializer, UserSerializer
-
-import time
 
 reg_fingerprints = []
 
@@ -73,7 +73,7 @@ class ObtainAuthToken(OriginalObtain):
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.validated_data["user"]
-        token, created = Token.objects.get_or_create(user=user)
+        token, _ = Token.objects.get_or_create(user=user)
         return Response({"token": token.key, "id": user.id})
 
 

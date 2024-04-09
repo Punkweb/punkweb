@@ -18,10 +18,9 @@ Including another URLconf
 from django.contrib import admin
 from django.contrib.staticfiles.urls import static
 from django.urls import include, path
+from rest_framework.authtoken.models import Token
 
 from punkweb import settings
-
-from rest_framework.authtoken.models import Token
 
 app_name = "punkweb"
 
