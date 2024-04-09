@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     "django.contrib.postgres",
     "django_extensions",
     "easy_thumbnails",
+    "corsheaders",
     "rest_framework",
     # PunkwebBB
     "precise_bbcode",
@@ -145,8 +146,8 @@ if DEBUG:
     STATIC_ROOT = BASE_DIR / "server" / "dev" / "static"
     MEDIA_ROOT = BASE_DIR / "server" / "dev" / "media"
 else:
-    STATIC_ROOT = "/var/www/punkweb.us/static/"
-    MEDIA_ROOT = "/var/www/punkweb.us/media/"
+    STATIC_ROOT = "/var/media/punkweb/static/"
+    MEDIA_ROOT = "/var/media/punkweb/media/"
 
 
 # Default primary key field type
@@ -156,8 +157,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 # Non default app configuration
-
-# admin.site.site_header = 'Punk Web'
 
 LOGIN_REDIRECT_URL = "/board/"
 
@@ -174,15 +173,7 @@ REST_FRAMEWORK = {
 
 THUMBNAIL_ALIASES = {
     "": {
-        "avatar_lrg_no_crop": {"size": (400, 400), "crop": False},
-        "avatar_no_crop": {"size": (200, 200), "crop": False},
-        "avatar_small_no_crop": {"size": (100, 100), "crop": False},
-        "avatar_smaller_no_crop": {"size": (50, 50), "crop": False},
-        "avatar_smallest_no_crop": {"size": (25, 25), "crop": False},
-        "avatar_lrg": {"size": (400, 400), "crop": True},
-        "avatar": {"size": (200, 200), "crop": True},
-        "avatar_small": {"size": (100, 100), "crop": True},
-        "avatar_smaller": {"size": (50, 50), "crop": True},
-        "avatar_smallest": {"size": (25, 25), "crop": True},
+        "medium": {"size": (200, 200), "crop": True},
+        "large": {"size": (400, 400), "crop": True},
     }
 }

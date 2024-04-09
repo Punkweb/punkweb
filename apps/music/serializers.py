@@ -27,7 +27,7 @@ class ArtistSerializer(serializers.ModelSerializer):
 
     def get_thumbnail(self, obj):
         request = self.context.get("request")
-        return request.build_absolute_uri(get_thumbnailer(obj.image)["avatar"].url)
+        return request.build_absolute_uri(get_thumbnailer(obj.image)["medium"].url)
 
     def get_plays_this_week(self, obj):
         all_song_ids = (
@@ -79,7 +79,7 @@ class AlbumSerializer(serializers.ModelSerializer):
 
     def get_thumbnail(self, obj):
         request = self.context.get("request")
-        return request.build_absolute_uri(get_thumbnailer(obj.cover_art)["avatar"].url)
+        return request.build_absolute_uri(get_thumbnailer(obj.cover_art)["medium"].url)
 
     def get_total_song_plays(self, obj):
         all_song_ids = (
@@ -128,13 +128,13 @@ class AudioSerializer(serializers.ModelSerializer):
     def get_album_thumbnail(self, obj):
         request = self.context.get("request")
         return request.build_absolute_uri(
-            get_thumbnailer(obj.album.cover_art)["avatar"].url
+            get_thumbnailer(obj.album.cover_art)["medium"].url
         )
 
     def get_album_thumbnail_lrg(self, obj):
         request = self.context.get("request")
         return request.build_absolute_uri(
-            get_thumbnailer(obj.album.cover_art)["avatar_lrg"].url
+            get_thumbnailer(obj.album.cover_art)["large"].url
         )
 
     def get_duration(self, obj):
@@ -160,7 +160,7 @@ class ArtistEventSerializer(serializers.ModelSerializer):
             return None
         request = self.context.get("request")
         return request.build_absolute_uri(
-            get_thumbnailer(obj.event_image)["avatar"].url
+            get_thumbnailer(obj.event_image)["medium"].url
         )
 
     def get_artist_name(self, obj):
