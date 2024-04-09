@@ -1,5 +1,6 @@
 from django.contrib import admin
-from . import models
+
+from apps.music.models import Album, Artist, ArtistEvent, Audio
 
 
 class ArtistAdmin(admin.ModelAdmin):
@@ -18,7 +19,7 @@ class ArtistEventAdmin(admin.ModelAdmin):
     list_display = ("artist", "venue", "event_date")
 
 
-admin.site.register(models.Artist, ArtistAdmin)
-admin.site.register(models.Album, AlbumAdmin)
-admin.site.register(models.Audio, AudioAdmin)
-admin.site.register(models.ArtistEvent, ArtistEventAdmin)
+admin.site.register(Artist, ArtistAdmin)
+admin.site.register(Album, AlbumAdmin)
+admin.site.register(Audio, AudioAdmin)
+admin.site.register(ArtistEvent, ArtistEventAdmin)

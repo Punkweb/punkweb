@@ -1,9 +1,6 @@
 import uuid
-from django.conf import settings
-from django.contrib.auth import get_user_model
+
 from django.db import models
-from easy_thumbnails.files import get_thumbnailer
-from punkweb_boards import utils
 
 
 class CreatedModifiedMixin(models.Model):

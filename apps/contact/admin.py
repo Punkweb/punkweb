@@ -1,5 +1,6 @@
 from django.contrib import admin
-from . import models
+
+from apps.contact.models import ContactForm
 
 
 class ContactFormAdmin(admin.ModelAdmin):
@@ -9,4 +10,4 @@ class ContactFormAdmin(admin.ModelAdmin):
     )
 
 
-admin.site.register(models.ContactForm, ContactFormAdmin)
+admin.site.register(ContactForm, ContactFormAdmin)

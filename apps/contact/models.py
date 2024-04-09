@@ -1,9 +1,5 @@
 from django.db import models
-
-from punkweb.mixins import (
-    UUIDPrimaryKey,
-    CreatedModifiedMixin,
-)
+from punkweb.mixins import CreatedModifiedMixin, UUIDPrimaryKey
 
 
 class ContactForm(UUIDPrimaryKey, CreatedModifiedMixin):

@@ -1,6 +1,6 @@
 #!/bin/bash
 sudo apt-get update
-sudo apt-get install postgresql postgresql-contrib
+sudo apt-get install libpq-dev postgresql postgresql-contrib
 
 echo "CREATE DATABASE punkweb; \
 CREATE USER punkweb WITH PASSWORD 'punkweb'; \

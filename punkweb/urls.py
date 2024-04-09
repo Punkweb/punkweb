@@ -1,7 +1,8 @@
-"""punkweb URL Configuration
+"""
+URL configuration for punkweb project.
 
 The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/2.0/topics/http/urls/
+    https://docs.djangoproject.com/en/4.2/topics/http/urls/
 Examples:
 Function views
     1. Add an import:  from my_app import views
@@ -13,28 +14,20 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.conf import settings
-from django.conf.urls import url, include
+
 from django.contrib import admin
-from django.contrib.staticfiles.urls import static, staticfiles_urlpatterns
-from django.views.generic.base import RedirectView
-from rest_framework.routers import DefaultRouter
+from django.contrib.staticfiles.urls import static
+from django.urls import include, path
 
 from punkweb import settings
-from punkweb import views
 
 app_name = "punkweb"
 
 urlpatterns = [
-    url(
-        "favicon.ico",
-        RedirectView.as_view(url=settings.STATIC_URL + "punkweb/favicon.ico"),
-    ),
-    url(r"^admin/", admin.site.urls),
-    url(r"^board/", include("punkweb_boards.urls")),
-    url(r"^api/", include("punkweb.rest.urls")),
-    url(r"^$", views.index_view, name="index"),
+    path("admin/", admin.site.urls),
+    path("board/", include("punkweb_bb.urls")),
+    path("api/", include("punkweb.rest.urls")),
 ]
 
-urlpatterns += staticfiles_urlpatterns()
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

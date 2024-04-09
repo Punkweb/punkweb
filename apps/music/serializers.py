@@ -1,23 +1,14 @@
 import datetime
-from django.db.models.functions import TruncDate
+
 from django.db.models import Count
-from rest_framework import serializers
+from django.db.models.functions import TruncDate
 from easy_thumbnails.files import get_thumbnailer
 from mutagen.mp3 import MP3
+from punkweb.rest.utils import listed_audio
+from rest_framework import serializers
 
-from apps.analytics.models import (
-    AnalyticsEvent,
-)
-
-from apps.music.models import (
-    Artist,
-    Album,
-    Audio,
-    ArtistEvent,
-)
-from punkweb.rest.utils import (
-    listed_audio,
-)
+from apps.analytics.models import AnalyticsEvent
+from apps.music.models import Album, Artist, ArtistEvent, Audio
 
 
 class ArtistSerializer(serializers.ModelSerializer):
@@ -36,9 +27,7 @@ class ArtistSerializer(serializers.ModelSerializer):
 
     def get_thumbnail(self, obj):
         request = self.context.get("request")
-        return request.build_absolute_uri(
-            get_thumbnailer(obj.image)["avatar"].url
-        )
+        return request.build_absolute_uri(get_thumbnailer(obj.image)["avatar"].url)
 
     def get_plays_this_week(self, obj):
         all_song_ids = (
@@ -90,9 +79,7 @@ class AlbumSerializer(serializers.ModelSerializer):
 
     def get_thumbnail(self, obj):
         request = self.context.get("request")
-        return request.build_absolute_uri(
-            get_thumbnailer(obj.cover_art)["avatar"].url
-        )
+        return request.build_absolute_uri(get_thumbnailer(obj.cover_art)["avatar"].url)
 
     def get_total_song_plays(self, obj):
         all_song_ids = (

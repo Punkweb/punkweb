@@ -1,20 +1,15 @@
-from django.db import models
 from django.conf import settings
-from django.contrib.auth import get_user_model
-
+from django.db import models
 from easy_thumbnails.fields import ThumbnailerImageField
 from precise_bbcode.fields import BBCodeTextField
-
-from apps.analytics.models import (
-    AnalyticsEvent,
-)
-
 from punkweb.mixins import (
-    UploadedAtMixin,
-    CreatedModifiedMixin,
-    UUIDPrimaryKey,
     AddressMixin,
+    CreatedModifiedMixin,
+    UploadedAtMixin,
+    UUIDPrimaryKey,
 )
+
+from apps.analytics.models import AnalyticsEvent
 
 
 def audio_upload_to(instance, filename):
@@ -48,9 +43,7 @@ def artist_event_upload_to(instance, filename):
 
 
 class Artist(UUIDPrimaryKey):
-    slug = models.SlugField(
-        max_length=256, blank=False, null=False, unique=True
-    )
+    slug = models.SlugField(max_length=256, blank=False, null=False, unique=True)
     name = models.CharField(max_length=256, blank=False, null=False)
     genre = models.CharField(max_length=256)
     bio = BBCodeTextField(max_length=5096, blank=True, null=True)
@@ -82,9 +75,7 @@ class Artist(UUIDPrimaryKey):
 
 
 class Album(UUIDPrimaryKey):
-    slug = models.SlugField(
-        max_length=256, blank=False, null=False, unique=True
-    )
+    slug = models.SlugField(max_length=256, blank=False, null=False, unique=True)
     artist = models.ForeignKey(
         "Artist",
         blank=False,
@@ -110,9 +101,7 @@ class Album(UUIDPrimaryKey):
 
 
 class TrackInformationMixin(models.Model):
-    slug = models.SlugField(
-        max_length=256, blank=False, null=False, unique=True
-    )
+    slug = models.SlugField(max_length=256, blank=False, null=False, unique=True)
     title = models.CharField(max_length=256, blank=False, null=False)
     album = models.ForeignKey(
         "Album",
@@ -157,9 +146,7 @@ class Audio(UUIDPrimaryKey, UploadedAtMixin, TrackInformationMixin):
 
 
 class ArtistEvent(UUIDPrimaryKey, CreatedModifiedMixin, AddressMixin):
-    slug = models.SlugField(
-        max_length=256, blank=False, null=False, unique=True
-    )
+    slug = models.SlugField(max_length=256, blank=False, null=False, unique=True)
     title = models.CharField(max_length=256, blank=False, null=False)
     venue = models.CharField(max_length=256, blank=True, null=True)
     artist = models.ForeignKey(

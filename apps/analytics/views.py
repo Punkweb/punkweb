@@ -1,17 +1,7 @@
-import datetime
-from rest_framework import viewsets, permissions, mixins, views
-from rest_framework.decorators import action
-from rest_framework.response import Response
+from rest_framework import mixins, viewsets
 
-from apps.analytics.models import (
-    AnalyticsEvent,
-    ClientError,
-)
-
-from apps.analytics.serializers import (
-    AnalyticsEventSerializer,
-    ClientErrorSerializer,
-)
+from apps.analytics.models import AnalyticsEvent, ClientError
+from apps.analytics.serializers import AnalyticsEventSerializer, ClientErrorSerializer
 
 
 class AnalyticsEventViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):

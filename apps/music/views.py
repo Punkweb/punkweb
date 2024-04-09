@@ -1,32 +1,17 @@
 import datetime
-from django.db.models.functions import TruncDate
-from django.db.models import Count
-from rest_framework import viewsets, permissions, mixins, views
+
+from punkweb.rest import utils as rest_utils
+from rest_framework import mixins, viewsets
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
-from apps.analytics.models import (
-    AnalyticsEvent,
-)
-from apps.analytics.serializers import (
-    AnalyticsEventSerializer,
-)
-
-from apps.music.models import (
-    Artist,
-    Album,
-    Audio,
-    ArtistEvent,
-)
-
+from apps.music.models import Album, Artist, ArtistEvent, Audio
 from apps.music.serializers import (
-    ArtistSerializer,
     AlbumSerializer,
-    AudioSerializer,
     ArtistEventSerializer,
+    ArtistSerializer,
+    AudioSerializer,
 )
-
-from punkweb.rest import utils as rest_utils
 
 
 class ArtistViewSet(
@@ -45,13 +30,9 @@ class ArtistViewSet(
         artist_songs = rest_utils.listed_audio(request).filter(
             album__artist__id=self.get_object().id
         )
-        all_song_ids = [
-            song.id for song in artist_songs if song.total_plays > 0
-        ]
+        all_song_ids = [song.id for song in artist_songs if song.total_plays > 0]
         songs = Audio.objects.filter(id__in=all_song_ids)
-        sorted_songs = sorted(
-            songs, key=lambda song: song.total_plays, reverse=True
-        )
+        sorted_songs = sorted(songs, key=lambda song: song.total_plays, reverse=True)
         serializer = AudioSerializer(
             sorted_songs[:10], many=True, context={"request": request}
         )

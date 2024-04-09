@@ -1,17 +1,12 @@
 from django.db import models
-from django.contrib.postgres.fields import JSONField
-
-from punkweb.mixins import (
-    UUIDPrimaryKey,
-    OccurredAtMixin,
-)
+from punkweb.mixins import OccurredAtMixin, UUIDPrimaryKey
 
 
 class AnalyticsEvent(UUIDPrimaryKey, OccurredAtMixin):
     category = models.CharField(max_length=256, null=False, blank=False)
     action = models.CharField(max_length=256, null=False, blank=False)
     label = models.CharField(max_length=256, null=False, blank=False)
-    metadata = JSONField(null=True, blank=True)
+    metadata = models.JSONField(null=True, blank=True)
 
     class Meta:
         ordering = ("-occurred_at",)

@@ -1,5 +1,6 @@
 from django.contrib import admin
-from . import models
+
+from apps.analytics.models import AnalyticsEvent, ClientError
 
 
 class AnalyticsEventAdmin(admin.ModelAdmin):
@@ -15,5 +16,5 @@ class ClientErrorAdmin(admin.ModelAdmin):
     list_display = ("occurred_at",)
 
 
-admin.site.register(models.AnalyticsEvent, AnalyticsEventAdmin)
-admin.site.register(models.ClientError, ClientErrorAdmin)
+admin.site.register(AnalyticsEvent, AnalyticsEventAdmin)
+admin.site.register(ClientError, ClientErrorAdmin)
