@@ -21,7 +21,11 @@ from django.urls import include, path
 
 from punkweb import settings
 
+from rest_framework.authtoken.models import Token
+
 app_name = "punkweb"
+
+admin.register(Token)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
