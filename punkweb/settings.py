@@ -22,13 +22,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get(
-    "SECRET_KEY", "360wd#k-r^(p)o*86&yw00&^z#x!eoozkq=bn@r!4da7bfnodf"
+    "SECRET_KEY", "92cd6de59fba769a326cdfa4f147debdcf9f957d44e26c69"
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get("DEBUG", "True") == "True"
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = os.environ.get("ALLOWED_HOSTS", "localhost").split(",")
 
 
 # Application definition
@@ -158,9 +158,19 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 # Non default app configuration
 
-LOGIN_REDIRECT_URL = "/board/"
+CSRF_TRUSTED_ORIGINS = os.environ.get(
+    "CSRF_TRUSTED_ORIGINS",
+    "http://localhost:5173",
+).split(",")
 
-CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOWED_ORIGINS = os.environ.get(
+    "CORS_ALLOWED_ORIGINS",
+    "http://localhost:5173",
+).split(",")
+
+CORS_ALLOW_CREDENTIALS = True
+
+LOGIN_REDIRECT_URL = "/board/"
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
