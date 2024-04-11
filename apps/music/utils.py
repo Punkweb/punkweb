@@ -1,8 +1,8 @@
-from apps.music import models as music_models
+from apps.music.models import Artist, Album, Audio
 
 
 def listed_artists(request):
-    objects = music_models.Artist.objects
+    objects = Artist.objects
 
     if request.user and request.user.is_superuser:
         return objects.filter(albums__isnull=False).distinct().order_by("name")
@@ -15,7 +15,7 @@ def listed_artists(request):
 
 
 def listed_albums(request):
-    objects = music_models.Album.objects
+    objects = Album.objects
 
     if request.user and request.user.is_superuser:
         return objects.filter(tracks__isnull=False).distinct().order_by("-release_date")
@@ -28,7 +28,7 @@ def listed_albums(request):
 
 
 def listed_audio(request):
-    objects = music_models.Audio.objects
+    objects = Audio.objects
 
     if request.user and request.user.is_superuser:
         return objects.all().order_by("disc_num", "track_num")

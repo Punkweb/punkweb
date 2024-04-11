@@ -15,21 +15,50 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 
+from django.conf import settings
 from django.contrib import admin
 from django.contrib.staticfiles.urls import static
 from django.urls import include, path
-from rest_framework.authtoken.models import Token
+from rest_framework import routers
 
-from punkweb import settings
+from apps.accounts.views import (
+    LoginAPIView,
+    LogoutAPIView,
+    PasswordChangeAPIView,
+    SessionAPIView,
+    UserViewSet,
+)
+from apps.analytics.views import AnalyticsEventViewSet, ClientErrorViewSet
+from apps.contact.views import ContactFormViewSet
+from apps.music.views import (
+    AlbumViewSet,
+    ArtistEventViewSet,
+    ArtistViewSet,
+    AudioViewSet,
+)
 
-app_name = "punkweb"
+router = routers.DefaultRouter()
 
-admin.register(Token)
+router.register(r"analytics/analytics_events", AnalyticsEventViewSet)
+router.register(r"analytics/client_errors", ClientErrorViewSet)
+router.register(r"contact_forms", ContactFormViewSet)
+router.register(r"artists", ArtistViewSet)
+router.register(r"albums", AlbumViewSet)
+router.register(r"audio", AudioViewSet)
+router.register(r"artist_events", ArtistEventViewSet)
+router.register(r"users", UserViewSet)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
+    path("api/", include(router.urls)),
+    path("api/auth", include("rest_framework.urls")),
+    path("api/login/", LoginAPIView.as_view(), name="login"),
+    path("api/logout/", LogoutAPIView.as_view(), name="logout"),
+    path(
+        "api/password-change/", PasswordChangeAPIView.as_view(), name="password_change"
+    ),
+    path("api/session/", SessionAPIView.as_view(), name="session"),
     path("board/", include("punkweb_bb.urls")),
-    path("api/", include("punkweb.rest.urls")),
 ]
 
 if settings.DEBUG:

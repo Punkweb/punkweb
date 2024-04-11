@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     "precise_bbcode",
     "punkweb_bb",
     # Punkweb
+    "apps.accounts",
     "apps.analytics",
     "apps.contact",
     "apps.music",
@@ -110,11 +111,17 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"
+        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
     },
-    {"NAME": "django.contrib.auth.password_validation.MinimumLengthValidator"},
-    {"NAME": "django.contrib.auth.password_validation.CommonPasswordValidator"},
-    {"NAME": "django.contrib.auth.password_validation.NumericPasswordValidator"},
+    {
+        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
+    },
+    {
+        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
+    },
 ]
 
 
@@ -123,22 +130,15 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "America/New_York"
+TIME_ZONE = "UTC"
 
 USE_I18N = True
-
-USE_L10N = True
 
 USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
-
-STATIC_URL = "static/"
-
-
-# Media files
 
 STATIC_URL = "/static/"
 MEDIA_URL = "/media/"
@@ -157,30 +157,45 @@ else:
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-# Non default app configuration
+# CSRF
+# https://docs.djangoproject.com/en/4.2/ref/settings/#csrf-cookie-age
 
 CSRF_TRUSTED_ORIGINS = os.environ.get(
     "CSRF_TRUSTED_ORIGINS",
-    "http://localhost:4200",
+    "http://localhost:5173",
 ).split(",")
+
+
+####################################
+#        3RD PARTY SETTINGS        #
+####################################
+
+
+# django-cors-headers
+# https://pypi.org/project/django-cors-headers/
 
 CORS_ALLOWED_ORIGINS = os.environ.get(
     "CORS_ALLOWED_ORIGINS",
-    "http://localhost:4200",
+    "http://localhost:5173",
 ).split(",")
 
 CORS_ALLOW_CREDENTIALS = True
 
-LOGIN_REDIRECT_URL = "/board/"
+
+# djangorestframework
+# https://www.django-rest-framework.org/api-guide/settings/
 
 REST_FRAMEWORK = {
-    "DEFAULT_AUTHENTICATION_CLASSES": (
-        "rest_framework.authentication.TokenAuthentication",
-        "punkweb.rest.authentication.NoCSRFSessionAuthentication",
-    ),
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.SessionAuthentication",
+    ],
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
-    "PAGE_SIZE": 25,
+    "PAGE_SIZE": 20,
 }
+
+
+# easy-thumbnails
+# https://easy-thumbnails.readthedocs.io/en/latest/
 
 THUMBNAIL_ALIASES = {
     "": {

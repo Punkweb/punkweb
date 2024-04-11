@@ -8,7 +8,7 @@ from rest_framework import serializers
 
 from apps.analytics.models import AnalyticsEvent
 from apps.music.models import Album, Artist, ArtistEvent, Audio
-from punkweb.rest.utils import listed_audio
+from apps.music.utils import listed_audio
 
 
 class ArtistSerializer(serializers.ModelSerializer):

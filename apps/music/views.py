@@ -11,7 +11,7 @@ from apps.music.serializers import (
     ArtistSerializer,
     AudioSerializer,
 )
-from punkweb.rest import utils as rest_utils
+from apps.music.utils import listed_audio, listed_albums, listed_artists
 
 
 class ArtistViewSet(
@@ -22,12 +22,12 @@ class ArtistViewSet(
     lookup_field = "slug"
 
     def get_queryset(self):
-        qs = rest_utils.listed_artists(self.request)
+        qs = listed_artists(self.request)
         return qs.order_by("name")
 
     @action(detail=True, methods=["get"])
     def top_10(self, request, *args, **kwargs):
-        artist_songs = rest_utils.listed_audio(request).filter(
+        artist_songs = listed_audio(request).filter(
             album__artist__id=self.get_object().id
         )
         all_song_ids = [song.id for song in artist_songs if song.total_plays > 0]
@@ -51,7 +51,7 @@ class AlbumViewSet(
         return context
 
     def get_queryset(self):
-        qs = rest_utils.listed_albums(self.request)
+        qs = listed_albums(self.request)
         artist_id = self.request.query_params.get("artist_id")
         if artist_id:
             qs = qs.filter(artist__id=artist_id)
@@ -71,7 +71,7 @@ class AudioViewSet(
     serializer_class = AudioSerializer
 
     def get_queryset(self):
-        qs = rest_utils.listed_audio(self.request)
+        qs = listed_audio(self.request)
         artist_id = self.request.query_params.get("artist_id")
         if artist_id:
             qs = qs.filter(album__artist__id=artist_id)
