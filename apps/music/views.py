@@ -27,10 +27,8 @@ class ArtistViewSet(
 
     @action(detail=True, methods=["get"])
     def top_10(self, request, *args, **kwargs):
-        artist_songs = listed_audio(request).filter(
-            album__artist__id=self.get_object().id
-        )
-        all_song_ids = [song.id for song in artist_songs if song.total_plays > 0]
+        artist_songs = listed_audio(request).filter(album__artist=self.get_object())
+        all_song_ids = [song.id for song in artist_songs]
         songs = Audio.objects.filter(id__in=all_song_ids)
         sorted_songs = sorted(songs, key=lambda song: song.total_plays, reverse=True)
         serializer = AudioSerializer(
@@ -56,12 +54,6 @@ class AlbumViewSet(
         if artist_id:
             qs = qs.filter(artist__id=artist_id)
         return qs.order_by("artist", "-release_date", "title")
-
-    @action(detail=False, methods=["get"])
-    def latest_releases(self, request):
-        qs = self.get_queryset().order_by("-release_date")[:5]
-        serializer = self.get_serializer(qs.all(), many=True)
-        return Response(serializer.data)
 
 
 class AudioViewSet(
@@ -98,16 +90,3 @@ class ArtistEventViewSet(
         if artist_id:
             qs = qs.filter(artist__id=artist_id)
         return qs.all()
-
-    @action(detail=False, methods=["get"])
-    def this_week(self, request):
-        qs = self.get_queryset()
-        today_beginning = datetime.datetime.combine(
-            datetime.date.today(), datetime.time()
-        )
-        one_week_from_now = today_beginning + datetime.timedelta(days=7)
-        qs = qs.filter(
-            event_date__gte=today_beginning, event_date__lte=one_week_from_now
-        )
-        serializer = self.get_serializer(qs.all(), many=True)
-        return Response(serializer.data)
