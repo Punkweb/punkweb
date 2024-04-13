@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.db import models
 from easy_thumbnails.fields import ThumbnailerImageField
 from precise_bbcode.fields import BBCodeTextField
