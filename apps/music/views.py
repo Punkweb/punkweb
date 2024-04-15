@@ -26,13 +26,6 @@ class ArtistViewSet(
 
     @action(detail=True, methods=["get"])
     def top_10(self, request, *args, **kwargs):
-        # cache top 10 for 1 hour
-
-        obj = self.get_object()
-
-        if cache.get(f"top_10_{obj.slug}"):
-            return Response(cache.get(f"top_10_{obj.slug}"), status=200)
-
         artist_songs = listed_audio(request).filter(album__artist=self.get_object())
         all_song_ids = [song.id for song in artist_songs]
         songs = Audio.objects.filter(id__in=all_song_ids)
@@ -40,7 +33,6 @@ class ArtistViewSet(
         serializer = AudioSerializer(
             sorted_songs[:10], many=True, context={"request": request}
         )
-        cache.set(f"top_10_{obj.slug}", serializer.data, 60 * 60)
         return Response(serializer.data, status=200)
 
 
