@@ -203,3 +203,11 @@ THUMBNAIL_ALIASES = {
         "large": {"size": (400, 400), "crop": True},
     }
 }
+
+# PunkwebBB
+
+PUNKWEB_BB = {
+    "DISCORD_WIDGET_ENABLED": True,
+    "DISCORD_WIDGET_THEME": "dark",
+    "DISCORD_SERVER_ID": "1237994039178166292",
+}
