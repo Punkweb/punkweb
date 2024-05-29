@@ -143,6 +143,8 @@ USE_TZ = True
 STATIC_URL = "/static/"
 MEDIA_URL = "/media/"
 
+STATICFILES_DIRS = (BASE_DIR / "static",)
+
 if DEBUG:
     STATIC_ROOT = BASE_DIR / "server" / "dev" / "static"
     MEDIA_ROOT = BASE_DIR / "server" / "dev" / "media"
@@ -207,6 +209,7 @@ THUMBNAIL_ALIASES = {
 # PunkwebBB
 
 PUNKWEB_BB = {
+    "OG_IMAGE": "https://punkweb.net/static/punkweb.png",
     "DISCORD_WIDGET_ENABLED": True,
     "DISCORD_WIDGET_THEME": "dark",
     "DISCORD_SERVER_ID": "1237994039178166292",
