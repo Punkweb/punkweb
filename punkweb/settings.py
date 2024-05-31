@@ -209,6 +209,7 @@ THUMBNAIL_ALIASES = {
 # PunkwebBB
 
 PUNKWEB_BB = {
+    "PARSER": "mix",
     "OG_IMAGE": "https://punkweb.net/static/punkweb.png",
     "DISCORD_WIDGET_ENABLED": True,
     "DISCORD_WIDGET_THEME": "dark",
