@@ -59,6 +59,7 @@ urlpatterns = [
     ),
     path("api/session/", SessionAPIView.as_view(), name="session"),
     path("board/", include("punkweb_bb.urls")),
+    path("insight/", include("punkweb_insight.urls")),
 ]
 
 if settings.DEBUG:
