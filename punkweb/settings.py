@@ -60,8 +60,8 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
-    "punkweb_insight.middleware.InsightMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "punkweb_insight.middleware.InsightMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
