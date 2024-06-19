@@ -209,6 +209,8 @@ THUMBNAIL_ALIASES = {
 
 # PunkwebBB
 
+LOGIN_URL = "punkweb_bb:login"
+
 PUNKWEB_BB = {
     "OG_IMAGE": "https://punkweb.net/static/punkweb.png",
     "DISCORD_WIDGET_ENABLED": True,
